@@ -10,7 +10,7 @@ function addElem(id, v){
     document.getElementById(id).innerHTML += v;
 }
 function getElem(id){
-    return document.getElementById(id);
+    return document.getElementById(id).innerHTML;
 }
 
 
@@ -21,9 +21,6 @@ var com = {}; //objet commande avec plats et boissons (sans ids table et garçon
 var cart = {}; //objet avec ids garçon, table ... et tableau de commande
 var table;
 var garcon;
-var date = new Date();
-var idCom = 'commande'+ date;
-console.log(idCom);
 var element = 0; //pour incrémenter les elem (numero uniquement)
 
 //fonction pour montrer l'onglet selectionné
@@ -63,16 +60,14 @@ function drawCommand(){
             + elem
             +'Bouton'
             + i
-            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\" onclick=\"suppItem(\''
-            + elem
-            + '\')\"/></h4>'
+            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\" /></h4>'
             +'<div class=thumbnail id=\"'
             + elem
             +'Nom'
             + i
             + ' \"><div class=\"caption-full\"><h4><a href=\"#\">'
             + plats[elem].Nom;
-        + '</a></h4></div></div>';
+            + '</a></h4></div></div>';
         addElem('tempCom',st);
     }
     for (var elem in boissons) {
@@ -81,25 +76,16 @@ function drawCommand(){
             + elem
             +'Bouton'
             + i
-            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\"onclick=\"suppItem(\''
-            + elem
-            + '\')\"/></h4>'
+            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\" /></h4>'
             +'<div class=thumbnail id=\"'
             + elem
             +'Nom'
             + i
             + ' \"><div class=\"caption-full\"><h4><a href=\"#\">'
             + boissons[elem].Nom;
-        + '</a></h4></div></div>';
+            + '</a></h4></div></div>';
         addElem('tempCom',st);
     }
-}
-
-//fonction pour supprimer un élément dans la commande
-function suppItem(item) {
-    it = item.id;
-    alert(it);
-    setElem(it,'');
 }
 
 //fonction pour changer le garçon de salle
@@ -117,23 +103,21 @@ function setTable(nom){
 //fonction pour push dans un tableau tmp
 function addTmp(typeTemp, nom, comment){
     var type = typeTemp.substring(0,typeTemp.length-1);
-    var input = typeTemp + "Input";
-    var qtt = getElem(input).value;
+    tmp['Nom'] = nom;
+    tmp['Categorie'] = type;
+    tmp['Detail'] = comment;
+    if(type=='boisson'){
+        tmp['Accompagnements'] = "acc";
+        tmp['Supplements'] = "supp";
+    }
 
-    for(i=0; i < qtt; i++) {
-        tmp['Nom'] = nom;
-        tmp['Categorie'] = type;
-        tmp['Detail'] = comment;
-        if (type == 'boisson') {
-            tmp['Accompagnements'] = "acc";
-            tmp['Supplements'] = "supp";
-            addToTab(boissons, tmp);
-            console.log(boissons);
-        }
-        else {
-            addToTab(plats, tmp);
-            console.log(plats);
-        }
+    if(type=='boisson'){
+        addToTab(boissons,tmp);
+        console.log(boissons);
+    }
+    else{
+        addToTab(plats,tmp);
+        console.log(plats);
     }
 }
 
@@ -158,7 +142,7 @@ function addCom(){
 
 function addCart(val){
     addCom();
-    cart['idCommande'] = idCom;
+    cart['idCommande'] = 'à définir';
     cart['idTable'] = table;
     cart['idGarcon'] = garcon;
     cart['commande'] = com;
@@ -167,12 +151,12 @@ function addCart(val){
 
 function onSubmit() {
     addCart();
-    /*$.ajax({
+    $.ajax({
         type: 'POST',
         data: JSON.stringify(cart),
         contentType: 'application/json',
         url: '/process_post'
-    });*/
+    });
     $(document).ready(function(){
         $('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
     });
@@ -183,9 +167,8 @@ function raz(){
     setElem('tempCom', '');
     setElem('garconCom', '');
     setElem('tableCom', '');
-    table = '';
-    garcon = '';
     tmp = {};
+    cart = {};
 }
 
 function affiche(){
@@ -193,6 +176,9 @@ function affiche(){
         $('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
     });
 }
+
+
+
 
 
 //fonctions pour les + et -
@@ -270,22 +256,8 @@ $(".input-number").keydown(function (e) {
 });
 
 
-function suppItem(item){
-    for(elem in plats){
-        if(item==elem){
-            delete plats[item];
-            console.log(plats);
-            drawCommand();
-        }
-    }
-    for(elem in boissons){
-        if(item==elem){
-            delete boissons[item];
-            console.log(boissons);
-            drawCommand();
-        }
-    }
-}
+
+
 
 
 

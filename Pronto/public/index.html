@@ -121,12 +121,12 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="#entreeChaude" onclick="showBox('entrees')">Chaudes</a>
+                                    <a href="#" onclick="showBox('entrees')">Froides</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="#entreeFroide" onclick="showBox('entrees')">Froides</a>
+                                    <a href="#" onclick="showBox('entrees')">Chaudes</a>
                                 </td>
                             </tr>
                         </table>
@@ -145,17 +145,17 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="#viandes" onclick="showBox('plats')">Viandes</a>
+                                    <a href="#" onclick="showBox('plats')">Viandes</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="#poissons" onclick="showBox('plats')">Poissons</a>
+                                    <a href="#" onclick="showBox('plats')">Poissons</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="#pates" onclick="showBox('plats')">Pâtes</a>
+                                    <a href="#" onclick="showBox('plats')">Pâtes</a>
                                 </td>
                             </tr>
                         </table>
@@ -174,12 +174,12 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="#auxFruits" onclick="showBox('desserts')">Aux fruits</a>
+                                    <a href="#" onclick="showBox('desserts')">Aux fruits</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="#auxChocolat" onclick="showBox('desserts')">Au chocolat</a>
+                                    <a href="#" onclick="showBox('desserts')">Au chocolat</a>
                                 </td>
                             </tr>
                         </table>
@@ -198,17 +198,17 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="#softs" onclick="showBox('boissons')">Softs</a>
+                                    <a href="#" onclick="showBox('boissons')">Softs</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="#alcools" onclick="showBox('boissons')">Alcools</a>
+                                    <a href="#" onclick="showBox('boissons')">Alcools</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="#theEtCafe" onclick="showBox('boissons')">Thés et cafés</a>
+                                    <a href="#" onclick="showBox('boissons')">Thés et cafés</a>
                                 </td>
                             </tr>
                         </table>
@@ -224,59 +224,31 @@
     <div class="col-md-9" id="entrees" style="display: none;">
 
         <h2>Entrées</h2>
-
-        <h3 id="entreeChaude">Entrées chaudes</h3>
-
+        
         <div class="thumbnail" id="entree1">
             <div class="caption-full">
                 <h4 class="pull-right" id="entree1Prix">$21</h4>
                 <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="entree1Nom">HEIRLOOM TOMATO & WATERMELON GAZPACHO</a></h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[1]" id="entree1Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
-                </h4>
                 <h4 class="pull-right">
-                    <button class="btn btn-default" onclick="getItem('entree1')">Ajouter</button>
+                    <input id="moinsEntree1" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultEntree1" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusEntree1" class="btn btn-default" type="button" value="+" onclick="getItem('entree1')"/>
                 </h4>
                 <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
                 <textarea class="form-control" rows="2" id="commententree1" placeholder="Commentaires: "></textarea>
             </div>
         </div>
 
-        <h3 id="entreeFroide">Entrées froides</h3>
-
         <div class="thumbnail" id="entree2">
             <div class="caption-full">
                 <h4 class="pull-right" id="entree2Prix">$19</h4>
                 <h4><a href="#" id="entree2Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> cucumber, radish, cilantro, purple potato, chili sesame dressing." data-animation="true">PINEAPPLE CARPACCIO, TUNA TARTARE</a>
                 </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[2]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[2]" id="entree2Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[2]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
+                <h4 class="pull-right">
+                    <input id="moinsEntree2" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultEntree2" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusEntree2" class="btn btn-default" type="button" value="+" onclick="getItem('entree2')"/>
                 </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('entree2')">Ajouter</button></h4>
                 <!-- <p id="entree2Desc">cucumber, radish, cilantro, purple potato, chili sesame dressing.</p> -->
                 <textarea class="form-control" rows="2" id="commentEntree2" placeholder="Commentaires: "></textarea>
             </div>
@@ -290,63 +262,35 @@
 
         <h2>Plats</h2>
 
-        <h3 id="viandes">Viandes</h3>
-
         <div class="thumbnail" id="plat1">
             <div class="caption-full">
                 <h4 class="pull-right" id="plat1Prix">$12</h4>
                 <h4><a href="#" id="plat1Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> pickled strawberries, crostinis." data-animation="true">HOUSE-MADE RICOTTA</a>
                 </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[3]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[3]" id="plat1Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[3]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
+                <h4 class="pull-right">
+                    <input id="moinsPlat1" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultPlat1" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusPlat1" class="btn btn-default" type="button" value="+" onclick="getItem('plat1')"/>
                 </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('plat1')">Ajouter</button></h4>
                 <!--<p id="plat1Desc">pickled strawberries, crostinis.</p>-->
                 <textarea class="form-control" rows="2" id="commentPlat1" placeholder="Commentaires: "></textarea>
             </div>
         </div>
-
-        <h3 id="poissons">Poissons</h3>
 
         <div class="thumbnail" id="plat2">
             <div class="caption-full">
                 <h4 class="pull-right" id="plat2Prix">$16</h4>
                 <h4><a href="#" id="plat2Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> assorted pickled & fresh baby vegetables, artichoke dip." data-animation="true">"CANNED" VEGETABLES</a>
                 </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[4]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[4]" id="plat2Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[4]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
+                <h4 class="pull-right">
+                    <input id="moinsPlat2" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultPlat2" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusPlat2" class="btn btn-default" type="button" value="+" onclick="getItem('plat2')"/>
                 </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('plat2')">Ajouter</button></h4>
                 <!--<p id="plat2Desc">assorted pickled & fresh baby vegetables, artichoke dip.</p>-->
                 <textarea class="form-control" rows="2" id="commentPlat2" placeholder="Commentaires: "></textarea>
             </div>
         </div>
-
-        <h3 id="pates">Pâtes</h3>
 
     </div>
 
@@ -358,57 +302,31 @@
 
         <h2>Desserts</h2>
 
-        <h3 id="auxFruits">Desserts aux fruits</h3>
-
         <div class="thumbnail" id="dessert1">
             <div class="caption-full">
                 <h4 class="pull-right" id="dessert1Prix">$12</h4>
                 <h4><a href="#" id="dessert1Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> raspberry preserves, whipped crème fraîche." data-animation="true">VALRHONA SINGLE ORIGIN TRUFFLE CAKE</a>
                 </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[5]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[5]" id="dessert1Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[5]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
+                <h4 class="pull-right">
+                    <input id="moinsDessert1" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultDessert1" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusDessert1" class="btn btn-default" type="button" value="+" onclick="getItem('dessert1')"/>
                 </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('dessert1')">Ajouter</button></h4>
                 <!--<p id="dessert1Desc">raspberry preserves, whipped crème fraîche.</p>-->
                 <textarea class="form-control" rows="2" id="commentDessert1" placeholder="Commentaires: "></textarea>
             </div>
         </div>
-
-        <h3 id="auxChocolat">Desserts aux chocolat</h3>
 
         <div class="thumbnail" id="dessert2">
             <div class="caption-full">
                 <h4 class="pull-right" id="dessert2Prix">$12</h4>
                 <h4><a href="#" id="dessert2Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> strawberry rhubarb jam, lemon thyme shortbread cookies, rosé geleé." data-animation="true">VANILLA BEAN PANNA COTTA</a>
                 </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[6]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[6]" id="dessert2Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[6]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
+                <h4 class="pull-right">
+                    <input id="moinsDessert2" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultDessert2" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusDessert2" class="btn btn-default" type="button" value="+" onclick="getItem('dessert2')"/>
                 </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('dessert2')">Ajouter</button></h4>
                 <!--<p id="dessert2Desc">strawberry rhubarb jam, lemon thyme shortbread cookies, rosé geleé.</p>-->
                 <textarea class="form-control" rows="2" id="commentDessert2" placeholder="Commentaires: "></textarea>
             </div>
@@ -423,87 +341,16 @@
 
         <h2>Boissons</h2>
 
-        <h3 id="softs">Softs</h3>
-
-        <div class="thumbnail" id="boisson4">
-            <div class="caption-full">
-                <h4 class="pull-right" id="boisson4Prix">$5</h4>
-                <h4><a href="#" id="boisson4Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> ..." data-animation="true">Jus de pomme</a>
-                </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[7]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[7]" id="boisson4Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[7]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
-                </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('boisson4')">Ajouter</button></h4>
-                <!--<p id="boisson1Desc">...</p>-->
-                <textarea class="form-control" rows="2" id="commentBoisson4" placeholder="Commentaires: "></textarea>
-            </div>
-        </div>
-
-
-        <h3 id="alcools">Alcools</h3>
-
-        <div class="thumbnail" id="boisson3">
-            <div class="caption-full">
-                <h4 class="pull-right" id="boisson3Prix">$5</h4>
-                <h4><a href="#" id="boisson3Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> ..." data-animation="true">Vin rouge</a>
-                </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[8]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[8]" id="boisson3Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[8]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
-                </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('boisson3')">Ajouter</button></h4>
-                <!--<p id="boisson1Desc">...</p>-->
-                <textarea class="form-control" rows="2" id="commentBoisson3" placeholder="Commentaires: "></textarea>
-            </div>
-        </div>
-
-
-        <h3 id="theEtCafe">Thés et cafés</h3>
-
         <div class="thumbnail" id="boisson1">
             <div class="caption-full">
                 <h4 class="pull-right" id="boisson1Prix">$5</h4>
                 <h4><a href="#" id="boisson1Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> ..." data-animation="true">COFFEE</a>
                 </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[9]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[9]" id="boisson1Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[9]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
+                <h4 class="pull-right">
+                    <input id="moinsBoisson1" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultBoisson1" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusBoisson1" class="btn btn-default" type="button" value="+" onclick="getItem('boisson1')"/>
                 </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('boisson1')">Ajouter</button></h4>
                 <!--<p id="boisson1Desc">...</p>-->
                 <textarea class="form-control" rows="2" id="commentBoisson1" placeholder="Commentaires: "></textarea>
             </div>
@@ -514,22 +361,11 @@
                 <h4 class="pull-right" id="boisson2Prix">$5</h4>
                 <h4><a href="#" id="boisson2Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> organic bedell north fork honey, lemon." data-animation="true">TEA SERVICE</a>
                 </h4>
-                <h4>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[10]">
-                                <span class="">-</span>
-                            </button>
-                        </span>
-                        <input type="text" name="quant[10]" id="boisson2Input" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[10]">
-                                <span class="">+</span>
-                            </button>
-                        </span>
-                    </div>
+                <h4 class="pull-right">
+                    <input id="moinsBoisson2" class="btn btn-default" type="button" value="-" />
+                    <input id ="resultBoisson2" class="btn btn-default" type="texte" value="0" maxlength="2" />
+                    <input id="plusBoisson2" class="btn btn-default" type="button" value="+" onclick="getItem('boisson2')"/>
                 </h4>
-                <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('boisson2')">Ajouter</button></h4>
                 <!--<p id="boisson2Desc">organic bedell north fork honey, lemon.</p>-->
                 <textarea class="form-control" rows="2" id="commentBoisson2" placeholder="Commentaires: "></textarea>
             </div>
