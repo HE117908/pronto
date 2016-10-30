@@ -14,16 +14,15 @@ function getElem(id){
 }
 
 
-var tmp = {}; //objet temporaire avec plat(ou boisson...) et commentaire
+var tmp = {}; //objet temporaire avec plats(ou boissons...) et commentaire
 var plats = {}; //objet des plats
 var boissons = {}; // objet des boissons
 var com = {}; //objet commande avec plats et boissons (sans ids table et garçon...)
 var cart = {}; //objet avec ids garçon, table ... et tableau de commande
 var table;
 var garcon;
-var date = new Date();
-dateMilli = date.getTime();
-var idCom = 'commande'+ dateMilli; // id de la commande = commande + date en millisecondes
+var date = new Date().getTime();
+var idCom = 'commande'+ date; // id de la commande = commande + date en millisecondes
 var element = 0; //pour incrémenter les elem (numero uniquement)
 
 //fonction pour montrer l'onglet selectionné
@@ -47,8 +46,11 @@ function hide(id) {
 
 //fonction pour récupérer les données d'un "item" (entrée, plat...)
 function getItem(a) {
-    item = document.getElementById(a + 'Nom').textContent;
-    addTmp(a,item,'ici le commentaire');
+    var nom = document.getElementById(a + 'Nom').textContent;
+    var com = document.getElementById(a + 'Comment').value;
+    var ac = 'ac';
+    var sup = 'sup';
+    addTmp(a ,nom ,com ,ac ,sup);
     drawCommand();
 }
 
@@ -115,18 +117,20 @@ function setTable(nom){
 }
 
 //fonction pour push dans un tableau tmp
-function addTmp(typeTemp, nom, comment){
+function addTmp(typeTemp, nom, det, ac, sup){
     var type = typeTemp.substring(0,typeTemp.length-1);
     var input = typeTemp + "Input";
     var qtt = getElem(input).value;
+    var accomp = [];
+    var suppl = [];
 
     for(i=0; i < qtt; i++) {
         tmp['Nom'] = nom;
         tmp['Categorie'] = type;
-        tmp['Detail'] = comment;
+        tmp['Detail'] = det;
         if (type != 'boisson') {
-            tmp['Accompagnements'] = "acc";
-            tmp['Supplements'] = "supp";
+            tmp['Accompagnements'] = accomp;
+            tmp['Supplements'] = suppl;
             addToTab(boissons, tmp);
             console.log(boissons);
         }
@@ -183,9 +187,17 @@ function raz(){
     setElem('tempCom', '');
     setElem('garconCom', '');
     setElem('tableCom', '');
+    idCom = '';
     table = '';
     garcon = '';
     tmp = {};
+    plats = {};
+    boissons = {};
+    com = {};
+    cart = {};
+    date = new Date().getTime();
+    idCom = 'commande'+ date;
+    element = 0;
 }
 
 function affiche(){
