@@ -123,11 +123,13 @@ function sendCuisine(data){
 function reception(req,res) {
     var commande = req.body;
     recordDB(commande);
-    //viewDB();
-    console.log(JSON.stringify(commande));
+    viewDB();
+    console.log(commande);
 
-    sendBar(JSON.stringify(commande));
-    sendCuisine(JSON.stringify(commande));
+    cuisine =  new Array(commande['idCommande'],commande['idTable'],JSON.stringify(commande['commande']['plats']));
+    bar = new Array(commande['idCommande'],commande['idTable'],JSON.stringify(commande['commande']['boissons']));
+    sendBar(bar);
+    sendCuisine(cuisine);
 
 
 }
