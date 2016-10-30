@@ -21,6 +21,9 @@ var com = {}; //objet commande avec plats et boissons (sans ids table et garçon
 var cart = {}; //objet avec ids garçon, table ... et tableau de commande
 var table;
 var garcon;
+var date = new Date();
+var idCom = 'commande'+ date;
+console.log(idCom);
 var element = 0; //pour incrémenter les elem (numero uniquement)
 
 //fonction pour montrer l'onglet selectionné
@@ -60,7 +63,9 @@ function drawCommand(){
             + elem
             +'Bouton'
             + i
-            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\" /></h4>'
+            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\" onclick=\"suppItem(\''
+            + elem
+            + '\')\"/></h4>'
             +'<div class=thumbnail id=\"'
             + elem
             +'Nom'
@@ -76,7 +81,9 @@ function drawCommand(){
             + elem
             +'Bouton'
             + i
-            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\" /></h4>'
+            + '\" class=\"btn btn-default\" type=\"button\" value=\"-\"onclick=\"suppItem(\''
+            + elem
+            + '\')\"/></h4>'
             +'<div class=thumbnail id=\"'
             + elem
             +'Nom'
@@ -111,7 +118,6 @@ function setTable(nom){
 function addTmp(typeTemp, nom, comment){
     var type = typeTemp.substring(0,typeTemp.length-1);
     var input = typeTemp + "Input";
-    alert(input);
     var qtt = getElem(input).value;
 
     for(i=0; i < qtt; i++) {
@@ -152,7 +158,7 @@ function addCom(){
 
 function addCart(val){
     addCom();
-    cart['idCommande'] = 'à définir';
+    cart['idCommande'] = idCom;
     cart['idTable'] = table;
     cart['idGarcon'] = garcon;
     cart['commande'] = com;
@@ -264,7 +270,22 @@ $(".input-number").keydown(function (e) {
 });
 
 
-
+function suppItem(item){
+    for(elem in plats){
+        if(item==elem){
+            delete plats[item];
+            console.log(plats);
+            drawCommand();
+        }
+    }
+    for(elem in boissons){
+        if(item==elem){
+            delete boissons[item];
+            console.log(boissons);
+            drawCommand();
+        }
+    }
+}
 
 
 
