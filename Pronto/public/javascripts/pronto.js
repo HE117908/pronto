@@ -198,6 +198,7 @@ function raz(){
     date = new Date().getTime();
     idCom = 'commande'+ date;
     element = 0;
+    showBox('menu');
 }
 
 function affiche(){
