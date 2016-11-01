@@ -131,12 +131,12 @@ function addTmp(typeTemp, nom, det, ac, sup){
         if (type != 'boisson') {
             tmp['Accompagnements'] = accomp;
             tmp['Supplements'] = suppl;
-            addToTab(boissons, tmp);
-            console.log(boissons);
-        }
-        else {
             addToTab(plats, tmp);
             console.log(plats);
+        }
+        else {
+            addToTab(boissons, tmp);
+            console.log(boissons);
         }
     }
 }
