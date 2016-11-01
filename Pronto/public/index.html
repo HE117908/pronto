@@ -76,36 +76,29 @@
     <div class="col-md-3" id="menu">
         <p class="lead">Restaurant Name</p>
 
-        <!--selection du garçon qui sert en salle (temporaire, session)-->
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Sélectionner du garçon de salle ici
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#" onclick="setGarcon(this)">Serveur 1</a></li>
-                <li><a href="#" onclick="setGarcon(this)">Serveur 2</a></li>
-                <li><a href="#" onclick="setGarcon(this)">Serveur 3</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#" onclick="setGarcon(this)">Au bar</a></li>
-            </ul>
+        <!-- sélection du serveur-->
+        <div class="form-group">
+            <label for="dropdownMenu2">Sélectionner du garçon de salle ici:</label>
+            <select class="form-control" id="dropdownMenu2" onclick="setGarcon(this)">
+                <option><a href="#" >Serveur 1</a></option>
+                <option><a href="#" >Serveur 2</a></option>
+                <option><a href="#" >Serveur 3</a></option>
+                <option><a href="#" >Au bar</a></option>
+            </select>
+            <br>
         </div>
 
         <!-- sélection de la table-->
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Sélectionner la table ici
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#" onclick="setTable(this)">Table 1</a></li>
-                <li><a href="#" onclick="setTable(this)">Table 2</a></li>
-                <li><a href="#" onclick="setTable(this)">Table 3</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#" onclick="setTable(this)">Au bar</a></li>
-            </ul>
+        <div class="form-group">
+            <label for="dropdownMenu1">Sélectionner la table ici:</label>
+            <select class="form-control" id="dropdownMenu1" onclick="setTable(this)">
+                <option><a href="#" >Table 1</a></option>
+                <option><a href="#" >Table 2</a></option>
+                <option><a href="#" >Table 3</a></option>
+                <option><a href="#" >Au bar</a></option>
+            </select>
+            <br>
         </div>
-        </br>
 
         <!-- menu des raccourcis déroulant-->
         <div class="panel-group" id="accordion">

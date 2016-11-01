@@ -98,21 +98,19 @@ function drawCommand(){
 }
 
 //fonction pour supprimer un élément dans la commande
-function suppItem(item) {
-    it = item.id;
-    alert(it);
-    setElem(it,'');
+function suppItem() {
+    alert('hello word!!!');
 }
 
 //fonction pour changer le garçon de salle
 function setGarcon(nom){
-    garcon = nom.textContent;
+    garcon = nom.value;
     setElem('garconCom', garcon);
 }
 
 //fonction pour changer la table
 function setTable(nom){
-    table = nom.textContent;
+    table = nom.value;
     setElem('tableCom', table);
 }
 
