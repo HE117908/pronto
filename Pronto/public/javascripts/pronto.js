@@ -47,10 +47,10 @@ function hide(id) {
 //fonction pour récupérer les données d'un "item" (entrée, plat...)
 function getItem(a) {
     var nom = document.getElementById(a + 'Nom').textContent;
-    var com = document.getElementById(a + 'Comment').value;
-    var ac = 'ac';
-    var sup = 'sup';
-    addTmp(a ,nom ,com ,ac ,sup);
+    var comment = document.getElementById(a + 'Comment').value;
+    var ac = document.getElementById(a + 'Acc').value;
+    var sup = document.getElementById(a + 'Supp').value;
+    addTmp(a ,nom ,comment ,ac ,sup);
     drawCommand();
 }
 
@@ -114,13 +114,16 @@ function setTable(nom){
     setElem('tableCom', table);
 }
 
-//fonction pour push dans un tableau tmp
+//fonction pour créer dans un objet tmp
 function addTmp(typeTemp, nom, det, ac, sup){
     var type = typeTemp.substring(0,typeTemp.length-1);
     var input = typeTemp + "Input";
     var qtt = getElem(input).value;
     var accomp = [];
     var suppl = [];
+
+    accomp.push(ac);
+    suppl.push(sup);
 
     for(i=0; i < qtt; i++) {
         tmp['Nom'] = nom;
@@ -139,6 +142,7 @@ function addTmp(typeTemp, nom, det, ac, sup){
     }
 }
 
+//fonction qui ajoute tmp dans boissons et plats
 function addToTab(tab,ajout){
     element++;
     var elem = "elem" + element;
@@ -153,11 +157,13 @@ function addQuant(val1,val2){
 }
 */
 
+//fonction pour créer la commande avant l'envoye sans id, table, etc (objets boissons + plats)
 function addCom(){
     com['boissons'] = boissons;
     com['plats'] = plats;
 }
 
+//fonction pour créer la commande avant l'envoye + id, table, etc
 function addCart(val){
     addCom();
     cart['idCommande'] = idCom;

@@ -24,8 +24,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <![endif]-->
 
-    <script src="javascripts/pronto.js"></script>
-
 </head>
 
 <br>
@@ -290,7 +288,7 @@
                 <h4 class="pull-right" id="plat1Prix">$12</h4>
                 <h4><a href="#" id="plat1Nom" class="link_ingredient" data-placement="auto top" data-toggle="tooltip" title= "<h4>Ingrédients:</h4> pickled strawberries, crostinis." data-animation="true">HOUSE-MADE RICOTTA</a>
                 </h4>
-                <h4>
+                <h4 class="col-md-3">
                     <div class="input-group">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[3]">
@@ -305,6 +303,22 @@
                         </span>
                     </div>
                 </h4>
+                <div class="col-md-3 form-group">
+                    <select class="form-control" id="plat1Acc">
+                        <option><a href="#" >Accompagnement</a></option>
+                        <option><a href="#" >Frites</a></option>
+                        <option><a href="#" >Salade</a></option>
+                        <option><a href="#" >Riz</a></option>
+                    </select>
+                </div>
+                <div class="col-md-3 form-group">
+                    <select class="form-control" id="plat1Supp">
+                        <option><a href="#" >Suppléments</a></option>
+                        <option><a href="#" >Sauce mayonnaise</a></option>
+                        <option><a href="#" >Sauce ketchup</a></option>
+                        <option><a href="#" >Sauce à l'ail</a></option>
+                    </select>
+                </div>
                 <h4 class="pull-right"><button class="btn btn-default" onclick="getItem('plat1')">Ajouter</button></h4>
                 <!--<p id="plat1Desc">pickled strawberries, crostinis.</p>-->
                 <textarea class="form-control" rows="2" id="plat1Comment" placeholder="Commentaires: "></textarea>
