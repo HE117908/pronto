@@ -28,9 +28,11 @@
     <script>
         var socket = io('/cuisine');
         socket.on('cuisine',function(data){
-            document.getElementById('tableau').innerHTML = data;
+            afficherPlats(data);
         });
     </script>
+
+    <script src="javascripts/pronto.js"></script>
 
 </head>
 
@@ -49,10 +51,11 @@
                 <tr>
                     <th>Numéro de table :</th>
                     <th>Nom du plat :</th>
+                    <th>Détails :</th>
                 </tr>
             </thead>
             <tbody id="tableau">
-            <!-- A remplir automatiquement mais hard codé pour l'instant, donc supprimé tous les balises <tr> et <td> pour tester-->
+            <!-- A remplir automatiquement mais hard codé pour l'instant, donc supprimé tous les balises <tr> et <td> pour tester
                 <tr>
                     <td>N°1</td>
                     <td>HOUSE-MADE RICOTTA</td>
@@ -64,7 +67,7 @@
                 <tr>
                     <td>N°1</td>
                     <td>HOUSE-MADE RICOTTA</td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
         </div>

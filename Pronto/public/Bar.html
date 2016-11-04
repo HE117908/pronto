@@ -24,13 +24,18 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- jQuery -->
+    <script src="javascripts/jquery.js"></script>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io('/bar');
         socket.on('bar',function(data){
-            document.getElementById('tableau').innerHTML = data;
+            afficherBoissons(data);
         });
     </script>
+
+    <script src="javascripts/pronto.js"></script>
 
 </head>
 
@@ -50,10 +55,11 @@
                 <tr>
                     <th>Numéro de table :</th>
                     <th>Nom de la boisson :</th>
+                    <th>Détails :</th>
                 </tr>
                 </thead>
                 <tbody id="tableau">
-                <!-- A remplir automatiquement mais hard codé pour l'instant, donc supprimé tous les balises <tr> et <td> pour tester-->
+                <!-- A remplir automatiquement mais hard codé pour l'instant, donc supprimé tous les balises <tr> et <td> pour tester
                 <tr>
                     <td>N°5</td>
                     <td>Vin rouge</td>
@@ -62,7 +68,7 @@
                     <td>N°5</td>
                     <td>Vin rouge</td>
                 </tr>
-                </tbody>
+                </tbody> -->
             </table>
         </div>
     </div>
@@ -79,9 +85,6 @@
 
 </div>
 <!-- /.container -->
-
-<!-- jQuery -->
-<script src="javascripts/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="javascripts/bootstrap.min.js"></script>

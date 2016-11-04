@@ -26,8 +26,8 @@ nspBar.on('connection', function(socket){
 
 
 
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
+/*var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');*/
 
 // Connection URL
 var url = 'mongodb://localhost:27017/db';
@@ -122,14 +122,11 @@ function sendCuisine(data){
 
 function reception(req,res) {
     var commande = req.body;
-    recordDB(commande);
-    viewDB();
+    //recordDB(commande);
+    //viewDB();
     console.log(commande);
-
-    cuisine =  new Array(commande['idCommande'],commande['idTable'],JSON.stringify(commande['commande']['plats']));
-    bar = new Array(commande['idCommande'],commande['idTable'],JSON.stringify(commande['commande']['boissons']));
-    sendBar(bar);
-    sendCuisine(cuisine);
+    sendBar(commande);
+    sendCuisine(commande);
 
 
 }

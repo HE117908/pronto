@@ -52,6 +52,12 @@ body{margin-top:50px;}
     text-align: center;
 }
 
+.btn-default, .btn-number {
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
+    border-radius: 50px;
+}
+
 .link_ingredient + .tooltip > .tooltip-inner {
     background-color: #73AD21;
     border: 1px solid green;
@@ -60,4 +66,10 @@ body{margin-top:50px;}
 
 .form-control{
     resize: none;
+}
+
+.btn-default + .tooltip > .tooltip-inner {
+    background-color: #73AD21;
+    border: 1px solid green;
+    padding: 5px;
 }

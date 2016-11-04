@@ -47,11 +47,12 @@ function hide(id) {
 //fonction pour récupérer les données d'un "item" (entrée, plat...)
 function getItem(a) {
     var nom = document.getElementById(a + 'Nom').textContent;
-    var comment = document.getElementById(a + 'Comment').value;
-    var ac = document.getElementById(a + 'Acc').value;
-    var sup = document.getElementById(a + 'Supp').value;
-    addTmp(a ,nom ,comment ,ac ,sup);
+    var com = document.getElementById(a + 'Comment').value;
+    var ac = 'ac';
+    var sup = 'sup';
+    addTmp(a ,nom ,com ,ac ,sup);
     drawCommand();
+
 }
 
 //fonction qui affiche le résumé de la commande
@@ -114,16 +115,13 @@ function setTable(nom){
     setElem('tableCom', table);
 }
 
-//fonction pour créer dans un objet tmp
+//fonction pour push dans un tableau tmp
 function addTmp(typeTemp, nom, det, ac, sup){
     var type = typeTemp.substring(0,typeTemp.length-1);
     var input = typeTemp + "Input";
     var qtt = getElem(input).value;
     var accomp = [];
     var suppl = [];
-
-    accomp.push(ac);
-    suppl.push(sup);
 
     for(i=0; i < qtt; i++) {
         tmp['Nom'] = nom;
@@ -142,7 +140,6 @@ function addTmp(typeTemp, nom, det, ac, sup){
     }
 }
 
-//fonction qui ajoute tmp dans boissons et plats
 function addToTab(tab,ajout){
     element++;
     var elem = "elem" + element;
@@ -157,13 +154,11 @@ function addQuant(val1,val2){
 }
 */
 
-//fonction pour créer la commande avant l'envoye sans id, table, etc (objets boissons + plats)
 function addCom(){
     com['boissons'] = boissons;
     com['plats'] = plats;
 }
 
-//fonction pour créer la commande avant l'envoye + id, table, etc
 function addCart(val){
     addCom();
     cart['idCommande'] = idCom;
@@ -175,16 +170,13 @@ function addCart(val){
 
 function onSubmit() {
     addCart();
-    /*$.ajax({
+    $.ajax({
         type: 'POST',
         data: JSON.stringify(cart),
         contentType: 'application/json',
         url: '/process_post'
-    });*/
-    $(document).ready(function(){
-        $('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
     });
-    raz();
+    //raz();
 }
 
 function raz(){
@@ -203,12 +195,6 @@ function raz(){
     idCom = 'commande'+ date;
     element = 0;
     showBox('menu');
-}
-
-function affiche(){
-    $(document).ready(function(){
-        $('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
-    });
 }
 
 
@@ -304,6 +290,41 @@ function suppItem(item){
     }
 }
 
+function afficherPlats(c){
+    var ligne;
+    setElem('tableau', '');
+    var elem = Object.keys(c.commande.plats);
+    for (var i in elem) {
+        i = elem[i];
+        ligne = '<tr>';
+        ligne += '<td>' + c.idTable + '</td>';
+        ligne += '<td>' + c.commande.plats[i].Nom + '</td>';
+        ligne += '<td>' + c.commande.plats[i].Detail + '</td>';
+        ligne += '</tr>';
+        addElem('tableau', ligne);
+    }
+}
+
+function afficherBoissons(b){
+    var ligne;
+    setElem('tableau', '');
+    var elem = Object.keys(b.commande.boissons);
+    for (var i in elem) {
+        i = elem[i];
+        ligne = '<tr>';
+        ligne += '<td>' + b.idTable + '</td>';
+        ligne += '<td>' + b.commande.boissons[i].Nom + '</td>';
+        ligne += '<td>' + b.commande.boissons[i].Detail + '</td>';
+        ligne += '</tr>';
+        addElem('tableau', ligne);
+    }
+}
+
+
+
+$('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
+$('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
+$('.btn-default').tooltip({placement: "auto right", trigger: "onClick" , toggle: "tooltip", title: "<h4>Produits ajoutés</h4>", animation:"true", html: "true"});
 
 
 
