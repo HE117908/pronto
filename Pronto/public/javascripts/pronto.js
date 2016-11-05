@@ -175,16 +175,16 @@ function addCart(val){
 
 function onSubmit() {
     addCart();
-    /*$.ajax({
+    $.ajax({
         type: 'POST',
         data: JSON.stringify(cart),
         contentType: 'application/json',
         url: '/process_post'
-    });*/
+    });
     $(document).ready(function(){
         $('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
     });
-    //raz();
+    raz();
 }
 
 function raz(){
@@ -339,7 +339,6 @@ function afficherBoissons(b){
 $('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
 $('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
 $('.btn-default').tooltip({placement: "auto right", trigger: "onClick" , toggle: "tooltip", title: "<h4>Produits ajoutés</h4>", animation:"true", html: "true"});
-
 
 
 
