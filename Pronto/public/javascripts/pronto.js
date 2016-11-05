@@ -48,10 +48,19 @@ function hide(id) {
 function getItem(a) {
     var nom = document.getElementById(a + 'Nom').textContent;
     var comment = document.getElementById(a + 'Comment').value;
-    var ac = document.getElementById(a + 'Acc').value;
-    var sup = document.getElementById(a + 'Supp').value;
+    if((getElem(a + 'Acc'))!=null){
+        var ac = document.getElementById(a + 'Acc').value;
+    }else{
+        var ac = 'Accompagnements';
+    }
+    if((getElem(a + 'Acc'))!=null){
+        var sup = document.getElementById(a + 'Supp').value;
+    }else{
+        var sup = 'Suppléments';
+    }
     addTmp(a ,nom ,comment ,ac ,sup);
     drawCommand();
+    razQtt(a);
 }
 
 //fonction qui affiche le résumé de la commande
@@ -98,8 +107,27 @@ function drawCommand(){
 }
 
 //fonction pour supprimer un élément dans la commande
-function suppItem() {
-    alert('hello word!!!');
+function suppItem(item){
+    for(elem in plats){
+        if(item==elem){
+            delete plats[item];
+            console.log(plats);
+            drawCommand();
+        }
+    }
+    for(elem in boissons){
+        if(item==elem){
+            delete boissons[item];
+            console.log(boissons);
+            drawCommand();
+        }
+    }
+}
+
+//fonction pour raz la valeur de la qtt
+function razQtt(el){
+    var qtt = el + 'Input';
+    getElem(qtt).value = 1;
 }
 
 //fonction pour changer le garçon de salle
@@ -122,8 +150,12 @@ function addTmp(typeTemp, nom, det, ac, sup){
     var accomp = [];
     var suppl = [];
 
-    accomp.push(ac);
-    suppl.push(sup);
+    if(ac!='Accompagnements') {
+        accomp.push(ac);
+    }
+    if(sup!='Suppléments') {
+        suppl.push(sup);
+    }
 
     for(i=0; i < qtt; i++) {
         tmp['Nom'] = nom;
@@ -287,22 +319,36 @@ $(".input-number").keydown(function (e) {
 });
 
 
-function suppItem(item){
-    for(elem in plats){
-        if(item==elem){
-            delete plats[item];
-            console.log(plats);
-            drawCommand();
-        }
-    }
-    for(elem in boissons){
-        if(item==elem){
-            delete boissons[item];
-            console.log(boissons);
-            drawCommand();
-        }
-    }
-}
+
+
+
+
+//fonction pour créer les éléments (entrées, plats...) de l'interface avec variables de la bdd mysql
+
+/*
+<div class="thumbnail" id="entree1">
+    <div class="caption-full">
+    <h4 class="pull-right" id="entree1Prix">$21</h4>
+    <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="entree1Nom">HEIRLOOM TOMATO & WATERMELON GAZPACHO</a></h4>
+<h4 class="pull-right">
+    <input id="moinsEntree1" class="btn btn-default" type="button" value="-" />
+    <input id ="resultEntree1" class="btn btn-default" type="texte" value="0" maxlength="2" />
+    <input id="plusEntree1" class="btn btn-default" type="button" value="+" onclick="getItem('entree1')"/>
+    </h4>
+    <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p> -->
+<textarea class="form-control" rows="2" id="commententree1" placeholder="Commentaires: "></textarea>
+    </div>
+    </div>
+    */
+
+
+
+
+
+
+
+//-----------------------------------------------------------------------------------------------------------//
+//partie cuisine
 
 function afficherPlats(c){
     var ligne;
@@ -339,27 +385,3 @@ function afficherBoissons(b){
 $('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
 $('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
 $('.btn-default').tooltip({placement: "auto right", trigger: "onClick" , toggle: "tooltip", title: "<h4>Produits ajoutés</h4>", animation:"true", html: "true"});
-
-
-
-
-
-
-
-//fonction pour créer les éléments (entrées, plats...) de l'interface avec variables de la bdd mysql
-
-/*
-<div class="thumbnail" id="entree1">
-    <div class="caption-full">
-    <h4 class="pull-right" id="entree1Prix">$21</h4>
-    <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="entree1Nom">HEIRLOOM TOMATO & WATERMELON GAZPACHO</a></h4>
-<h4 class="pull-right">
-    <input id="moinsEntree1" class="btn btn-default" type="button" value="-" />
-    <input id ="resultEntree1" class="btn btn-default" type="texte" value="0" maxlength="2" />
-    <input id="plusEntree1" class="btn btn-default" type="button" value="+" onclick="getItem('entree1')"/>
-    </h4>
-    <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p> -->
-<textarea class="form-control" rows="2" id="commententree1" placeholder="Commentaires: "></textarea>
-    </div>
-    </div>
-    */
