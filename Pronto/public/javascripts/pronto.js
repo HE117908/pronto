@@ -2,18 +2,6 @@
  * Created by Alex on 11/10/2016.
  */
 
-// fonctions utilitaires
-function setElem(id, v){
-    document.getElementById(id).innerHTML = v;
-}
-function addElem(id, v){
-    document.getElementById(id).innerHTML += v;
-}
-function getElem(id){
-    return document.getElementById(id);
-}
-
-
 var tmp = {}; //objet temporaire avec plats(ou boissons...) et commentaire
 var plats = {}; //objet des plats
 var boissons = {}; // objet des boissons
@@ -340,45 +328,6 @@ $(".input-number").keydown(function (e) {
     </div>
     </div>
     */
-
-
-
-
-
-
-
-//-----------------------------------------------------------------------------------------------------------//
-//partie cuisine
-
-function afficherPlats(c){
-    var ligne;
-    setElem('tableau', '');
-    var elem = Object.keys(c.commande.plats);
-    for (var i in elem) {
-        i = elem[i];
-        ligne = '<tr>';
-        ligne += '<td>' + c.idTable + '</td>';
-        ligne += '<td>' + c.commande.plats[i].Nom + '</td>';
-        ligne += '<td>' + c.commande.plats[i].Detail + '</td>';
-        ligne += '</tr>';
-        addElem('tableau', ligne);
-    }
-}
-
-function afficherBoissons(b){
-    var ligne;
-    setElem('tableau', '');
-    var elem = Object.keys(b.commande.boissons);
-    for (var i in elem) {
-        i = elem[i];
-        ligne = '<tr>';
-        ligne += '<td>' + b.idTable + '</td>';
-        ligne += '<td>' + b.commande.boissons[i].Nom + '</td>';
-        ligne += '<td>' + b.commande.boissons[i].Detail + '</td>';
-        ligne += '</tr>';
-        addElem('tableau', ligne);
-    }
-}
 
 
 
