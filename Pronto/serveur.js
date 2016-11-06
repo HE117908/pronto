@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/", express.static(__dirname + "/public"));
 
 var nspCuisine = io.of('/cuisine');
 nspCuisine.on('connection', function(socket){
@@ -23,11 +26,8 @@ nspBar.on('connection', function(socket){
     });
 });
 
-
-
-
-/*var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');*/
+var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
 
 // Connection URL
 var url = 'mongodb://localhost:27017/db';
@@ -55,13 +55,6 @@ var findDocuments = function(db, callback) {
     });
 }
 
-// Create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use("/", express.static(__dirname + "/public"));
 app.get('/', function (req, res) {
     res.sendFile( __dirname + "/" + "index.html" );
     console.log("Homepage visiting");
@@ -78,14 +71,27 @@ app.get('/cuisine', function (req, res) {
     console.log("Cuisine visiting");
 })
 
-
-
-
+app.get('/login', function (req, res) {
+    res.sendFile( __dirname + "/" + "login.html" );
+    console.log("Login visiting");
+})
 
 app.post('/process_post', function (req, res) {
-    reception(req,res);
+    reception(req);
     console.log('----');
 })
+
+app.post('/login_post', function (req, res) {
+    checkLog(req);
+})
+
+function checkLog(req) {
+    var info = req.body;
+    var pwd = info.password;
+    var usr = info.username;
+    console.log(usr+" - "+pwd);
+
+}
 
 function recordDB (data) {
     MongoClient.connect(url, function (err, db) {
@@ -120,10 +126,10 @@ function sendCuisine(data){
     nspCuisine.emit('cuisine', data);
 }
 
-function reception(req,res) {
+function reception(req) {
     var commande = req.body;
-    //recordDB(commande);
-    //viewDB();
+    recordDB(commande);
+    viewDB();
     console.log(commande);
     sendBar(commande);
     sendCuisine(commande);
