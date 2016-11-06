@@ -11,6 +11,26 @@ var données = {
         serveur3 : "serveur3",
         serveur4 : "barman"
     },
+    categories : {
+        "Entrées" : {
+            sousCat1 : "Chaudes",
+            sousCat2 : "Froides"
+        },
+        "Plats" : {
+            sousCat1 : "Viandes",
+            sousCat2 : "Poissons",
+            sousCat3 : "Pâtes"
+        },
+        "Desserts" : {
+            sousCat1 : "Aux fruits",
+            sousCat2 : "Au chocolat"
+        },
+        "Boissons" : {
+            sousCat1 : "Thés et cafés",
+            sousCat2 : "Alcools",
+            sousCat3 : "Softs"
+        }
+    },
 
     elements : {
         boissons: {

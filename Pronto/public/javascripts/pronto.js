@@ -306,31 +306,57 @@ $(".input-number").keydown(function (e) {
     }
 });
 
+//fonctions pour créer la page onload
+function drawAll(){
+    drawServeur();
+    drawTable();
+    //drawAccoreon();
+}
+
+//crée le select des serveurs
+function drawServeur(){
+    setElem('dropdownMenuServeur', '');
+    for (var serv in données.serveurs) {
+        st = '<option><a href=\"#\" >'
+        + serv
+        + '</a></option>';
+        addElem('dropdownMenuServeur',st);
+    }
+}
+
+//crée le select des tables
+function drawTable(){
+    setElem('dropdownMenuTable', '');
+    for (var tab in données.tables) {
+        st = '<option><a href=\"#\" >'
+            + tab
+            + '</a></option>';
+        addElem('dropdownMenuTable',st);
+    }
+}
+
+//crée le menu de raccourcis en accordéon
+function drawAccoreon(){
+    setElem('menuAccordion', '');
+    for (var cat in données.categories) {
+        var sc = '<table class="table">'
+        for (var sousCat in données.categories[cat]){
+            sc += '<tr><td><a href="#'
+            + données.categories[cat][sousCat]
+            + '" onclick="showBox('
+            + données.categories[cat]
+            + ')">'
+            + données.categories[cat][sousCat]
+            + '</a></td></tr>'
+        }
+        sc += '</table>';
+        st = '<div class="panel panel-default"><div class="panel-heading"><br class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">'
+            + cat
+            + '</a></h4></div><div id="" class="panel-collapse collapse in"><div class="panel-body">'
+            + sc
+            + '</div></div></div>';
+        addElem('menuAccordion',st);
+    }
+}
 
 
-
-
-
-//fonction pour créer les éléments (entrées, plats...) de l'interface avec variables de la bdd mysql
-
-/*
-<div class="thumbnail" id="entree1">
-    <div class="caption-full">
-    <h4 class="pull-right" id="entree1Prix">$21</h4>
-    <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="entree1Nom">HEIRLOOM TOMATO & WATERMELON GAZPACHO</a></h4>
-<h4 class="pull-right">
-    <input id="moinsEntree1" class="btn btn-default" type="button" value="-" />
-    <input id ="resultEntree1" class="btn btn-default" type="texte" value="0" maxlength="2" />
-    <input id="plusEntree1" class="btn btn-default" type="button" value="+" onclick="getItem('entree1')"/>
-    </h4>
-    <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p> -->
-<textarea class="form-control" rows="2" id="commententree1" placeholder="Commentaires: "></textarea>
-    </div>
-    </div>
-    */
-
-
-
-$('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
-$('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
-$('.btn-default').tooltip({placement: "auto right", trigger: "onClick" , toggle: "tooltip", title: "<h4>Produits ajoutés</h4>", animation:"true", html: "true"});

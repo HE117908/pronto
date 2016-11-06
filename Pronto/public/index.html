@@ -27,7 +27,7 @@
 
 </head>
 
-<br>
+<body onload="drawAll()">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -76,7 +76,7 @@
         <p class="lead">Restaurant Name</p>
 
         <!-- sélection du serveur-->
-        <div class="form-group">
+        <!--<div class="form-group">
             <label for="dropdownMenu2">Sélectionner du garçon de salle ici:</label>
             <select class="form-control" id="dropdownMenu2" onclick="setGarcon(this)">
                 <option><a href="#" >Serveur 1</a></option>
@@ -85,16 +85,34 @@
                 <option><a href="#" >Au bar</a></option>
             </select>
             <br>
+        </div>-->
+
+        <!--sélection du serveur rempli onload-->
+        <div class="form-group">
+            <label for="dropdownMenuServeur">Sélectionner du garçon de salle ici:</label>
+            <select class="form-control" id="dropdownMenuServeur" onclick="setGarcon(this)">
+
+            </select>
+            <br>
         </div>
 
         <!-- sélection de la table-->
-        <div class="form-group">
+        <!--<div class="form-group">
             <label for="dropdownMenu1">Sélectionner la table ici:</label>
             <select class="form-control" id="dropdownMenu1" onclick="setTable(this)">
                 <option><a href="#" >Table 1</a></option>
                 <option><a href="#" >Table 2</a></option>
                 <option><a href="#" >Table 3</a></option>
                 <option><a href="#" >Au bar</a></option>
+            </select>
+            <br>
+        </div>-->
+
+        <!-- sélection de la table rempli onload-->
+        <div class="form-group">
+            <label for="dropdownMenuTable">Sélectionner la table ici:</label>
+            <select class="form-control" id="dropdownMenuTable" onclick="setTable(this)">
+
             </select>
             <br>
         </div>
@@ -208,6 +226,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel-group" id="menuAccordion">
+
+        </div>
+
     </div>
 
 
