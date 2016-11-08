@@ -5,9 +5,14 @@
 //-----------------------------------------------------------------------------------------------------------//
 //partie cuisine
 
-var socket = io('/cuisine');
-socket.on('cuisine',function(data){
+var socketC = io('/cuisine');
+socketC.on('cuisine',function(data){
     afficherPlats(data);
+});
+
+var socketB = io('/bar');
+socketB.on('bar',function(data){
+    afficherBoissons(data);
 });
 
 function afficherPlats(c){
