@@ -5,6 +5,11 @@
 //-----------------------------------------------------------------------------------------------------------//
 //partie cuisine
 
+var socket = io('/cuisine');
+socket.on('cuisine',function(data){
+    afficherPlats(data);
+});
+
 function afficherPlats(c){
     var ligne;
     setElem('tableau', '');
@@ -34,7 +39,3 @@ function afficherBoissons(b){
         addElem('tableau', ligne);
     }
 }
-
-$('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
-$('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
-$('.btn-default').tooltip({placement: "auto right", trigger: "onClick" , toggle: "tooltip", title: "<h4>Produits ajoutés</h4>", animation:"true", html: "true"});
