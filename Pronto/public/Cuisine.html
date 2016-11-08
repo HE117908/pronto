@@ -30,6 +30,13 @@
     <script src="javascripts/utils.js"></script>
     <script src="javascripts/barCuisine.js"></script>
 
+    <script>
+        var socket = io('/cuisine');
+        socket.on('cuisine',function(data){
+            afficherPlats(data);
+        });
+    </script>
+
 </head>
 
 <body>

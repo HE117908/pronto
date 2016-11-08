@@ -32,6 +32,13 @@
     <!-- <script src="javascripts/pronto.js"></script> -->
     <script src="javascripts/utils.js"></script>
     <script src="javascripts/barCuisine.js"></script>
+
+    <script>
+        var socket = io('/bar');
+        socket.on('bar',function(data){
+            afficherBoissons(data);
+        });
+    </script>
 </head>
 
 <body>
