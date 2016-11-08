@@ -4,6 +4,46 @@ var bodyParser = require('body-parser');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var mysql = require('mysql');
+
+var mySqlClient = mysql.createConnection({
+    host     : "localhost",
+    user     : "root",
+    password : "alex",
+    database : "pronto"
+});
+
+/*
+var selectQuery = 'SELECT * FROM boissons';
+
+mySqlClient.query(
+    selectQuery,
+    function select(error, results, fields) {
+        if (error) {
+            console.log(error);
+            mySqlClient.end();
+            return;
+        }
+
+        if ( results.length > 0 )  {
+            for(i in results){
+                var firstResult = results[ i ];
+                console.log('Nom: ' + firstResult['Nom']);
+                console.log('Prix: ' + firstResult['Prix']);
+                console.log('Catégorie: ' + firstResult['NomCatBoisson']);
+            }
+            var firstResult = results[ 0 ];
+            console.log('Nom: ' + firstResult['Nom']);
+            console.log('Prix: ' + firstResult['Prix']);
+            console.log('Catégorie: ' + firstResult['NomCatBoisson']);
+        } else {
+            console.log("Pas de données");
+        }
+        mySqlClient.end();
+    }
+);
+*/
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", express.static(__dirname + "/public"));
@@ -25,13 +65,13 @@ nspBar.on('connection', function(socket){
         console.log('bar disconnected');
     });
 });
-
+/*
 var MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
 
 // Connection URL
 var url = 'mongodb://localhost:27017/db';
-
+*/
 var insertDocuments = function(db, callback,data) {
     // Get the documents collection
     var collection = db.collection('documents');
@@ -90,6 +130,38 @@ function checkLog(req) {
     var pwd = info.password;
     var usr = info.username;
     console.log(usr+" - "+pwd);
+    var selectQuery = 'SELECT IdServeur, Pass FROM serveurs';
+
+    mySqlClient.query(
+        selectQuery,
+        function select(error, results, fields) {
+            if (error) {
+                console.log(error);
+                mySqlClient.end();
+                return;
+            }
+
+            if ( results.length > 0 )  {
+                for(i in results){
+                    var firstResult = results[ i ];
+                    /*console.log('IdServeur: ' + firstResult['IdServeur']);
+                    console.log('Pass: ' + firstResult['Pass']);*/
+                    if(usr==firstResult['IdServeur']&&pwd==firstResult['Pass']){
+                        console.log('bon mdp!');
+                        console.log(firstResult['IdServeur'] + ' + ' + firstResult['Pass']);
+                        //ici la fonction pour passer a index.html
+                    }
+                }
+                /*var firstResult = results[ 0 ];
+                 console.log('Nom: ' + firstResult['Nom']);
+                 console.log('Prix: ' + firstResult['Prix']);
+                 console.log('Catégorie: ' + firstResult['NomCatBoisson']);*/
+            } else {
+                console.log("Pas de données");
+            }
+            mySqlClient.end();
+        }
+    );
 
 }
 
@@ -128,8 +200,8 @@ function sendCuisine(data){
 
 function reception(req) {
     var commande = req.body;
-    recordDB(commande);
-    viewDB();
+    //recordDB(commande);
+    //viewDB();
     console.log(commande);
     sendBar(commande);
     sendCuisine(commande);
