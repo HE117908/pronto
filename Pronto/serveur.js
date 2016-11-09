@@ -3,8 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
 var mysql = require('mysql');
+var request = require("request");
 
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
@@ -151,6 +151,9 @@ function checkLog(req) {
                         console.log('bon mdp!');
                         console.log(firstResult['IdServeur'] + ' + ' + firstResult['Pass']);
                         //ici la fonction pour passer a index.html
+                        request("http://localhost:"+server.address().port+"/index.html", function(error, response, body) {
+                            console.log(body);
+                        });
                     }
                 }
             } else {
@@ -207,6 +210,7 @@ function reception(req) {
 
 
 }
+
     var server = http.listen(3000, function () {
         var host = server.address().address
         var port = server.address().port
