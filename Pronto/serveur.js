@@ -9,7 +9,7 @@ var mysql = require('mysql');
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
     user     : "root",
-    password : "alex",
+    password : "mpolkiuj",
     database : "pronto"
 });
 
@@ -127,9 +127,11 @@ app.post('/login_post', function (req, res) {
 
 function checkLog(req) {
     var info = req.body;
-    var pwd = info.password;
-    var usr = info.username;
+    var pwd = info.pwd;
+    var usr = info.usr;
     console.log(usr+" - "+pwd);
+
+
     var selectQuery = 'SELECT IdServeur, Pass FROM serveurs';
 
     mySqlClient.query(
@@ -137,29 +139,26 @@ function checkLog(req) {
         function select(error, results, fields) {
             if (error) {
                 console.log(error);
-                mySqlClient.end();
-                return;
+                //mySqlClient.end();
+                return false;
             }
 
             if ( results.length > 0 )  {
+
                 for(i in results){
                     var firstResult = results[ i ];
-                    /*console.log('IdServeur: ' + firstResult['IdServeur']);
-                    console.log('Pass: ' + firstResult['Pass']);*/
                     if(usr==firstResult['IdServeur']&&pwd==firstResult['Pass']){
                         console.log('bon mdp!');
                         console.log(firstResult['IdServeur'] + ' + ' + firstResult['Pass']);
                         //ici la fonction pour passer a index.html
                     }
                 }
-                /*var firstResult = results[ 0 ];
-                 console.log('Nom: ' + firstResult['Nom']);
-                 console.log('Prix: ' + firstResult['Prix']);
-                 console.log('Catégorie: ' + firstResult['NomCatBoisson']);*/
             } else {
                 console.log("Pas de données");
+
             }
-            mySqlClient.end();
+            //mySqlClient.end();
+            //console.log("fin conn");
         }
     );
 
