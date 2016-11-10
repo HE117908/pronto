@@ -18,10 +18,6 @@ var mySqlClient = mysql.createConnection({
     database : "pronto"
 });
 
-var loginResult;
-var serveurResult;
-var tableResult;
-
 /*
 var selectQuery = 'SELECT * FROM boissons';
 
@@ -104,20 +100,20 @@ var findDocuments = function(db, callback) {
     });
 }
 
-// select IdServeur from Serveurs;
-// select IdTable from Tables;
-
+/*
+app.get('/', function (req, res) {
+    res.sendFile( __dirname + "/" + "indexold.html" );
+    console.log("Homepage visiting");
+})
+*/
 
 app.get('/', function(req, res) {
     var menu = ["Entrées","Plats","Desserts","Boissons"];
-    var serveur = ["Albert","Bernard","Charlie"];
-    var table = [1,2,3];
+    var serveur;
+    var table;
     res.render('index',{
         RestaurantName:"Resto",
-        Menu:menu,
-        Serveur:serveur,
-        Table:table
-
+        Menu:menu
     });
 });
 
@@ -126,15 +122,18 @@ app.get('/', function(req, res) {
 
 app.get('/bar', function (req, res) {
     res.sendFile( __dirname + "/" + "bar.html" );
+    console.log("Bar visiting");
 })
 
 
 app.get('/cuisine', function (req, res) {
     res.sendFile( __dirname + "/" + "cuisine.html" );
+    console.log("Cuisine visiting");
 })
 
 app.get('/login', function (req, res) {
     res.sendFile( __dirname + "/" + "login.html" );
+    console.log("Login visiting");
 })
 
 app.post('/process_post', function (req, res) {
@@ -152,26 +151,38 @@ function checkLog(req) {
     var usr = info.usr;
     console.log(usr+" - "+pwd);
 
+
     var selectQuery = 'SELECT IdServeur, Pass FROM serveurs';
 
-    mySqlClient.query(selectQuery,
+    mySqlClient.query(
+        selectQuery,
         function select(error, results, fields) {
+            if (error) {
+                console.log(error);
+                //mySqlClient.end();
+                return false;
+            }
+
             if ( results.length > 0 )  {
+
                 for(i in results){
-                    loginResult = results[ i ];
-                    if(usr==loginResult['IdServeur']&&pwd==loginResult['Pass']){
+                    var firstResult = results[ i ];
+                    if(usr==firstResult['IdServeur']&&pwd==firstResult['Pass']){
                         console.log('bon mdp!');
-                        console.log(loginResult['IdServeur'] + ' + ' + loginResult['Pass']);
-                        //ici la fonction pour passer a index.html
+                        console.log(firstResult['IdServeur'] + ' + ' + firstResult['Pass']);
+                        //ici la fonction pour passer a indexold.html
                     }
                 }
-            } else console.log("Pas de données");
-        });
+            } else {
+                console.log("Pas de données");
 
+            }
+            //mySqlClient.end();
+            //console.log("fin conn");
+        }
+    );
 
 }
-
-
 
 function recordDB (data) {
     MongoClient.connect(url, function (err, db) {
