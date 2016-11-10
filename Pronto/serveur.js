@@ -4,7 +4,12 @@ var bodyParser = require('body-parser');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mysql = require('mysql');
+var ejs = require('ejs');
 var request = require("request");
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
 
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
@@ -95,10 +100,25 @@ var findDocuments = function(db, callback) {
     });
 }
 
+/*
 app.get('/', function (req, res) {
-    res.sendFile( __dirname + "/" + "index.html" );
+    res.sendFile( __dirname + "/" + "indexold.html" );
     console.log("Homepage visiting");
 })
+*/
+
+app.get('/', function(req, res) {
+    var menu = ["Entrées","Plats","Desserts","Boissons"];
+    var serveur;
+    var table;
+    res.render('index',{
+        RestaurantName:"Resto",
+        Menu:menu
+    });
+});
+
+
+
 
 app.get('/bar', function (req, res) {
     res.sendFile( __dirname + "/" + "bar.html" );
@@ -150,10 +170,7 @@ function checkLog(req) {
                     if(usr==firstResult['IdServeur']&&pwd==firstResult['Pass']){
                         console.log('bon mdp!');
                         console.log(firstResult['IdServeur'] + ' + ' + firstResult['Pass']);
-                        //ici la fonction pour passer a index.html
-                        request("http://localhost:"+server.address().port+"/index.html", function(error, response, body) {
-                            console.log(body);
-                        });
+                        //ici la fonction pour passer a indexold.html
                     }
                 }
             } else {
