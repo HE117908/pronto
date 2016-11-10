@@ -18,9 +18,8 @@ var mySqlClient = mysql.createConnection({
     database : "pronto"
 });
 
-var loginResult;
-var serveurResult;
-var tableResult;
+var serveurResult = [];
+var tableResult = [];
 
 /*
 var selectQuery = 'SELECT * FROM boissons';
@@ -104,14 +103,38 @@ var findDocuments = function(db, callback) {
     });
 }
 
-// select IdServeur from Serveurs;
-// select IdTable from Tables;
+var queryServeur = 'select IdServeur from Serveurs';
+var queryTable = 'select IdTable from Tables';
+
+mySqlClient.query(queryServeur,
+    function select(error, results, fields) {
+        if ( results.length > 0 )  {
+            for(i in results){
+                serveurResult[i] = results[ i ].IdServeur;
+            }
+
+        } else console.log("Pas de données");
+    });
+
+mySqlClient.query(queryTable,
+    function select(error, results, fields) {
+        if ( results.length > 0 )  {
+            for(i in results){
+                tableResult[i] = results[ i ].IdTable;
+            }
+
+        } else console.log("Pas de données");
+    });
+
+
 
 
 app.get('/', function(req, res) {
+    console.log(serveurResult);
+    console.log(tableResult);
     var menu = ["Entrées","Plats","Desserts","Boissons"];
-    var serveur = ["Albert","Bernard","Charlie"];
-    var table = [1,2,3];
+    var serveur = serveurResult;
+    var table = tableResult;
     res.render('index',{
         RestaurantName:"Resto",
         Menu:menu,
@@ -158,7 +181,7 @@ function checkLog(req) {
         function select(error, results, fields) {
             if ( results.length > 0 )  {
                 for(i in results){
-                    loginResult = results[ i ];
+                    var loginResult = results[ i ];
                     if(usr==loginResult['IdServeur']&&pwd==loginResult['Pass']){
                         console.log('bon mdp!');
                         console.log(loginResult['IdServeur'] + ' + ' + loginResult['Pass']);
