@@ -5,14 +5,36 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mysql = require('mysql');
 var ejs = require('ejs');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
 var request = require("request");
 
-// set the view engine to ejs
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// uncomment after placing your favicon in /public
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/", express.static(__dirname + "/public"));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+var index = require('./routes/index');
+var login = require('./routes/login');
+var bar = require('./routes/bar');
+var cuisine = require('./routes/cuisine');
+
+
+app.use('/', index);
+app.use('/login', login);
+app.use('/bar', bar);
+app.use('/cuisine', cuisine);
+
+var loginResult = [];
 
 var nspCuisine = io.of('/cuisine');
 nspCuisine.on('connection', function(socket){
@@ -68,57 +90,6 @@ var mySqlClient = mysql.createConnection({
     database : "pronto"
 });
 
-var serveurResult = [];
-var tableResult = [];
-var loginResult = [];
-
-var queryServeur = 'select IdServeur from Serveurs';
-var queryTable = 'select IdTable from Tables';
-
-DBQuery(queryServeur,serveurResult,"IdServeur");
-DBQuery(queryTable,tableResult,"IdTable");
-
-function DBQuery(query,receive,column){
-    mySqlClient.query(query,
-        function select(error, results, fields) {
-            if ( results.length > 0 )  {
-                for(i in results){
-                    receive[i] = results[ i ][column];
-                }
-
-            } else console.log("Pas de données");
-        });
-}
-
-
-app.get('/', function(req, res) {
-    console.log(serveurResult);
-    console.log(tableResult);
-    var menu = ["Entrées","Plats","Desserts","Boissons"];
-    res.render('index',{
-        RestaurantName:"Resto",
-        Menu:menu,
-        Serveur:serveurResult,
-        Table:tableResult
-
-    });
-});
-
-
-
-
-app.get('/bar', function (req, res) {
-    res.sendFile( __dirname + "/" + "bar.html" );
-})
-
-
-app.get('/cuisine', function (req, res) {
-    res.sendFile( __dirname + "/" + "cuisine.html" );
-})
-
-app.get('/login', function (req, res) {
-    res.sendFile( __dirname + "/" + "login.html" );
-})
 
 app.post('/process_post', function (req, res) {
     reception(req);
@@ -200,6 +171,24 @@ function reception(req) {
 
 }
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
+
     var server = http.listen(3000, function () {
         var host = server.address().address
         var port = server.address().port
@@ -207,6 +196,8 @@ function reception(req) {
         console.log("The server listening at http://%s:%s", host, port)
 
     })
+
+module.exports = app;
 
 /*
  var selectQuery = 'SELECT * FROM boissons';
