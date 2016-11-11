@@ -10,48 +10,6 @@ var request = require("request");
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-
-var mySqlClient = mysql.createConnection({
-    host     : "localhost",
-    user     : "root",
-    password : "mpolkiuj",
-    database : "pronto"
-});
-
-var serveurResult = [];
-var tableResult = [];
-
-/*
-var selectQuery = 'SELECT * FROM boissons';
-
-mySqlClient.query(
-    selectQuery,
-    function select(error, results, fields) {
-        if (error) {
-            console.log(error);
-            mySqlClient.end();
-            return;
-        }
-
-        if ( results.length > 0 )  {
-            for(i in results){
-                var firstResult = results[ i ];
-                console.log('Nom: ' + firstResult['Nom']);
-                console.log('Prix: ' + firstResult['Prix']);
-                console.log('Catégorie: ' + firstResult['NomCatBoisson']);
-            }
-            var firstResult = results[ 0 ];
-            console.log('Nom: ' + firstResult['Nom']);
-            console.log('Prix: ' + firstResult['Prix']);
-            console.log('Catégorie: ' + firstResult['NomCatBoisson']);
-        } else {
-            console.log("Pas de données");
-        }
-        mySqlClient.end();
-    }
-);
-*/
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", express.static(__dirname + "/public"));
@@ -103,43 +61,45 @@ var findDocuments = function(db, callback) {
     });
 }
 
+var mySqlClient = mysql.createConnection({
+    host     : "localhost",
+    user     : "root",
+    password : "mpolkiuj",
+    database : "pronto"
+});
+
+var serveurResult = [];
+var tableResult = [];
+var loginResult = [];
+
 var queryServeur = 'select IdServeur from Serveurs';
 var queryTable = 'select IdTable from Tables';
 
-mySqlClient.query(queryServeur,
-    function select(error, results, fields) {
-        if ( results.length > 0 )  {
-            for(i in results){
-                serveurResult[i] = results[ i ].IdServeur;
-            }
+DBQuery(queryServeur,serveurResult,"IdServeur");
+DBQuery(queryTable,tableResult,"IdTable");
 
-        } else console.log("Pas de données");
-    });
+function DBQuery(query,receive,column){
+    mySqlClient.query(query,
+        function select(error, results, fields) {
+            if ( results.length > 0 )  {
+                for(i in results){
+                    receive[i] = results[ i ][column];
+                }
 
-mySqlClient.query(queryTable,
-    function select(error, results, fields) {
-        if ( results.length > 0 )  {
-            for(i in results){
-                tableResult[i] = results[ i ].IdTable;
-            }
-
-        } else console.log("Pas de données");
-    });
-
-
+            } else console.log("Pas de données");
+        });
+}
 
 
 app.get('/', function(req, res) {
     console.log(serveurResult);
     console.log(tableResult);
     var menu = ["Entrées","Plats","Desserts","Boissons"];
-    var serveur = serveurResult;
-    var table = tableResult;
     res.render('index',{
         RestaurantName:"Resto",
         Menu:menu,
-        Serveur:serveur,
-        Table:table
+        Serveur:serveurResult,
+        Table:tableResult
 
     });
 });
@@ -181,10 +141,10 @@ function checkLog(req) {
         function select(error, results, fields) {
             if ( results.length > 0 )  {
                 for(i in results){
-                    var loginResult = results[ i ];
-                    if(usr==loginResult['IdServeur']&&pwd==loginResult['Pass']){
+                     loginResult[i] = results[ i ];
+                    if(usr==loginResult[i]['IdServeur']&&pwd==loginResult[i]['Pass']){
                         console.log('bon mdp!');
-                        console.log(loginResult['IdServeur'] + ' + ' + loginResult['Pass']);
+                        console.log(loginResult[i]['IdServeur'] + ' + ' + loginResult[i]['Pass']);
                         //ici la fonction pour passer a index.html
                     }
                 }
@@ -247,3 +207,34 @@ function reception(req) {
         console.log("The server listening at http://%s:%s", host, port)
 
     })
+
+/*
+ var selectQuery = 'SELECT * FROM boissons';
+
+ mySqlClient.query(
+ selectQuery,
+ function select(error, results, fields) {
+ if (error) {
+ console.log(error);
+ mySqlClient.end();
+ return;
+ }
+
+ if ( results.length > 0 )  {
+ for(i in results){
+ var firstResult = results[ i ];
+ console.log('Nom: ' + firstResult['Nom']);
+ console.log('Prix: ' + firstResult['Prix']);
+ console.log('Catégorie: ' + firstResult['NomCatBoisson']);
+ }
+ var firstResult = results[ 0 ];
+ console.log('Nom: ' + firstResult['Nom']);
+ console.log('Prix: ' + firstResult['Prix']);
+ console.log('Catégorie: ' + firstResult['NomCatBoisson']);
+ } else {
+ console.log("Pas de données");
+ }
+ mySqlClient.end();
+ }
+ );
+ */
