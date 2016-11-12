@@ -97,10 +97,13 @@ app.post('/process_post', function (req, res) {
 })
 
 app.post('/login_post', function (req, res) {
-    checkLog(req);
+  var re =  checkLog(req);
+    console.log(re);
+    if(re) res.redirect('public/index.html');
 })
 
 function checkLog(req) {
+    var GL = true;
     var info = req.body;
     var pwd = info.pwd;
     var usr = info.usr;
@@ -117,12 +120,20 @@ function checkLog(req) {
                         console.log('bon mdp!');
                         console.log(loginResult[i]['IdServeur'] + ' + ' + loginResult[i]['Pass']);
                         //ici la fonction pour passer a index.html
+                        GL = true;
+
+
+
                     }
                 }
-            } else console.log("Pas de données");
+
+            } else{
+                console.log("Pas de données");
+            }
+
         });
-
-
+    console.log("in fct "+GL);
+    return true;
 }
 
 
