@@ -35,6 +35,7 @@ app.use('/bar', bar);
 app.use('/cuisine', cuisine);
 
 var loginResult = [];
+var GL = "test";
 
 var nspCuisine = io.of('/cuisine');
 nspCuisine.on('connection', function(socket){
@@ -97,17 +98,20 @@ app.post('/process_post', function (req, res) {
 })
 
 app.post('/login_post', function (req, res) {
-  var re =  checkLog(req);
-    console.log(re);
-    if(re) res.redirect('public/index.html');
+    var user_name=req.body.user;
+    var password=req.body.password;
+    console.log("User name = "+user_name+", password is "+password);
+   var rs = ckL(user_name,password);
+    console.log(rs);
+    //res.end("yes");
 })
 
-function checkLog(req) {
-    var GL = true;
-    var info = req.body;
-    var pwd = info.pwd;
-    var usr = info.usr;
-    console.log(usr+" - "+pwd);
+function loginT(val) {
+    GL = val;
+
+}
+
+function ckL(usr,pwd){
 
     var selectQuery = 'SELECT IdServeur, Pass FROM serveurs';
 
@@ -115,28 +119,26 @@ function checkLog(req) {
         function select(error, results, fields) {
             if ( results.length > 0 )  {
                 for(i in results){
-                     loginResult[i] = results[ i ];
+                    loginResult[i] = results[ i ];
                     if(usr==loginResult[i]['IdServeur']&&pwd==loginResult[i]['Pass']){
                         console.log('bon mdp!');
                         console.log(loginResult[i]['IdServeur'] + ' + ' + loginResult[i]['Pass']);
                         //ici la fonction pour passer a index.html
-                        GL = true;
-
-
+                        loginT(true);
 
                     }
                 }
 
             } else{
                 console.log("Pas de données");
+                loginT(false);
             }
 
         });
     console.log("in fct "+GL);
-    return true;
+    return GL;
+
 }
-
-
 
 function recordDB (data) {
     MongoClient.connect(url, function (err, db) {
