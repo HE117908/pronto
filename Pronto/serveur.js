@@ -95,6 +95,26 @@ var mySqlClient = mysql.createConnection({
     database : "pronto"
 });
 
+var loginResult = new Object();
+var queryLogin = 'SELECT IdServeur, Pass FROM serveurs';
+
+DBQueryLogin(queryLogin,loginResult);
+
+function DBQueryLogin(query,receive){
+    mySqlClient.query(query,
+        function select(error, results, fields) {
+            if ( results.length > 0 )  {
+                for(i in results){
+                    //receive[i]['IdServeur'] = results[ i ]['IdServeur'];
+                    receive[results[ i ]['IdServeur']] = results[ i ]['Pass'];
+                }
+
+            } else console.log("Pas de données");
+        });
+}
+
+
+
 
 app.post('/process_post', function (req, res) {
     reception(req);
@@ -105,55 +125,22 @@ app.post('/login_post', function (req, res) {
     var user_name=req.body.user;
     var password=req.body.password;
     console.log("User name = "+user_name+", password is "+password);
-   var rs = ckL(user_name,password);
-    console.log(rs);
-    //res.end("yes");
+    ckL(user_name,password);
 })
 
-function loginT(val) {
-    GL = val;
-
-}
 
 function ckL(usr,pwd){
+    var tab = Object.keys(loginResult);
+    //console.log(tab);
+    if(tab.indexOf(usr) != -1){
+        console.log("login ok");
+        if(loginResult[usr] == pwd) {
+            console.log("Pass ok");
+            // redirection
 
-    var selectQuery = 'SELECT IdServeur, Pass FROM serveurs';
+        } else console.log("Pass nok");
+    } else console.log("login nok");
 
-    mySqlClient.query(selectQuery,
-        function select(error, results, fields) {
-            if ( results.length > 0 )  {
-                for(i in results){
-                    loginResult[i] = results[ i ];
-                    if(usr==loginResult[i]['IdServeur']&&pwd==loginResult[i]['Pass']){
-                        console.log('bon mdp!');
-                        console.log(loginResult[i]['IdServeur'] + ' + ' + loginResult[i]['Pass']);
-                        //ici la fonction pour passer a index.html
-                        loginT(true);
-
-                    }
-                }
-
-            } else{
-                console.log("Pas de données");
-                loginT(false);
-            }
-
-        });
-    console.log("in fct "+GL);
-    return GL;
-
-}
-
-function recordDB (data) {
-    MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
-        console.log("Connected successfully to server database");
-
-        insertDocuments(db, function () {
-            db.close();
-        }, data);
-
-    });
 
 }
 
