@@ -23,11 +23,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <![endif]-->
-    <script src="javascripts/object.js"></script>
+        <script src="javascripts/object.js"></script>
 
 </head>
 
-<body onload="drawAll()">
+<body onload="drawAll(<%= Menu %>)">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -41,12 +41,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand" onclick="showBox('menu')">Home</a>
+                <a href="#" class="navbar-brand" onclick="showBox('home')">Home</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <% for(var i=0; i<Menu.length; i++) {%>
+                       <li><a href="#" onclick="showBox('<%=Menu[i]%>')"><%=Menu[i]%></a></li>
+                    <% } %>
+
+                    <!--
                     <li>
                         <a href="#" onclick="showBox('entrees')"><%=Menu[0]%></a>
                     </li>
@@ -59,6 +64,8 @@
                     <li>
                         <a href="#" onclick="showBox('boissons')"><%=Menu[3]%></a>
                     </li>
+                    -->
+
                     <li>
                         <a href="#" onclick="showBox('commande')">Commande</a>
                     </li>
@@ -72,7 +79,7 @@
 
     <!-- Page Content -->
 
-    <div class="col-md-3" id="menu">
+    <div class="col-md-3" id="home">
         <p class="lead"><%=RestaurantName%></p>
 
         <!-- sélection du serveur-->
@@ -118,6 +125,7 @@
         </div>
 
         <!-- menu des raccourcis déroulant-->
+        <!--
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -226,6 +234,7 @@
                 </div>
             </div>
         </div>
+        -->
 
         <div class="panel-group" id="menuAccordion">
 
@@ -236,11 +245,11 @@
 
     <!-- Entrées -->
 
-    <div class="col-md-9" id="entrees" style="display: none;">
+    <div class="col-md-9" id="<%=Menu[0]%>" style="display: none;">
 
         <h2><%=Menu[0]%></h2>
 
-        <h3 id="entreeChaude">Entrées chaudes</h3>
+        <!--<h3 id="entreeChaude">Entrées chaudes</h3>-->
 
         <div class="thumbnail" id="entree1">
             <div class="caption-full">
@@ -269,7 +278,7 @@
             </div>
         </div>
 
-        <h3 id="entreeFroide">Entrées froides</h3>
+        <!--<h3 id="entreeFroide">Entrées froides</h3>-->
 
         <div class="thumbnail" id="entree2">
             <div class="caption-full">
@@ -301,11 +310,11 @@
 
     <!-- Plats -->
 
-    <div class="col-md-9" id="plats" style="display: none;">
+    <div class="col-md-9" id="<%=Menu[1]%>" style="display: none;">
 
         <h2><%=Menu[1]%></h2>
 
-        <h3 id="viandes">Viandes</h3>
+        <!--<h3 id="viandes">Viandes</h3>-->
 
         <div class="thumbnail" id="plat1">
             <div class="caption-full">
@@ -349,7 +358,7 @@
             </div>
         </div>
 
-        <h3 id="poissons">Poissons</h3>
+        <!--<h3 id="poissons">Poissons</h3>-->
 
         <div class="thumbnail" id="plat2">
             <div class="caption-full">
@@ -377,7 +386,7 @@
             </div>
         </div>
 
-        <h3 id="pates">Pâtes</h3>
+        <!--<h3 id="pates">Pâtes</h3>-->
 
     </div>
 
@@ -385,11 +394,11 @@
 
     <!-- Desserts -->
 
-    <div class="col-md-9" id="desserts" style="display: none;">
+    <div class="col-md-9" id="<%=Menu[2]%>" style="display: none;">
 
         <h2><%=Menu[2]%></h2>
 
-        <h3 id="auxFruits">Desserts aux fruits</h3>
+        <!--<h3 id="auxFruits">Desserts aux fruits</h3>-->
 
         <div class="thumbnail" id="dessert1">
             <div class="caption-full">
@@ -417,7 +426,7 @@
             </div>
         </div>
 
-        <h3 id="auxChocolat">Desserts aux chocolat</h3>
+        <!--<h3 id="auxChocolat">Desserts aux chocolat</h3>-->
 
         <div class="thumbnail" id="dessert2">
             <div class="caption-full">
@@ -450,11 +459,11 @@
 
     <!-- Boissons -->
 
-    <div class="col-md-9" id="boissons" style="display: none;">
+    <div class="col-md-9" id="<%=Menu[3]%>" style="display: none;">
 
         <h2><%=Menu[3]%></h2>
 
-        <h3 id="theEtCafe">Thés et cafés</h3>
+        <!--<h3 id="theEtCafe">Thés et cafés</h3>-->
 
         <div class="thumbnail" id="boisson1">
             <div class="caption-full">
@@ -508,7 +517,7 @@
             </div>
         </div>
 
-        <h3 id="alcools">Alcools</h3>
+        <!--<h3 id="alcools">Alcools</h3>-->
 
         <div class="thumbnail" id="boisson3">
             <div class="caption-full">
@@ -536,7 +545,7 @@
             </div>
         </div>
 
-        <h3 id="softs">Softs</h3>
+        <!--<h3 id="softs">Softs</h3>-->
 
         <div class="thumbnail" id="boisson4">
             <div class="caption-full">

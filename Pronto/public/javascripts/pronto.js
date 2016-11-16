@@ -13,14 +13,15 @@ var date = new Date().getTime();
 var idCom = 'commande'+ date; // id de la commande = commande + date en millisecondes
 var element = 0; //pour incrémenter les elem (numero uniquement)
 
+
 //fonction pour montrer l'onglet selectionné
 function showBox(n) {
 
-    hide('menu');
-    hide('entrees');
-    hide('plats');
-    hide('desserts');
-    hide('boissons');
+    hide('home');
+    hide('Entrées');
+    hide('Plats');
+    hide('Desserts');
+    hide('Boissons');
     hide('commande');
 
     document.getElementById(n).style.display='block';
@@ -222,7 +223,7 @@ function raz(){
     date = new Date().getTime();
     idCom = 'commande'+ date;
     element = 0;
-    showBox('menu');
+    showBox('home');
 }
 
 function affiche(){
@@ -307,7 +308,9 @@ $(".input-number").keydown(function (e) {
 });
 
 //fonctions pour créer la page onload
-function drawAll(){
+function drawAll(param){
+    menu = param;
+    //console.log(param);
     drawServeur();
     drawTable();
     //drawAccoreon();
