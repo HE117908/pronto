@@ -11,6 +11,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var request = require("request");
 
+var server;
+makeServeur();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -33,6 +36,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/bar', bar);
 app.use('/cuisine', cuisine);
+
 
 var loginResult = [];
 var GL = "test";
@@ -202,13 +206,16 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-    var server = http.listen(3000, function () {
+function makeServeur () {
+    server = http.listen(3000, function () {
         var host = server.address().address
         var port = server.address().port
 
         console.log("The server listening at http://%s:%s", host, port)
 
     })
+}
+
 
 module.exports = app;
 
