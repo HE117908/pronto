@@ -7,7 +7,6 @@
 
 function afficherPlats(c){
     var ligne;
-    setElem('tableau', '');
     var elem = Object.keys(c.commande.plats);
     for (var i in elem) {
         i = elem[i];
@@ -15,6 +14,8 @@ function afficherPlats(c){
         ligne += '<td>' + c.idTable + '</td>';
         ligne += '<td>' + c.commande.plats[i].Nom + '</td>';
         ligne += '<td>' + c.commande.plats[i].Detail + '</td>';
+        ligne += '<td>' + c.commande.plats[i].Accompagnements + '</td>';
+        ligne += '<td>' + c.commande.plats[i].Supplements + '</td>';
         ligne += '</tr>';
         addElem('tableau', ligne);
     }
@@ -22,7 +23,6 @@ function afficherPlats(c){
 
 function afficherBoissons(b){
     var ligne;
-    setElem('tableau', '');
     var elem = Object.keys(b.commande.boissons);
     for (var i in elem) {
         i = elem[i];

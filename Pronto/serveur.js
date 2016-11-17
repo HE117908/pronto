@@ -17,6 +17,8 @@ makeServeur();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use('/views', express.static(path.resolve(__dirname, 'views')));
+app.use('/public', express.static(path.resolve(__dirname, 'public')));
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -38,9 +40,6 @@ app.use('/bar', bar);
 app.use('/cuisine', cuisine);
 
 
-var loginResult = [];
-var GL = "test";
-
 var nspCuisine = io.of('/cuisine');
 nspCuisine.on('connection', function(socket){
     console.log('cuisine connected');
@@ -58,13 +57,13 @@ nspBar.on('connection', function(socket){
         console.log('bar disconnected');
     });
 });
-/*
+
 var MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
 
 // Connection URL
 var url = 'mongodb://localhost:27017/db';
-*/
+
 var insertDocuments = function(db, callback,data) {
     // Get the documents collection
     var collection = db.collection('documents');
@@ -105,7 +104,6 @@ function DBQueryLogin(query,receive){
         function select(error, results, fields) {
             if ( results.length > 0 )  {
                 for(i in results){
-                    //receive[i]['IdServeur'] = results[ i ]['IdServeur'];
                     receive[results[ i ]['IdServeur']] = results[ i ]['Pass'];
                 }
 
@@ -117,16 +115,26 @@ function DBQueryLogin(query,receive){
 
 
 app.post('/process_post', function (req, res) {
+    console.log('test1');
     reception(req);
     console.log('----');
 })
 
-app.post('/login_post', function (req, res) {
+app.post('/login_post', function (req, response) {
     var user_name=req.body.user;
     var password=req.body.password;
     console.log("User name = "+user_name+", password is "+password);
-    ckL(user_name,password);
+    //var rs = ckL(user_name,password);
+    if(user_name == "Albert" && password == "pass1"){
+        //res.redirect(302,'http://localhost:3000/');
+        response.statusCode = 302;
+        response.setHeader("Location", "/");
+        response.end();
+        //res.end();
+       // console.log(rs);
+    }
 })
+
 
 
 function ckL(usr,pwd){
@@ -136,11 +144,31 @@ function ckL(usr,pwd){
         console.log("login ok");
         if(loginResult[usr] == pwd) {
             console.log("Pass ok");
+            return true;
             // redirection
 
-        } else console.log("Pass nok");
-    } else console.log("login nok");
+        } else{
+            console.log("Pass nok");
+            return false;
+        }
+    } else {
+        console.log("login nok");
+        return false;
+    }
 
+
+}
+
+function recordDB (data) {
+    MongoClient.connect(url, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server database");
+
+        insertDocuments(db, function () {
+            db.close();
+        }, data);
+
+    });
 
 }
 
@@ -165,9 +193,10 @@ function sendCuisine(data){
 }
 
 function reception(req) {
+    console.log('test2');
     var commande = req.body;
-    //recordDB(commande);
-    //viewDB();
+    recordDB(commande);
+    viewDB();
     console.log(commande);
     sendBar(commande);
     sendCuisine(commande);
@@ -192,6 +221,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
 
 function makeServeur () {
     server = http.listen(3000, function () {

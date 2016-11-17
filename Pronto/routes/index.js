@@ -15,15 +15,13 @@ var mySqlClient = mysql.createConnection({
 
 var serveurResult = [];
 var tableResult = [];
-var loginResult = new Object();
 
 var queryServeur = 'select IdServeur from Serveurs';
 var queryTable = 'select IdTable from Tables';
-var queryLogin = 'SELECT IdServeur, Pass FROM serveurs';
 
 DBQuery(queryServeur,serveurResult,"IdServeur");
 DBQuery(queryTable,tableResult,"IdTable");
-DBQueryLogin(queryLogin,loginResult);
+
 
 
 function DBQuery(query,receive,column){
@@ -38,29 +36,11 @@ function DBQuery(query,receive,column){
         });
 }
 
-
-function DBQueryLogin(query,receive){
-    mySqlClient.query(query,
-        function select(error, results, fields) {
-            if ( results.length > 0 )  {
-                for(i in results){
-                    //receive[i]['IdServeur'] = results[ i ]['IdServeur'];
-                    receive[results[ i ]['IdServeur']] = results[ i ]['Pass'];
-                }
-
-            } else console.log("Pas de données");
-        });
-}
-
-
-
-
-
 /* GET home page. */
 router.get('/', function(req, res,next) {
     //console.log(serveurResult);
     //console.log(tableResult);
-    console.log(loginResult);
+    console.log('index');
     var menu = ["Entrées","Plats","Desserts","Boissons"];
     res.render('index',{
         RestaurantName:"Resto",

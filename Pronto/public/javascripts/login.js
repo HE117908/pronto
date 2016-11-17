@@ -7,12 +7,9 @@
         $("#submit").click(function(){
             user=$("#inputLogin").val();
             pass=$("#inputPassword").val();
-            $.post("http://localhost:3000/login_post",{user: user,password: pass}, function(data){
-                if(data==='done')
-                {
-                    alert("login success");
-                }
-            });
+            $.post("http://localhost:3000/login_post",{user: user,password: pass});
+
+
 
             return false;
         });
