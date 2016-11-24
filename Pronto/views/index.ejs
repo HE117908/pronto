@@ -28,7 +28,6 @@
 </head>
 
 <body onload="drawAll(<%= Menu %>)">
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -84,7 +83,7 @@
 
         <!-- sélection du serveur-->
         <!--<div class="form-group">
-            <label for="dropdownMenu2">Sélectionner du garçon de salle ici:</label>
+            <label for="dropdownMenu2">Sélectionner le garçon de salle ici:</label>
             <select class="form-control" id="dropdownMenu2" onclick="setGarcon(this)">
                 <option><a href="#" >Serveur 1</a></option>
                 <option><a href="#" >Serveur 2</a></option>
@@ -95,10 +94,26 @@
         </div>-->
 
         <!--sélection du serveur rempli onload-->
+        <!--
         <div class="form-group">
-            <label for="dropdownMenuServeur">Sélectionner du garçon de salle ici:</label>
+            <label for="dropdownMenuServeur">Sélectionner le garçon de salle ici:</label>
             <select class="form-control" id="dropdownMenuServeur" onclick="setGarcon(this)">
 
+            </select>
+            <br>
+        </div>
+        -->
+
+
+
+        <!--sélection du serveur rempli onload-->
+        <div class="form-group">
+            <label for="dropdownMenuServeur">Sélectionner le garçon de salle ici:</label>
+            <select class="form-control" id="dropdownMenuServeur" onclick="setGarcon(this)">
+                <option><a href="#" >---</a></option>
+                <% for(var i=0; i<Serveur.length; i++) {%>
+                   <option><a href="#" ><%= Serveur[i] %></a></option>
+                <% } %>
             </select>
             <br>
         </div>
@@ -116,6 +131,7 @@
         </div>-->
 
         <!-- sélection de la table rempli onload-->
+        <!--
         <div class="form-group">
             <label for="dropdownMenuTable">Sélectionner la table ici:</label>
             <select class="form-control" id="dropdownMenuTable" onclick="setTable(this)">
@@ -123,6 +139,20 @@
             </select>
             <br>
         </div>
+        -->
+
+        <!-- sélection de la table rempli onload-->
+        <div class="form-group">
+            <label for="dropdownMenuTable">Sélectionner la table ici:</label>
+            <select class="form-control" id="dropdownMenuTable" onclick="setTable(this)">
+                <option><a href="#" >---</a></option>
+                <% for(var i=0; i<Table.length; i++) {%>
+                   <option><a href="#" >Table <%= Table[i] %></a></option>
+                <% } %>
+            </select>
+            <br>
+        </div>
+
 
         <!-- menu des raccourcis déroulant-->
         <!--
@@ -250,6 +280,34 @@
         <h2><%=Menu[0]%></h2>
 
         <!--<h3 id="entreeChaude">Entrées chaudes</h3>-->
+        <% for(i in Entrees) {%>
+        <div class="thumbnail" id="<%= Entrees[i][0] %>">
+            <div class="caption-full">
+                <h4 class="pull-right" id="entree1Prix"><%= Entrees[i][1] %></h4>
+                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Entrees[i][2]+i %>Nom"><%= Entrees[i][0] %></a></h4>
+                <h4>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                <span class="">-</span>
+                            </button>
+                        </span>
+                        <input type="text" name="quant[1]" id="<%= Entrees[i][2]+i %>Input" class="form-control input-number" value="1" min="1" max="100">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                                <span class="">+</span>
+                            </button>
+                        </span>
+                    </div>
+                </h4>
+                <h4 class="pull-right">
+                    <button class="btn btn-default" onclick="getItem('<%= Entrees[i][2]+i %>')">Ajouter</button>
+                </h4>
+                <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
+                <textarea class="form-control" rows="2" id="<%= Entrees[i][2]+i %>Comment" placeholder="Commentaires: "></textarea>
+            </div>
+        </div>
+        <% } %>
 
         <div class="thumbnail" id="entree1">
             <div class="caption-full">
@@ -315,6 +373,35 @@
         <h2><%=Menu[1]%></h2>
 
         <!--<h3 id="viandes">Viandes</h3>-->
+
+        <% for(i in Plats) {%>
+        <div class="thumbnail" id="<%= Plats[i][0] %>">
+            <div class="caption-full">
+                <h4 class="pull-right" id="entree1Prix"><%= Plats[i][1] %></h4>
+                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Plats[i][2]+i %>Nom"><%= Plats[i][0] %></a></h4>
+                <h4>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                <span class="">-</span>
+                            </button>
+                        </span>
+                        <input type="text" name="quant[1]" id="<%= Plats[i][2]+i %>Input" class="form-control input-number" value="1" min="1" max="100">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                                <span class="">+</span>
+                            </button>
+                        </span>
+                    </div>
+                </h4>
+                <h4 class="pull-right">
+                    <button class="btn btn-default" onclick="getItem('<%= Plats[i][2]+i %>')">Ajouter</button>
+                </h4>
+                <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
+                <textarea class="form-control" rows="2" id="<%= Plats[i][2]+i %>Comment" placeholder="Commentaires: "></textarea>
+            </div>
+        </div>
+        <% } %>
 
         <div class="thumbnail" id="plat1">
             <div class="caption-full">
@@ -400,6 +487,35 @@
 
         <!--<h3 id="auxFruits">Desserts aux fruits</h3>-->
 
+        <% for(i in Desserts) {%>
+        <div class="thumbnail" id="<%= Desserts[i][0] %>">
+            <div class="caption-full">
+                <h4 class="pull-right" id="entree1Prix"><%= Desserts[i][1] %></h4>
+                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Desserts[i][2]+i %>Nom"><%= Desserts[i][0] %></a></h4>
+                <h4>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                <span class="">-</span>
+                            </button>
+                        </span>
+                        <input type="text" name="quant[1]" id="<%= Desserts[i][2]+i %>Input" class="form-control input-number" value="1" min="1" max="100">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                                <span class="">+</span>
+                            </button>
+                        </span>
+                    </div>
+                </h4>
+                <h4 class="pull-right">
+                    <button class="btn btn-default" onclick="getItem('<%= Desserts[i][2]+i %>')">Ajouter</button>
+                </h4>
+                <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
+                <textarea class="form-control" rows="2" id="<%= Desserts[i][2]+i %>Comment" placeholder="Commentaires: "></textarea>
+            </div>
+        </div>
+        <% } %>
+
         <div class="thumbnail" id="dessert1">
             <div class="caption-full">
                 <h4 class="pull-right" id="dessert1Prix">$12</h4>
@@ -464,6 +580,35 @@
         <h2><%=Menu[3]%></h2>
 
         <!--<h3 id="theEtCafe">Thés et cafés</h3>-->
+
+        <% for(i in Boissons) {%>
+        <div class="thumbnail" id="<%= Boissons[i][0] %>">
+            <div class="caption-full">
+                <h4 class="pull-right" id="entree1Prix"><%= Boissons[i][1] %></h4>
+                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Boissons[i][2]+i %>Nom"><%= Boissons[i][0] %></a></h4>
+                <h4>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                <span class="">-</span>
+                            </button>
+                        </span>
+                        <input type="text" name="quant[1]" id="<%= Boissons[i][2]+i %>Input" class="form-control input-number" value="1" min="1" max="100">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                                <span class="">+</span>
+                            </button>
+                        </span>
+                    </div>
+                </h4>
+                <h4 class="pull-right">
+                    <button class="btn btn-default" onclick="getItem('<%= Boissons[i][2]+i %>')">Ajouter</button>
+                </h4>
+                <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
+                <textarea class="form-control" rows="2" id="<%= Boissons[i][2]+i %>Comment" placeholder="Commentaires: "></textarea>
+            </div>
+        </div>
+        <% } %>
 
         <div class="thumbnail" id="boisson1">
             <div class="caption-full">

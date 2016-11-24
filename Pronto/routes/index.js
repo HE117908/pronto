@@ -9,21 +9,36 @@ var mysql = require('mysql');
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
     user     : "root",
-    password : "mpolkiuj",
+    password : "alex",
     database : "pronto"
 });
 
 var serveurResult = [];
 var tableResult = [];
-var platResult = new Object();
+var entreesResult = new Object();
+var platsResult = new Object();
+var dessertsResult = new Object();
+var boissonsResult = new Object();
+var accompagnementsResult = new Object();
+var supplementsResult = new Object();
 
-var queryServeur = 'select IdServeur from Serveurs';
+var queryServeur = 'select NomServeur from Serveurs';
 var queryTable = 'select IdTable from Tables';
-var queryPlat = 'SELECT IdPlat, Nom, Prix, NomCatPlats FROM plats ORDER BY NomCatPlats ASC, Nom ASC';
+var queryEntrees = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "entrees" ORDER BY catplats.NomCatPlat ASC';
+var queryPlats = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "plats" ORDER BY catplats.NomCatPlat ASC';
+var queryDesserts = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "desserts" ORDER BY catplats.NomCatPlat ASC';
+var queryBoissons = 'SELECT boissons.IdBoisson, boissons.NomBoisson, boissons.Prix, NomCatBoisson FROM boissons INNER JOIN catboissons ON boissons.IdCatBoisson = catboissons.IdCatBoisson ORDER BY catboissons.IdCatBoisson ASC, boissons.IdBoisson ASC';
+var queryAccompagnements = 'SELECT * FROM accompagnements ORDER BY Nom ASC';
+var querySupplements = 'SELECT * FROM supplements ORDER BY Nom ASC';
 
-DBQuery(queryServeur,serveurResult,"IdServeur");
+DBQuery(queryServeur,serveurResult,"NomServeur");
 DBQuery(queryTable,tableResult,"IdTable");
-DBQueryPlat(queryPlat,platResult);
+DBquery(queryEntrees,entreesResult,'IdPlat','NomPlat','Prix','NomCatPlat');
+DBquery(queryPlats,platsResult,'IdPlat','NomPlat','Prix','NomCatPlat');
+DBquery(queryDesserts,dessertsResult,'IdPlat','NomPlat','Prix','NomCatPlat');
+DBquery(queryBoissons,boissonsResult,'IdBoisson','NomBoisson','Prix','NomCatBoisson');
+//DBquery(queryAccompagnements,accompagnementsResult,'IdAcc','Nom');
+//DBquery(querySupplements,supplementsResult,'IdSupp','Nom','Prix');
 
 
 
@@ -39,12 +54,12 @@ function DBQuery(query,receive,column){
         });
 }
 
-function DBQueryPlat(query,receive){
+function DBquery(query,receive,id,nom,prix,cat){
     mySqlClient.query(query,
         function select(error, results, fields) {
             if ( results.length > 0 )  {
                 for(i in results){
-                    receive[results[ i ]['IdPlat']] = [results[ i ]['Nom'],results[ i ]['Prix'],results[ i ]['NomCatPlats']];
+                    receive[results[ i ][id]] = [results[ i ][nom],results[ i ][prix],results[ i ][cat]];
                 }
 
             } else console.log("Pas de données");
@@ -57,13 +72,22 @@ function DBQueryPlat(query,receive){
 router.get('/', function(req, res,next) {
     console.log(serveurResult);
     console.log(tableResult);
-    console.log(platResult);
+    console.log(entreesResult);
+    console.log(platsResult);
+    console.log(dessertsResult);
+    console.log(boissonsResult);
     var menu = ["Entrées","Plats","Desserts","Boissons"];
     res.render('index',{
         RestaurantName:"Resto",
         Menu:menu,
         Serveur:serveurResult,
-        Table:tableResult
+        Table:tableResult,
+        Entrees:entreesResult,
+        Plats:platsResult,
+        Desserts:dessertsResult,
+        Boissons:boissonsResult,
+        Accompagnements:accompagnementsResult,
+        Supplements:supplementsResult
 
     });
 });
