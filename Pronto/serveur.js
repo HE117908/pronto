@@ -10,6 +10,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var request = require("request");
+var redirect = require("http").ServerResponse;
 
 var server;
 makeServeur();
@@ -87,6 +88,19 @@ var findDocuments = function(db, callback) {
     });
 }
 
+
+var deleteDocument = function(db, callback) {
+    // Get the documents collection
+    var collection = db.collection('documents');
+    // Insert some documents
+    collection.deleteOne({ a : 3 }, function(err, result) {
+        assert.equal(err, null);
+        assert.equal(1, result.result.n);
+        console.log("Removed the document with the field a equal to 3");
+        callback(result);
+    });
+}
+
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
     user     : "root",
@@ -115,7 +129,6 @@ function DBQueryLogin(query,receive){
 
 
 app.post('/process_post', function (req, res) {
-    console.log('test1');
     reception(req);
     console.log('----');
 })
@@ -124,15 +137,8 @@ app.post('/login_post', function (req, response) {
     var user_name=req.body.user;
     var password=req.body.password;
     console.log("User name = "+user_name+", password is "+password);
-    //var rs = ckL(user_name,password);
-    if(user_name == "Albert" && password == "pass1"){
-        //res.redirect(302,'http://localhost:3000/');
-        response.statusCode = 302;
-        response.setHeader("Location", "/");
-        response.end();
-        //res.end();
-       // console.log(rs);
-    }
+    var rs = ckL(user_name,password);
+    console.log(rs);
 })
 
 
@@ -144,8 +150,14 @@ function ckL(usr,pwd){
         console.log("login ok");
         if(loginResult[usr] == pwd) {
             console.log("Pass ok");
-            return true;
+
+            console.log("coucou");
             // redirection
+            redirect.writeHead(302, {
+                'Location': 'http://localhost:3000/'
+            });
+            redirect.end();
+
 
         } else{
             console.log("Pass nok");
@@ -193,7 +205,6 @@ function sendCuisine(data){
 }
 
 function reception(req) {
-    console.log('test2');
     var commande = req.body;
     recordDB(commande);
     viewDB();
@@ -232,6 +243,7 @@ function makeServeur () {
 
     })
 }
+
 
 
 module.exports = app;

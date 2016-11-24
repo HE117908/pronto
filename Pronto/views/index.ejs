@@ -14,6 +14,8 @@
 
     <!-- Custom CSS -->
     <link href="stylesheets/pronto.css" rel="stylesheet">
+    <link href="stylesheets/connexion.css" rel="stylesheet">
+  
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,6 +26,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <![endif]-->
         <script src="javascripts/object.js"></script>
+        <script src="javascripts/login.js"></script>
+  
 
 </head>
 
@@ -69,6 +73,9 @@
                     <li>
                         <a href="#" onclick="showBox('commande')">Commande</a>
                     </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#login-modal">Connexion</a>
+                    </li>
                 </ul>
             </div>
 
@@ -81,6 +88,19 @@
 
     <div class="col-md-3" id="home">
         <p class="lead"><%=RestaurantName%></p>
+      
+      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Login to Your Account</h1><br>
+				  <form method="post">
+					<input type="text" name="user" id="inputLogin" placeholder="Username">
+					<input type="password" name="pass" id="inputPassword" placeholder="Password">
+					<input type="submit" name="login" class="login loginmodal-submit" value="Login" onclick="submitLog()">
+				  </form>
+				</div>
+			</div>
+		  </div>
 
         <!-- sélection du serveur-->
         <!--<div class="form-group">

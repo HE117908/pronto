@@ -2,7 +2,7 @@
  * Created by francois on 06/11/2016.
  */
 
-    $(document).ready(function(){
+   /* $(document).ready(function(){
         var user,pass;
         $("#submit").click(function(){
             user=$("#inputLogin").val();
@@ -15,11 +15,11 @@
         });
     });
 
-/*
-function onSubmit() {
+*/
+function submitLog() {
     var tabData = {};
-    tabData.usr = document.getElementById("inputLogin").value;
-    tabData.pwd = document.getElementById("inputPassword").value;
+    tabData.user = document.getElementById("inputLogin").value;
+    tabData.password = document.getElementById("inputPassword").value;
     //alert(JSON.stringify(tabData));
     $.ajax({
         type: 'POST',
@@ -28,7 +28,6 @@ function onSubmit() {
         url: '/login_post'
     });
 
-    return false;
+    return
 
 }
-    */
