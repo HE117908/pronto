@@ -2,20 +2,6 @@
  * Created by francois on 06/11/2016.
  */
 
-   /* $(document).ready(function(){
-        var user,pass;
-        $("#submit").click(function(){
-            user=$("#inputLogin").val();
-            pass=$("#inputPassword").val();
-            $.post("http://localhost:3000/login_post",{user: user,password: pass});
-
-
-
-            return false;
-        });
-    });
-
-*/
 function submitLog() {
     var tabData = {};
     tabData.user = document.getElementById("inputLogin").value;
@@ -25,9 +11,24 @@ function submitLog() {
         type: 'POST',
         data: JSON.stringify(tabData),
         contentType: 'application/json',
-        url: '/login_post'
+        url: '/login_post',
+        error: function() {
+                alert("Please enter correct user name and password.");
+        },
+        success: function() {
+            alert("name and password OK.");
+            show();
+            $('#dropdownMenuServeur').val("serveur3");
+            setElem('garconCom', tabData.user);
+        }
     });
 
-    return
 
+}
+
+function show() {
+
+    showBox("home");
+    hide("login-modal");
+    $(".modal-backdrop").remove();
 }

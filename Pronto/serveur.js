@@ -59,47 +59,7 @@ nspBar.on('connection', function(socket){
     });
 });
 
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
 
-// Connection URL
-var url = 'mongodb://localhost:27017/db';
-
-var insertDocuments = function(db, callback,data) {
-    // Get the documents collection
-    var collection = db.collection('documents');
-    // Insert some documents
-    collection.insert(
-        data, function(err, result) {
-            console.log("success");
-            callback(result);
-        });
-}
-
-var findDocuments = function(db, callback) {
-    // Get the documents collection
-    var collection = db.collection('documents');
-    // Find some documents
-    collection.find({}).toArray(function(err, docs) {
-        assert.equal(err, null);
-        console.log("Found the following records");
-        console.log(docs);
-        callback(docs);
-    });
-}
-
-
-var deleteDocument = function(db, callback) {
-    // Get the documents collection
-    var collection = db.collection('documents');
-    // Insert some documents
-    collection.deleteOne({ a : 3 }, function(err, result) {
-        assert.equal(err, null);
-        assert.equal(1, result.result.n);
-        console.log("Removed the document with the field a equal to 3");
-        callback(result);
-    });
-}
 
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
@@ -133,12 +93,14 @@ app.post('/process_post', function (req, res) {
     console.log('----');
 })
 
-app.post('/login_post', function (req, response) {
+app.post('/login_post', function (req, res) {
     var user_name=req.body.user;
     var password=req.body.password;
     console.log("User name = "+user_name+", password is "+password);
     var rs = ckL(user_name,password);
     console.log(rs);
+    if(!rs)res.sendStatus(500);
+    else res.sendStatus(200);
 })
 
 
@@ -150,13 +112,7 @@ function ckL(usr,pwd){
         console.log("login ok");
         if(loginResult[usr] == pwd) {
             console.log("Pass ok");
-
-            console.log("coucou");
-            // redirection
-            redirect.writeHead(302, {
-                'Location': 'http://localhost:3000/'
-            });
-            redirect.end();
+            return true;
 
 
         } else{
@@ -171,30 +127,7 @@ function ckL(usr,pwd){
 
 }
 
-function recordDB (data) {
-    MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
-        console.log("Connected successfully to server database");
 
-        insertDocuments(db, function () {
-            db.close();
-        }, data);
-
-    });
-
-}
-
-function viewDB(){
-    MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
-        console.log("Connected successfully to server database");
-        console.log("contenu de la db");
-        findDocuments(db, function () {
-            db.close();
-        });
-    });
-
-}
 
 function sendBar(data){
     nspBar.emit('bar', data);
@@ -206,8 +139,8 @@ function sendCuisine(data){
 
 function reception(req) {
     var commande = req.body;
-    recordDB(commande);
-    viewDB();
+    //recordDB(commande);
+    //viewDB();
     console.log(commande);
     sendBar(commande);
     sendCuisine(commande);
@@ -277,4 +210,76 @@ module.exports = app;
  mySqlClient.end();
  }
  );
+ */
+
+/*
+
+ var MongoClient = require('mongodb').MongoClient
+ , assert = require('assert');
+
+ // Connection URL
+ var url = 'mongodb://localhost:27017/db';
+
+ var insertDocuments = function(db, callback,data) {
+ // Get the documents collection
+ var collection = db.collection('documents');
+ // Insert some documents
+ collection.insert(
+ data, function(err, result) {
+ console.log("success");
+ callback(result);
+ });
+ }
+
+ var findDocuments = function(db, callback) {
+ // Get the documents collection
+ var collection = db.collection('documents');
+ // Find some documents
+ collection.find({}).toArray(function(err, docs) {
+ assert.equal(err, null);
+ console.log("Found the following records");
+ console.log(docs);
+ callback(docs);
+ });
+ }
+
+
+ var deleteDocument = function(db, callback) {
+ // Get the documents collection
+ var collection = db.collection('documents');
+ // Insert some documents
+ collection.deleteOne({ a : 3 }, function(err, result) {
+ assert.equal(err, null);
+ assert.equal(1, result.result.n);
+ console.log("Removed the document with the field a equal to 3");
+ callback(result);
+ });
+ }
+
+
+ function recordDB (data) {
+ MongoClient.connect(url, function (err, db) {
+ assert.equal(null, err);
+ console.log("Connected successfully to server database");
+
+ insertDocuments(db, function () {
+ db.close();
+ }, data);
+
+ });
+
+ }
+
+ function viewDB(){
+ MongoClient.connect(url, function (err, db) {
+ assert.equal(null, err);
+ console.log("Connected successfully to server database");
+ console.log("contenu de la db");
+ findDocuments(db, function () {
+ db.close();
+ });
+ });
+
+ }
+
  */
