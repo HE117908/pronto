@@ -121,14 +121,18 @@ function razQtt(el){
 
 //fonction pour changer le garçon de salle
 function setGarcon(nom){
-    garcon = nom.value;
-    setElem('garconCom', garcon);
+    if(nom.value !='---'){
+        garcon = nom.value;
+        setElem('garconCom', garcon);
+    }
 }
 
 //fonction pour changer la table
 function setTable(nom){
-    table = nom.value;
-    setElem('tableCom', table);
+    if(nom.value !='---'){
+        table = nom.value;
+        setElem('tableCom', table);
+    }
 }
 
 //fonction pour créer dans un objet tmp
@@ -311,8 +315,8 @@ $(".input-number").keydown(function (e) {
 function drawAll(param){
     menu = param;
     //console.log(param);
-    drawServeur();
-    drawTable();
+    //drawServeur();
+    //drawTable();
     //drawAccoreon();
 }
 
