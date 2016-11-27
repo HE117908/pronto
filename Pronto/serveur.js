@@ -30,13 +30,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var index = require('./routes/index');
-var login = require('./routes/login');
 var bar = require('./routes/bar');
 var cuisine = require('./routes/cuisine');
 
 
 app.use('/', index);
-app.use('/login', login);
 app.use('/bar', bar);
 app.use('/cuisine', cuisine);
 
