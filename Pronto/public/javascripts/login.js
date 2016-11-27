@@ -18,7 +18,7 @@ function submitLog() {
         success: function() {
             alert("name and password OK.");
             show();
-            $('#dropdownMenuServeur').val("serveur3");
+            $('#dropdownMenuServeur').val(tabData.user);
             setElem('garconCom', tabData.user);
         }
     });

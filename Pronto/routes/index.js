@@ -9,7 +9,7 @@ var mysql = require('mysql');
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
     user     : "root",
-    password : "alex",
+    password : "mpolkiuj",
     database : "pronto"
 });
 
@@ -22,7 +22,7 @@ var boissonsResult = new Object();
 var accompagnementsResult = new Object();
 var supplementsResult = new Object();
 
-var queryServeur = 'SELECT NomServeur FROM serveurs ORDER BY IdServeur ASC';
+var queryServeur = 'SELECT IdServeur FROM serveurs ORDER BY IdServeur ASC';
 var queryTable = 'SELECT IdTable FROM tables ORDER BY IdTable ASC';
 var queryEntrees = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "entrees" ORDER BY catplats.NomCatPlat ASC';
 var queryPlats = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "plats" ORDER BY catplats.NomCatPlat ASC';
@@ -31,7 +31,7 @@ var queryBoissons = 'SELECT boissons.IdBoisson, boissons.NomBoisson, boissons.Pr
 var queryAccompagnements = 'SELECT * FROM accompagnements ORDER BY IdAcc ASC';
 var querySupplements = 'SELECT * FROM supplements ORDER BY IdSupp ASC';
 
-DBQuery(queryServeur,serveurResult,"NomServeur");
+DBQuery(queryServeur,serveurResult,"IdServeur");
 DBQuery(queryTable,tableResult,"IdTable");
 DBQueryQuatreVar(queryEntrees,entreesResult,'IdPlat','NomPlat','Prix','NomCatPlat');
 DBQueryQuatreVar(queryPlats,platsResult,'IdPlat','NomPlat','Prix','NomCatPlat');
