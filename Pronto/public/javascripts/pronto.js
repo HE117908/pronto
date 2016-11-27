@@ -214,11 +214,11 @@ function onSubmit() {
 
 function raz(){
     setElem('tempCom', '');
-    setElem('garconCom', '');
+    //setElem('garconCom', '');
     setElem('tableCom', '');
     idCom = '';
     table = '';
-    garcon = '';
+    //garcon = '';
     tmp = {};
     plats = {};
     boissons = {};
