@@ -88,7 +88,7 @@
         <!--sélection du serveur rempli onload-->
         <div class="form-group">
             <label for="dropdownMenuServeur">Sélectionner le garçon de salle ici:</label>
-            <select class="form-control" id="dropdownMenuServeur" onclick="setGarcon(this)">
+            <select class="form-control" id="dropdownMenuServeur" onclick="setGarcon(this)" disabled>
                 <option><a href="#" >---</a></option>
                 <% for(var i=0; i<Serveur.length; i++) {%>
                    <option><a href="#" ><%= Serveur[i] %></a></option>
@@ -100,7 +100,7 @@
         <!-- sélection de la table rempli onload-->
         <div class="form-group">
             <label for="dropdownMenuTable">Sélectionner la table ici:</label>
-            <select class="form-control" id="dropdownMenuTable" onclick="setTable(this)">
+            <select class="form-control" id="dropdownMenuTable" onclick="setTable(this)" >
                 <option><a href="#" >---</a></option>
                 <% for(var i=0; i<Table.length; i++) {%>
                    <option><a href="#" >Table <%= Table[i] %></a></option>
