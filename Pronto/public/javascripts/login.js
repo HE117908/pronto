@@ -19,7 +19,7 @@ function submitLog() {
             alert("name and password OK.");
             show();
             $('#dropdownMenuServeur').val(tabData.user);
-            setElem('garconCom', tabData.user);
+            setGarcon(tabData.user);
         }
     });
 

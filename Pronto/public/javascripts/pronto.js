@@ -121,10 +121,8 @@ function razQtt(el){
 
 //fonction pour changer le garçon de salle
 function setGarcon(nom){
-    if(nom.value !='---'){
-        garcon = nom.value;
+        garcon = nom;
         setElem('garconCom', garcon);
-    }
 }
 
 //fonction pour changer la table
@@ -154,7 +152,7 @@ function addTmp(typeTemp, nom, det, ac, sup){
         tmp['Nom'] = nom;
         tmp['Categorie'] = type;
         tmp['Detail'] = det;
-        if (type != 'boisson') {
+        if (type != 'boisson' && type != 'Softs' && type != 'Alcools' && type != 'Bières') {
             tmp['Accompagnements'] = accomp;
             tmp['Supplements'] = suppl;
             addToTab(plats, tmp);
