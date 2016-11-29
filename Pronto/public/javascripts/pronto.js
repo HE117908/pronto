@@ -71,9 +71,11 @@ function drawCommand(){
             + elem
             +'Nom'
             + i
-            + ' \"><div class=\"caption-full\"><h4><a href=\"#\">'
-            + plats[elem].Nom;
-        + '</a></h4></div></div>';
+            + ' \"><div class=\"caption-full\"><h4>'
+            + plats[elem].Nom
+            + '   X <b>'
+            + plats[elem].Quantite
+            +'</b></h4></div></div>';
         addElem('tempCom',st);
     }
     for (var elem in boissons) {
@@ -89,9 +91,11 @@ function drawCommand(){
             + elem
             +'Nom'
             + i
-            + ' \"><div class=\"caption-full\"><h4><a href=\"#\">'
-            + boissons[elem].Nom;
-        + '</a></h4></div></div>';
+            + ' \"><div class=\"caption-full\"><h4>'
+            + boissons[elem].Nom
+            + '   X <b>'
+            + boissons[elem].Quantite
+            +'</b></h4></div></div>';
         addElem('tempCom',st);
     }
 }
@@ -135,12 +139,13 @@ function setTable(nom){
 }
 
 //fonction pour créer dans un objet tmp
-function addTmp(typeTemp, nom, det, ac, sup, prix){
+function addTmp(typeTemp, nom, det, ac, sup, pr){
     var type = typeTemp.substring(0,typeTemp.length-1);
     var input = typeTemp + "Input";
     var qtt = getElem(input).value;
     var accomp = [];
     var suppl = [];
+    var prix = pr.substring(0,pr.length-1);
     console.log(prix);
 
     if(ac!='Accompagnements') {
@@ -150,22 +155,22 @@ function addTmp(typeTemp, nom, det, ac, sup, prix){
         suppl.push(sup);
     }
 
-    for(i=0; i < qtt; i++) {
-        tmp['Nom'] = nom;
-        tmp['Categorie'] = type;
-        tmp['Detail'] = det;
-        tmp['Prix'] = prix;
-        if (type != 'boisson' && type != 'Softs' && type != 'Alcools' && type != 'Bières') {
-            tmp['Accompagnements'] = accomp;
-            tmp['Supplements'] = suppl;
-            addToTab(plats, tmp);
-            console.log(plats);
-        }
-        else {
-            addToTab(boissons, tmp);
-            console.log(boissons);
-        }
+    tmp['Nom'] = nom;
+    tmp['Categorie'] = type;
+    tmp['Detail'] = det;
+    tmp['Prix'] = prix;
+    tmp['Quantite'] = qtt;
+    if (type != 'boisson' && type != 'Softs' && type != 'Alcools' && type != 'Bières') {
+        tmp['Accompagnements'] = accomp;
+        tmp['Supplements'] = suppl;
+        addToTab(plats, tmp);
+        console.log(plats);
     }
+    else {
+        addToTab(boissons, tmp);
+        console.log(boissons);
+    }
+
 }
 
 //fonction qui ajoute tmp dans boissons et plats
