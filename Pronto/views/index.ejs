@@ -70,16 +70,18 @@
     </nav>
 
     <!-- Page Content -->
-        <div class="modal fade in" id="login-modal" id="connexion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Login to Your Account</h1><br>
-					<input type="text" name="user" id="inputLogin" placeholder="Username">
-					<input type="password" name="pass" id="inputPassword" placeholder="Password">
-					<input type="submit" name="login" class="login loginmodal-submit" value="Login" onclick="submitLog()">
-				</div>
-			</div>
-		  </div>
+
+    <!--interface login-->
+    <div class="modal fade in" id="login-modal" id="connexion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>Login to Your Account</h1><br>
+                <input type="text" name="user" id="inputLogin" placeholder="Username" value="Albert">
+                <input type="password" name="pass" id="inputPassword" placeholder="Password" value="pass1">
+                <input type="submit" name="login" class="login loginmodal-submit" value="Login" onclick="submitLog()">
+            </div>
+        </div>
+      </div>
 
 
     <div class="col-md-3" id="home">
@@ -122,7 +124,7 @@
         <% for(i in Entrees) {%>
         <div class="thumbnail" id="<%= Entrees[i][0] %>">
             <div class="caption-full">
-                <h4 class="pull-right" id="entree1Prix"><%= Entrees[i][1] %></h4>
+                <h4 class="pull-right" id="<%= Entrees[i][2]+i %>Prix"><%= Entrees[i][1] %></h4>
                 <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Entrees[i][2]+i %>Nom"><%= Entrees[i][0] %></a></h4>
                 <h4>
                     <div class="input-group">
@@ -161,7 +163,7 @@
         <% for(i in Plats) {%>
         <div class="thumbnail" id="<%= Plats[i][0] %>">
             <div class="caption-full">
-                <h4 class="pull-right" id="entree1Prix"><%= Plats[i][1] %></h4>
+                <h4 class="pull-right" id="<%= Plats[i][2]+i %>Prix"><%= Plats[i][1] %></h4>
                 <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Plats[i][2]+i %>Nom"><%= Plats[i][0] %></a></h4>
                 <h4>
                     <div class="input-group">
@@ -179,7 +181,7 @@
                     </div>
                 </h4>
                 <div class="col-md-3 form-group">
-                    <select class="form-control" id="plat1Acc">
+                    <select class="form-control" id="<%= Plats[i][2]+i %>Acc">
                         <option><a href="#" >Accompagnements</a></option>
 
                         <% for(j in Accompagnements) {%>
@@ -188,7 +190,7 @@
                     </select>
                 </div>
                 <div class="col-md-3 form-group">
-                    <select class="form-control" id="plat1Supp">
+                    <select class="form-control" id="<%= Plats[i][2]+i %>Supp">
                         <option><a href="#" >Suppléments</a></option>
 
                         <% for(j in Supplements) {%>
@@ -220,7 +222,7 @@
         <% for(i in Desserts) {%>
         <div class="thumbnail" id="<%= Desserts[i][0] %>">
             <div class="caption-full">
-                <h4 class="pull-right" id="entree1Prix"><%= Desserts[i][1] %></h4>
+                <h4 class="pull-right" id="<%= Desserts[i][2]+i %>Prix"><%= Desserts[i][1] %></h4>
                 <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Desserts[i][2]+i %>Nom"><%= Desserts[i][0] %></a></h4>
                 <h4>
                     <div class="input-group">
@@ -261,7 +263,7 @@
         <% for(i in Boissons) {%>
         <div class="thumbnail" id="<%= Boissons[i][0] %>">
             <div class="caption-full">
-                <h4 class="pull-right" id="entree1Prix"><%= Boissons[i][1] %></h4>
+                <h4 class="pull-right" id="<%= Boissons[i][2]+i %>Prix"><%= Boissons[i][1] %></h4>
                 <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Boissons[i][2]+i %>Nom"><%= Boissons[i][0] %></a></h4>
                 <h4>
                     <div class="input-group">

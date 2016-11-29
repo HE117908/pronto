@@ -37,6 +37,7 @@ function hide(id) {
 function getItem(a) {
     var nom = document.getElementById(a + 'Nom').textContent;
     var comment = document.getElementById(a + 'Comment').value;
+    var prix = document.getElementById(a + 'Prix').textContent;
     if((getElem(a + 'Acc'))!=null){
         var ac = document.getElementById(a + 'Acc').value;
     }else{
@@ -47,7 +48,7 @@ function getItem(a) {
     }else{
         var sup = 'Suppléments';
     }
-    addTmp(a ,nom ,comment ,ac ,sup);
+    addTmp(a, nom, comment, ac, sup, prix);
     drawCommand();
     razQtt(a);
 }
@@ -134,12 +135,13 @@ function setTable(nom){
 }
 
 //fonction pour créer dans un objet tmp
-function addTmp(typeTemp, nom, det, ac, sup){
+function addTmp(typeTemp, nom, det, ac, sup, prix){
     var type = typeTemp.substring(0,typeTemp.length-1);
     var input = typeTemp + "Input";
     var qtt = getElem(input).value;
     var accomp = [];
     var suppl = [];
+    console.log(prix);
 
     if(ac!='Accompagnements') {
         accomp.push(ac);
@@ -152,6 +154,7 @@ function addTmp(typeTemp, nom, det, ac, sup){
         tmp['Nom'] = nom;
         tmp['Categorie'] = type;
         tmp['Detail'] = det;
+        tmp['Prix'] = prix;
         if (type != 'boisson' && type != 'Softs' && type != 'Alcools' && type != 'Bières') {
             tmp['Accompagnements'] = accomp;
             tmp['Supplements'] = suppl;
