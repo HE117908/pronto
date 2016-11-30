@@ -48,13 +48,14 @@
                     </table>
                     <div class="paiement">
                         <p>
-                            <label for="recu1"> Argent reçu : </label>
-                            <input id="recu1" name="recu" for="recu3" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
+                            <label for="recu1">Argent reçu : </label>
+                            <input id="recu1" name="recu1" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
                         </p>
-                        <p><label id="totalTVA1"> Total TVA : </label></p>
-                        <p><label id="total1"> Total : </label></p>
-                        <p><label id="rendu1"> A rendre : </label></p>
-                        <button class="btnPayer" id="btnPayer1" onclick="payer()">Payer</button>
+                        <p><label>Total TVA(6%) : <span id="totalTVA1"></span></label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA1"></span></label></p>
+                        <p><label>Total : <span id="total1"></span> €</label></p>
+                        <p><label>A rendre : <span id="rendu1"></span></label></p>
+                        <button class="btnPayer" id="btnPayer1" onclick="payer1()">Payer</button>
                     </div>
                 </div>
             </div>
@@ -80,13 +81,14 @@
                 </div>
                 <div class="paiement">
                     <p>
-                        <label for="recu2"> Argent reçu : </label>
-                        <input id="recu2" name="recu" for="recu3" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
+                        <label for="recu2">Argent reçu : </label>
+                        <input id="recu2" name="recu2" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
                     </p>
-                    <p><label id="totalTVA2"> Total TVA : </label></p>
-                    <p><label id="total2"> Total : </label></p>
-                    <p><label id="rendu2"> A rendre : </label></p>
-                    <button class="btnPayer" id="btnPayer2" onclick="calcul()">Payer</button>
+                    <p><label>Total TVA(6%) : <span id="totalTVA2"></span></label></p>
+                    <p><label>Total HTVA : <span id="totalHTVA2"></span></label></p>
+                    <p><label>Total : <span id="total2"></span> €</label></p>
+                    <p><label>A rendre : <span id="rendu2"></span></label></p>
+                    <button class="btnPayer" id="btnPayer2" onclick="payer2()">Payer</button>
                 </div>
             </div>
         </div>
@@ -110,13 +112,14 @@
                     </table>
                     <div class="paiement">
                         <p>
-                            <label> Argent reçu : </label>
-                            <input id="recu3" name="recu" for="recu3" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
+                            <label>Argent reçu : </label>
+                            <input id="recu3" name="recu3" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
                         </p>
-                        <p><label id="totalTVA3"> Total TVA : </label></p>
-                        <p><label id="total3"> Total : </label></p>
-                        <p><label id="rendu3"> A rendre : </label></p>
-                        <button class="btnPayer" id="btnPayer3" onclick="calcul()">Payer</button>
+                        <p><label>Total TVA(6%) : <span id="totalTVA3"></span></label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA3"></span></label></p>
+                        <p><label>Total : <span id="total3"></span> €</label></p>
+                        <p><label>A rendre : <span id="rendu3"></span></label></p>
+                        <button class="btnPayer" id="btnPayer3" onclick="payer3()">Payer</button>
                     </div>
                 </div>
             </div>

@@ -9,9 +9,25 @@ function getElem(id){
     return document.getElementById(id);
 }
 
-function payer() {
-    var diff = 50 - 10;
-    addElem("rendu1", diff + " €");
+function payer1(){
+    var recu = document.getElementById("recu1").value;
+    var total = document.getElementById("total1").innerHTML;
+    setElem("rendu1", "");
+    addElem("rendu1", recu - total + " €");
+}
+
+function payer2(){
+    var recu = document.getElementById("recu2").value;
+    var total = document.getElementById("total2").innerHTML;
+    setElem("rendu2", "");
+    addElem("rendu2", recu - total + " €");
+}
+
+function payer3(){
+    var recu = document.getElementById("recu3").value;
+    var total = document.getElementById("total3").innerHTML;
+    setElem("rendu3", "");
+    addElem("rendu3", recu - total + " €");
 }
 
 function ajouteCommande(c){
@@ -59,36 +75,30 @@ function ajouteCommande(c){
             addElem('tableau3', ligne);
         }
     }
-    // Calcul du total d'un table
 
     var longp = Object.keys(elem).length;
     var longb = Object.keys(eleme).length;
     if (c.idTable == "Table 1") {
         var sommep = prixp * longp;
         var sommeb = prixb * longb;
-        addElem('totalTVA1', ((sommep + sommeb)*6)/100 + " €");
-        addElem('total1', sommep + sommeb + " €");
-        /*if(sommep == true && sommeb == true){
-         addElem('totalTVA1', ((sommep + sommeb)*6)/100 + " €");
-         addElem('total1', sommep + sommeb + " €");
-         }else if(sommep == true && sommeb == false){
-         addElem('totalTVA1', (sommep*6)/100 + " €");
-         addElem('total1', sommep + " €");
-         }else if(sommep == false && sommeb == true){
-         addElem('totalTVA1', (sommeb*6)/100 + " €");
-         addElem('total1', sommeb + " €");
-         }*/
+        var tot = sommep + sommeb;
+        var TVA = ((sommep + sommeb)*6)/100;
+        addElem('totalTVA1', TVA + " €");
+        addElem('totalHTVA1', (tot - TVA) + " €");
+        addElem('total1', tot);
     } else if (c.idTable == "Table 2") {
         var sommep = prixp * longp;
         var sommeb = prixb * longb;
-        addElem('totalTVA2', ((sommep + sommeb)*6)/100 + " €");
-        addElem('total2', sommep + sommeb + " €");
+        addElem('totalTVA2', TVA + " €");
+        addElem('totalHTVA2', (tot - TVA) + " €");
+        addElem('total2', tot);
     } else if (c.idTable == "Table 3") {
         var sommep = prixp * longp;
         var sommeb = prixb * longb;
-        addElem('totalTVA3', ((somme + sommeb)*6)/100 + " €");
-        addElem('total3', sommep + sommeb + " €");
-    }
+        addElem('totalTVA3', TVA + " €");
+        addElem('totalHTVA3', (tot - TVA) + " €");
+        addElem('total3', tot);
+    }else{}
 }
 
 
