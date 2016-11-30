@@ -1,0 +1,30 @@
+body {
+    padding-top: 10px;
+}
+
+#menu {
+    width: 100%;
+}
+
+#recap {
+    width: 50%;
+}
+
+.btnPayer:hover {
+    background-color: royalblue;
+}
+
+.btnPayer {
+    padding-bottom: 5px;
+}
+
+.titreRecap {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.paiement{
+    padding-right:  10px;
+    padding-bottom: 10px;
+    text-align: right;
+}

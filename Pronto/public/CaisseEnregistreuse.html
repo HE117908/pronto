@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Caisse Enregistreuse</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="stylesheets/CaisseEnregistreuse.css" rel="stylesheet">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('/CaisseEnregistreuse');
+        socket.on('CaisseEnregistreuse',function(data){
+            ajouteCommande(data);
+        });
+    </script>
+
+</head>
+
+<body>
+
+<div class="col-md-3" id="menu">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Table 1</p>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="table">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau1"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label for="recu1"> Argent reçu : </label>
+                            <input id="recu1" name="recu" for="recu3" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label id="totalTVA1"> Total TVA : </label></p>
+                        <p><label id="total1"> Total : </label></p>
+                        <p><label id="rendu1"> A rendre : </label></p>
+                        <button class="btnPayer" id="btnPayer1" onclick="payer()">Payer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Table 2</p>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="table2">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau2"></tbody>
+                    </table>
+                </div>
+                <div class="paiement">
+                    <p>
+                        <label for="recu2"> Argent reçu : </label>
+                        <input id="recu2" name="recu" for="recu3" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
+                    </p>
+                    <p><label id="totalTVA2"> Total TVA : </label></p>
+                    <p><label id="total2"> Total : </label></p>
+                    <p><label id="rendu2"> A rendre : </label></p>
+                    <button class="btnPayer" id="btnPayer2" onclick="calcul()">Payer</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Table 3</p>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="table3">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau3"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label> Argent reçu : </label>
+                            <input id="recu3" name="recu" for="recu3" type=number min=0 max=10000 step=1 placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label id="totalTVA3"> Total TVA : </label></p>
+                        <p><label id="total3"> Total : </label></p>
+                        <p><label id="rendu3"> A rendre : </label></p>
+                        <button class="btnPayer" id="btnPayer3" onclick="calcul()">Payer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<![endif]-->
+
+<!-- jQuery -->
+<script src="javascripts/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="javascripts/bootstrap.min.js"></script>
+
+<script src="javascripts/CaisseEnregistreuse.js"></script>
+
+
+
+</body>
+
+</html>
+
+
+

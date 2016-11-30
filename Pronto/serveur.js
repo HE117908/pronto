@@ -1,4 +1,4 @@
-var express = require('express');
+﻿var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var http = require('http').Server(app);
@@ -32,12 +32,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var index = require('./routes/index');
 var bar = require('./routes/bar');
 var cuisine = require('./routes/cuisine');
-
+var CaisseEnregistreuse = require('./routes/CaisseEnregistreuse');
 
 app.use('/', index);
 app.use('/bar', bar);
 app.use('/cuisine', cuisine);
-
+app.use('/CaisseEnregistreuse', CaisseEnregistreuse);
 
 var nspCuisine = io.of('/cuisine');
 nspCuisine.on('connection', function(socket){
@@ -54,6 +54,15 @@ nspBar.on('connection', function(socket){
 
     socket.on('disconnect', function(){
         console.log('bar disconnected');
+    });
+});
+
+var nspCaisseEnregistreuse = io.of('/CaisseEnregistreuse');
+nspCaisseEnregistreuse.on('connection', function(socket){
+    console.log('Caisse Enregistreuse connected');
+
+    socket.on('disconnect', function(){
+        console.log('Caisse Enregistreuse disconnected');
     });
 });
 
@@ -135,6 +144,10 @@ function sendCuisine(data){
     nspCuisine.emit('cuisine', data);
 }
 
+function sendCaisseEnregistreuse(data){
+    nspCaisseEnregistreuse.emit('CaisseEnregistreuse', data);
+}
+
 function reception(req) {
     var commande = req.body;
     //recordDB(commande);
@@ -142,7 +155,7 @@ function reception(req) {
     console.log(commande);
     sendBar(commande);
     sendCuisine(commande);
-
+    sendCaisseEnregistreuse(commande);
 
 }
 
