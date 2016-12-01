@@ -98,7 +98,7 @@ function DBQueryLogin(query,receive){
 app.post('/process_post', function (req, res) {
     reception(req);
     console.log('----');
-})
+});
 
 app.post('/login_post', function (req, res) {
     var user_name=req.body.user;
@@ -108,7 +108,7 @@ app.post('/login_post', function (req, res) {
     console.log(rs);
     if(!rs)res.sendStatus(500);
     else res.sendStatus(200);
-})
+});
 
 
 
