@@ -98,6 +98,12 @@ function drawCommand(){
             +'</b></h4></div></div>';
         addElem('tempCom',st);
     }
+	//fonction de tri
+    for (elem in plats){
+        if(plats[elem].Nom = nom){
+            plats[elem].Quantite++;
+        }
+    }
 }
 
 //fonction pour supprimer un élément dans la commande
