@@ -1,33 +1,8 @@
-// fonctions utilitaires
-function setElem(id, v){
-    document.getElementById(id).innerHTML = v;
-}
-function addElem(id, v){
-    document.getElementById(id).innerHTML += v;
-}
-function getElem(id){
-    return document.getElementById(id);
-}
-
-function payer1(){
-    var recu = document.getElementById("recu1").value;
-    var total = document.getElementById("total1").innerHTML;
-    setElem("rendu1", "");
-    addElem("rendu1", recu - total + " €");
-}
-
-function payer2(){
-    var recu = document.getElementById("recu2").value;
-    var total = document.getElementById("total2").innerHTML;
-    setElem("rendu2", "");
-    addElem("rendu2", recu - total + " €");
-}
-
-function payer3(){
-    var recu = document.getElementById("recu3").value;
-    var total = document.getElementById("total3").innerHTML;
-    setElem("rendu3", "");
-    addElem("rendu3", recu - total + " €");
+function payer(x){
+    var recu = document.getElementById("recu"+x).value;
+    var total = document.getElementById("total"+x).innerHTML;
+    setElem("rendu"+x, "");
+    addElem("rendu"+x, recu - total + " €");
 }
 
 function ajouteCommande(c){
