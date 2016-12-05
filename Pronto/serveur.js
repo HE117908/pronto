@@ -110,7 +110,9 @@ app.post('/login_post', function (req, res) {
     else res.sendStatus(200);
 });
 
+app.post('/caisse_post', function (req, res) {
 
+});
 
 function ckL(usr,pwd){
     var tab = Object.keys(loginResult);
