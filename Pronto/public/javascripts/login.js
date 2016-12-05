@@ -16,7 +16,6 @@ function submitLog() {
                 alert("Please enter correct user name and password.");
         },
         success: function() {
-            alert("name and password OK.");
             show();
             $('#dropdownMenuServeur').val(tabData.user);
             setGarcon(tabData.user);

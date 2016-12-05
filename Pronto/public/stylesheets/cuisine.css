@@ -7,11 +7,15 @@
     padding-bottom: 50px;
 }
 
-.titre {
+.col-md-9 {
+    padding: 20px;
+}
+
+/*.titre {
     background-color: #0D3349;
     color: white;
     text-align: center;
     border: 2px solid black;
     padding: 20px;
 
-}
+}*/

@@ -1,9 +1,40 @@
-﻿function payer(x){
+﻿var plats = {}; //objet des plats
+var boissons = {}; // objet des boissons
+var com = {}; //objet commande avec plats et boissons (sans ids table et garçon...)
+var cart = {}; //objet avec ids garçon, table ... et tableau de commande
+var table;
+var date = new Date().getTime();
+var idCom = 'commande'+ date; // id de la commande = commande + date en millisecondes
+
+//fonction pour créer la commande avant l'envoye sans id, table, etc (objets boissons + plats)
+function addCom(){
+    com['boissons'] = boissons;
+    com['plats'] = plats;
+}
+
+//fonction pour créer la commande avant l'envoye + id, table, etc
+function addCart(val){
+    addCom();
+    cart['idCommande'] = idCom;
+    cart['idTable'] = table;
+    cart['commande'] = com;
+    console.log(cart);
+}
+
+function payer(x){
+    setElem(("tableau"+x), "");
     var recu = document.getElementById("recu"+x).value;
     var total = document.getElementById("total"+x).innerHTML;
     var res = (recu - total);
     setElem("rendu"+x, "");
     addElem("rendu"+x, res.toFixed(2) + " €");
+    addCart();
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(cart),
+        contentType: 'application/json',
+        url: '/caisse_post'
+    });
 }
 
 function ajouteCommande(c){
@@ -14,7 +45,7 @@ function ajouteCommande(c){
         i = elem[i];
         var prixp = c.commande.plats[i].Prix;
         ligne = '<tr>';
-        ligne += '<td>' + "5X" + '</td>';
+        ligne += '<td>' + c.commande.plats[i].Quantite + '</td>';
         ligne += '<td>' + c.commande.plats[i].Nom + '</td>';
         ligne += '<td class="prix" id="prix'
         ligne += i
@@ -35,7 +66,7 @@ function ajouteCommande(c){
         j = eleme[j];
         var prixb = c.commande.boissons[j].Prix
         ligne = '<tr>';
-        ligne += '<td>' + "2X" + '</td>';
+        ligne += '<td>' + c.commande.boissons[j].Quantite + '</td>';
         ligne += '<td>' + c.commande.boissons[j].Nom + '</td>';
         ligne += '<td class="prix" id="prix'
         ligne += j

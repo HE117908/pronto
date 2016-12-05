@@ -152,7 +152,6 @@ function addTmp(typeTemp, nom, det, ac, sup, pr){
     var accomp = [];
     var suppl = [];
     var prix = pr.substring(0,pr.length-1);
-    console.log(prix);
 
     if(ac!='Accompagnements') {
         accomp.push(ac);
@@ -218,9 +217,6 @@ function onSubmit() {
         contentType: 'application/json',
         url: '/process_post'
     });
-    $(document).ready(function(){
-        $('.btn-success').popover({trigger: "focus", content: "commande envoyée", placement: "bottom"});
-    });
     raz();
 }
 
@@ -241,13 +237,6 @@ function raz(){
     element = 0;
     showBox('home');
 }
-
-function affiche(){
-    $(document).ready(function(){
-        $('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
-    });
-}
-
 
 //fonctions pour les + et -
 
