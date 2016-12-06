@@ -215,10 +215,16 @@ function onSubmit() {
         type: 'POST',
         data: JSON.stringify(cart),
         contentType: 'application/json',
-        url: '/process_post'
+        url: '/process_post',
+        error: function() {
+            alert("La commande n'a pas aboutie...");
+        },
+        success: function() {
+            raz();
+        }
     });
-    raz();
 }
+
 
 function raz(){
     setElem('tempCom', '');

@@ -9,8 +9,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var request = require("request");
-var redirect = require("http").ServerResponse;
+
 
 var server;
 makeServeur();
@@ -96,8 +95,13 @@ function DBQueryLogin(query,receive){
 
 
 app.post('/process_post', function (req, res) {
-    reception(req);
-    console.log('----');
+    var commande = req.body;
+    if(commande != ""){
+        res.sendStatus(200);
+        reception(commande);
+        console.log('----');
+    } else res.sendStatus(500);
+
 });
 
 app.post('/login_post', function (req, res) {
@@ -111,6 +115,13 @@ app.post('/login_post', function (req, res) {
 });
 
 app.post('/caisse_post', function (req, res) {
+    var commande = req.body;
+    if(commande != "") {
+        res.sendStatus(200);
+        commande = JSON.stringify(commande);
+        console.log(commande);
+    } else res.sendStatus(500);
+
 
 });
 
@@ -150,10 +161,7 @@ function sendCaisseEnregistreuse(data){
     nspCaisseEnregistreuse.emit('CaisseEnregistreuse', data);
 }
 
-function reception(req) {
-    var commande = req.body;
-    //recordDB(commande);
-    //viewDB();
+function reception(commande) {
     console.log(commande);
     sendBar(commande);
     sendCuisine(commande);

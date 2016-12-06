@@ -33,9 +33,15 @@ function payer(x){
         type: 'POST',
         data: JSON.stringify(cart),
         contentType: 'application/json',
-        url: '/caisse_post'
+        url: '/caisse_post',
+        error: function() {
+            alert("Enregistrement échoué.");
+        },
+        success: function() {
+            raz(x);
+        }
     });
-    raz(x);
+
 }
 
 function raz(x){
