@@ -210,19 +210,56 @@ function addCart(val){
 }
 
 function onSubmit() {
-    addCart();
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(cart),
-        contentType: 'application/json',
-        url: '/process_post',
-        error: function() {
-            alert("La commande n'a pas aboutie...");
-        },
-        success: function() {
-            raz();
-        }
-    });
+    if(isEmpty(plats) && isEmpty(boissons)){
+        setElem("comError","Veuillez remplir la commande!");
+    }
+    else if(isEmpty(table)){
+        setElem("comError","Veuillez indiquer la table!");
+    }
+    else {
+        setElem("comError","");
+        addCart();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(cart),
+            contentType: 'application/json',
+            url: '/process_post',
+            error: function () {
+                alert("La commande n'a pas aboutie...");
+            },
+            success: function () {
+                raz();
+            }
+        });
+    }
+}
+
+// Speed up calls to hasOwnProperty
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function isEmpty(obj) {
+
+    // null and undefined are "empty"
+    if (obj == null) return true;
+
+    // Assume if it has a length property with a non-zero value
+    // that that property is correct.
+    if (obj.length > 0)    return false;
+    if (obj.length === 0)  return true;
+
+    // If it isn't an object at this point
+    // it is empty, but it can't be anything *but* empty
+    // Is it empty?  Depends on your application.
+    if (typeof obj !== "object") return true;
+
+    // Otherwise, does it have any properties of its own?
+    // Note that this doesn't handle
+    // toString and valueOf enumeration bugs in IE < 9
+    for (var key in obj) {
+        if (hasOwnProperty.call(obj, key)) return false;
+    }
+
+    return true;
 }
 
 
