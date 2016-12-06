@@ -42,6 +42,7 @@
                             <th>Quantité :</th>
                             <th>Nom du produit :</th>
                             <th>Prix :</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody id="tableau1"></tbody>
@@ -56,6 +57,13 @@
                         <p><label class="total">Total : <span id="total1"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu1"></span></label></p>
                         <button class="btnPayer" id="btnPayer1" onclick="payer(1)">Payer</button>
+                        <select id="typePaiement1">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -89,6 +97,13 @@
                     <p><label class="total">Total : <span id="total2"></span> €</label></p>
                     <p><label>A rendre : <span id="rendu2"></span></label></p>
                     <button class="btnPayer" id="btnPayer2" onclick="payer(2)">Payer</button>
+                    <select id="typePaiement2">
+                        <option>Liquide</option>
+                        <option>Bancontact</option>
+                        <option>Visa(carte de crédit)</option>
+                        <option>Chèque cadeau</option>
+                        <option>Ticket restaurant</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -120,9 +135,226 @@
                         <p><label class="total">Total : <span id="total3"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu3"></span></label></p>
                         <button class="btnPayer" id="btnPayer3" onclick="payer(3)">Payer</button>
+                        <select id="typePaiement3">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Table 4</p>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="table4">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau4"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label for="recu4">Argent reçu : </label>
+                            <input id="recu4" name="recu1" placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label>Total TVA(6%) : <span id="totalTVA4"></span></label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA4"></span></label></p>
+                        <p><label class="total">Total : <span id="total4"></span> €</label></p>
+                        <p><label>A rendre : <span id="rendu4"></span></label></p>
+                        <button class="btnPayer" id="btnPayer4" onclick="payer(4)">Payer</button>
+                        <select id="typePaiement4">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Table 5</p>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="table5">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau5"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label for="recu5">Argent reçu : </label>
+                            <input id="recu5" name="recu1" placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label>Total TVA(6%) : <span id="totalTVA5"></span></label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA5"></span></label></p>
+                        <p><label class="total">Total : <span id="total5"></span> €</label></p>
+                        <p><label>A rendre : <span id="rendu5"></span></label></p>
+                        <button class="btnPayer" id="btnPayer5" onclick="payer(5)">Payer</button>
+                        <select id="typePaiement5">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Table 6</p>
+                </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="table6">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau6"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label for="recu6">Argent reçu : </label>
+                            <input id="recu6" name="recu1" placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label>Total TVA(6%) : <span id="totalTVA6"></span></label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA6"></span></label></p>
+                        <p><label class="total">Total : <span id="total6"></span> €</label></p>
+                        <p><label>A rendre : <span id="rendu6"></span></label></p>
+                        <button class="btnPayer" id="btnPayer6" onclick="payer(6)">Payer</button>
+                        <select id="typePaiement6">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Table 7</p>
+                </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="tabl7">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau7"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label for="recu7">Argent reçu : </label>
+                            <input id="recu7" name="recu1" placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label>Total TVA(6%) : <span id="totalTVA7"></span></label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA7"></span></label></p>
+                        <p><label class="total">Total : <span id="total7"></span> €</label></p>
+                        <p><label>A rendre : <span id="rendu7"></span></label></p>
+                        <button class="btnPayer" id="btnPayer7" onclick="payer(7)">Payer</button>
+                        <select id="typePaiement7">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapseHeight">Table 8</p>
+                </h4>
+            </div>
+            <div id="collapseHeight" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="table8">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableau8"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label for="recu8">Argent reçu : </label>
+                            <input id="recu8" name="recu1" placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label>Total TVA(6%) : <span id="totalTVA8"></span></label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA8"></span></label></p>
+                        <p><label class="total">Total : <span id="total8"></span> €</label></p>
+                        <p><label>A rendre : <span id="rendu8"></span></label></p>
+                        <button class="btnPayer" id="btnPayer8" onclick="payer(8)">Payer</button>
+                        <select id="typePaiement8">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4" id="paiementSepare">
+        <table class="table table-striped" id="tableSepare">
+            <thead>
+            <tr>
+                <th>Quantité :</th>
+                <th>Nom du produit :</th>
+                <th>Prix :</th>
+            </tr>
+            </thead>
+            <tbody id="tabPaiementSepare"></tbody>
+        </table>
+        <div class="paiement">
+            <p><label class="total">Total : <span id="totalPaiementSepare"></span> €</label></p>
         </div>
     </div>
 </div>

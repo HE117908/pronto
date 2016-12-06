@@ -121,7 +121,6 @@
         <h2><%=Menu[0]%></h2>
 
         <!--<h3 id="entreeChaude">Entrées chaudes</h3>-->
-
         <div class="panel-group" id="accordion">
         <% for(i in Entrees) {%>
             <div class="panel panel-primary">
@@ -136,7 +135,7 @@
                         <div class="thumbnail" id="<%= Entrees[i][0] %>">
                             <div class="caption-full">
                                 <h4 class="pull-right" id="<%= Entrees[i][2]+i %>Prix"><%= Entrees[i][1] %>€</h4>
-                                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Entrees[i][2]+i %>Nom"><%= Entrees[i][0] %></a></h4>
+                                <h4><a href="#" class="link_ingredient" id="<%= Entrees[i][2]+i %>Nom"><%= Entrees[i][0] %></a></h4>
                                 <h4>
                                 <div class="input-group">
                                     <span class="input-group-btn">
@@ -175,12 +174,12 @@
 
         <!--<h3 id="viandes">Viandes</h3>-->
 
-        <div class="panel-group" id="accordion">
+        <div class="panel-group" id="accordion1">
         <% for(i in Plats) {%>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#collapse<%= i %>">
                             </span><%= Plats[i][0] %></a>
                     </h4>
                 </div>
@@ -189,7 +188,7 @@
                         <div class="thumbnail" id="<%= Plats[i][0] %>">
                             <div class="caption-full">
                                 <h4 class="pull-right" id="<%= Plats[i][2]+i %>Prix"><%= Plats[i][1] %>€</h4>
-                                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Plats[i][2]+i %>Nom"><%= Plats[i][0] %></a></h4>
+                                <h4><a href="#" class="link_ingredient" id="<%= Plats[i][2]+i %>Nom"><%= Plats[i][0] %></a></h4>
                                 <h4>
                                     <div class="input-group">
                         <span class="input-group-btn">
@@ -248,12 +247,12 @@
 
         <!--<h3 id="auxFruits">Desserts aux fruits</h3>-->
 
-        <div class="panel-group" id="accordion">
+        <div class="panel-group" id="accordion2">
         <% for(i in Desserts) {%>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= i %>">
                             </span><%= Desserts[i][0] %></a>
                     </h4>
                 </div>
@@ -262,7 +261,7 @@
                         <div class="thumbnail" id="<%= Desserts[i][0] %>">
                             <div class="caption-full">
                                 <h4 class="pull-right" id="<%= Desserts[i][2]+i %>Prix"><%= Desserts[i][1] %>€</h4>
-                                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Desserts[i][2]+i %>Nom"><%= Desserts[i][0] %></a></h4>
+                                <h4><a href="#" class="link_ingredient" id="<%= Desserts[i][2]+i %>Nom"><%= Desserts[i][0] %></a></h4>
                                 <h4>
                                     <div class="input-group">
                         <span class="input-group-btn">
@@ -303,12 +302,12 @@
 
         <!--<h3 id="theEtCafe">Thés et cafés</h3>-->
 
-        <div class="panel-group" id="accordion">
+        <div class="panel-group" id="accordion3">
         <% for(i in Boissons) {%>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= 100 + i %>">
+                        <a data-toggle="collapse" data-parent="#accordion3" href="#collapse<%= 100 + i %>">
                             </span><%= Boissons[i][0] %></a>
                     </h4>
                 </div>
@@ -317,7 +316,7 @@
                         <div class="thumbnail" id="<%= Boissons[i][0] %>">
                             <div class="caption-full">
                                 <h4 class="pull-right" id="<%= Boissons[i][2]+i %>Prix"><%= Boissons[i][1] %>€</h4>
-                                <h4><a href="#" onmouseover="affiche()" class="link_ingredient" id="<%= Boissons[i][2]+i %>Nom"><%= Boissons[i][0] %></a></h4>
+                                <h4><a href="#" class="link_ingredient" id="<%= Boissons[i][2]+i %>Nom"><%= Boissons[i][0] %></a></h4>
                                 <h4>
                                     <div class="input-group">
                         <span class="input-group-btn">

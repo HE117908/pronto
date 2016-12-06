@@ -1,16 +1,7 @@
-/**
- * Created by francois on 06/11/2016.
- */
-
-//-----------------------------------------------------------------------------------------------------------//
-//partie cuisine
-
 function afficherPlats(c){
     var ligne;
-    var j = 0;
     var elem = Object.keys(c.commande.plats);
     for (var i in elem) {
-        j++;
         i = elem[i];
         ligne = '<tr id="row'
         ligne += elem
@@ -35,10 +26,8 @@ function afficherPlats(c){
 
 function afficherBoissons(b){
     var ligne;
-    var j = 0;
     var elem = Object.keys(b.commande.boissons);
     for (var i in elem) {
-        j++;
         i = elem[i];
         ligne = '<tr id="row'
         ligne += elem
@@ -61,7 +50,7 @@ function afficherBoissons(b){
 
 function change(item){
     if(document.formulaire.elements[item].checked == true){
-        document.getElementById(item).style.backgroundColor = "cornflowerblue";
+        //document.getElementById(item).style.backgroundColor = "cornflowerblue";
         document.getElementById(item).style.display = "none";
     }
     else{
