@@ -35,6 +35,15 @@ function payer(x){
         contentType: 'application/json',
         url: '/caisse_post'
     });
+    raz(x);
+}
+
+function raz(x){
+    setElem("rendu"+x, "");
+    setElem("totalTVA"+x,"");
+    setElem("totalHTVA"+x,"");
+    setElem("total"+x,"");
+    document.getElementById("recu"+x).value = '';
 }
 
 function ajouteCommande(c){
