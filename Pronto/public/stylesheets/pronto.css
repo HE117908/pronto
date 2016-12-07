@@ -73,3 +73,11 @@ body{margin-top:50px;}
     border: 1px solid green;
     padding: 5px;
 }
+
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand{
+    color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover{
+    color: #7dcbed;
+}
