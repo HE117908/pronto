@@ -38,6 +38,7 @@ function payer(x){
     cart['idCommande'] = idCom;
     cart['PrixTotal'] = document.getElementById("total"+x).innerHTML;
     cart['typePaiement'] = document.getElementById("typePaiement"+x).value;
+    cart['idTable'] = c['idTable'];
     addCart();
     $.ajax({
         type: 'POST',
