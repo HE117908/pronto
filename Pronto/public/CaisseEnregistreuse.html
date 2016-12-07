@@ -56,6 +56,13 @@
                         <p><label>Total HTVA : <span id="totalHTVA1">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total1">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu1"></span></label></p>
+                        <p><label name="btnSuspendu1">Payer un plat suspendu :</label>
+                        <select id="typeSuspendu1">
+                            <option>Soupe</option>
+                            <option>Café</option>
+                        </select>
+                        <button class="btnPayer" name="btnSuspendu1" id="btnSuspendu1" onclick="suspendu(1)">Ajouter</button></p>
+
                         <button class="btnTicket" id="btnTicket1" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer1" onclick="payer(1)">Payer</button>
                         <select id="typePaiement1">

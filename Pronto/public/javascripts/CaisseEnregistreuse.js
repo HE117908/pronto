@@ -23,7 +23,7 @@ function addCart(val){
 
 function passData(data){
     c = data;
-    drawTable();
+    //drawTable();
     ajouteCommande();
 }
 
@@ -54,10 +54,33 @@ function payer(x){
     //raz(x);
 }
 
+function suspendu(n) {
+    var type = getElem("typeSuspendu" + n).value;
+    var prix;
+    if(type=="Soupe"){
+        prix = 5;
+    }else{
+        prix = 2;
+    }
+    console.log(type);
+    var ligne = '<tr id="Table ' + n + '">';
+    ligne += '<td>1</td>';
+    ligne += '<td>' + type + '</td>';
+    ligne += '<td class="prix" id="prix'
+    ligne += n
+    ligne += '" value='
+    ligne += prix
+    ligne += '>' + prix + '€ </td>';
+    ligne += '<td>' + '<button class="add" onclick="ajoutePaiement(this.parentNode.parentNode)"> + </button></td>';
+    ligne += '</tr>';
+
+    addElem("Table "+n, ligne);
+}
+
 function raz(x){
-    setElem("totalTVA"+x,"");
-    setElem("totalHTVA"+x,"");
-    setElem("total"+x,"");
+    setElem("totalTVA"+x,"0");
+    setElem("totalHTVA"+x,"0");
+    setElem("total"+x,"0");
     document.getElementById("recu"+x).value = '';
 }
 
