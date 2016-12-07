@@ -5,12 +5,12 @@ function afficherPlats(c){
         i = elem[i];
         ligne = '<tr id="row'
         ligne += elem
-        ligne += j
+        ligne += i
         ligne += '"'
         ligne += '" >';
         ligne += '<td>' + '<input onclick="change(this.name)" type="checkbox" name="row'
         ligne += elem
-        ligne += j
+        ligne += i
         ligne += '"'
         ligne += ' >' + '</td>'
         ligne += '<td>' + c.idTable + '</td>';
@@ -31,12 +31,12 @@ function afficherBoissons(b){
         i = elem[i];
         ligne = '<tr id="row'
         ligne += elem
-        ligne += j
+        ligne += i
         ligne += '"'
         ligne += '" >';
         ligne += '<td>' + '<input onclick="change(this.name)" type="checkbox" name="row'
         ligne += elem
-        ligne += j
+        ligne += i
         ligne += '"'
         ligne += ' >' + '</td>'
         ligne += '<td>' + b.idTable + '</td>';

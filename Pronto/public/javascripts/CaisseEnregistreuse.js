@@ -34,13 +34,13 @@ function payer(x){
         type: 'POST',
         data: JSON.stringify(cart),
         contentType: 'application/json',
-        url: '/caisse_post'
-        /*error: function() {
+        url: '/caisse_post',
+        error: function() {
             alert("Enregistrement échoué.");
         },
         success: function() {
             raz(x);
-        }*/
+        }
     });
     //raz(x);
 }
@@ -72,23 +72,8 @@ function ajouteCommande(c){
         ligne += '>' + prixp + " €" + '</td>';
         ligne += '<td>' + '<button class="add" onclick="ajoutePaiement()"> + </button>' + '</td>';
         ligne += '</tr>';
-        if(c.idTable == "Table 1"){
-            addElem('tableau1', ligne);
-        }else if(c.idTable == "Table 2"){
-            addElem('tableau2', ligne);
-        }else if(c.idTable == "Table 3"){
-            addElem('tableau3', ligne);
-        }else if(c.idTable == "Table 4"){
-            addElem('tableau4', ligne);
-        }else if(c.idTable == "Table 5"){
-            addElem('tableau5', ligne);
-        }else if(c.idTable == "Table 6"){
-            addElem('tableau6', ligne);
-        }else if(c.idTable == "Table 7"){
-            addElem('tableau7', ligne);
-        }else if(c.idTable == "Table 8"){
-            addElem('tableau8', ligne);
-        }
+        addElem('tableau'+c.idTable.substring(6), ligne);
+
         var prixligneP = (qtep*prixp);//prix plats selon quantité
         totalP= totalP + prixligneP;
         console.log(totalP);
@@ -109,23 +94,8 @@ function ajouteCommande(c){
         ligne += '>' + prixb + " €" + '</td>';
         ligne += '<td>' + '<button class="add" onclick="ajoutePaiement()"> + </button>' + '</td>';
         ligne += '</tr>';
-        if (c.idTable == "Table 1") {
-            addElem('tableau1', ligne);
-        } else if (c.idTable == "Table 2") {
-            addElem('tableau2', ligne);
-        } else if (c.idTable == "Table 3") {
-            addElem('tableau3', ligne);
-        }else if(c.idTable == "Table 4"){
-            addElem('tableau4', ligne);
-        }else if(c.idTable == "Table 5"){
-            addElem('tableau5', ligne);
-        }else if(c.idTable == "Table 6"){
-            addElem('tableau6', ligne);
-        }else if(c.idTable == "Table 7"){
-            addElem('tableau7', ligne);
-        }else if(c.idTable == "Table 8"){
-            addElem('tableau8', ligne);
-        }
+        addElem('tableau'+c.idTable.substring(6), ligne);
+
         var prixligneB = (qteb*prixb);//prix boissons selon quantité
         totalB= totalB + prixligneB;
         console.log(totalB);
@@ -141,39 +111,10 @@ function ajouteCommande(c){
     var total = (totalB+totalP);
     var TVA = (total*6)/100;
 
-    if(c.idTable == "Table 1") {
-        addElem('totalTVA1', TVA + " €");
-        addElem('totalHTVA1', (total - TVA) + " €");
-        addElem('total1', total);
-    }else if (c.idTable == "Table 2") {
-        addElem('totalTVA2', TVA + " €");
-        addElem('totalHTVA2', (total - TVA) + " €");
-        addElem('total2', total);
-    }else if (c.idTable == "Table 3") {
-        addElem('totalTVA3', TVA + " €");
-        addElem('totalHTVA3', (total - TVA) + " €");
-        addElem('total3', total);
-    }else if (c.idTable == "Table 4") {
-        addElem('totalTVA4', TVA + " €");
-        addElem('totalHTVA4', (total - TVA) + " €");
-        addElem('total4', total);
-    }else if (c.idTable == "Table 5") {
-        addElem('totalTVA5', TVA + " €");
-        addElem('totalHTVA5', (total - TVA) + " €");
-        addElem('total5', total);
-    }else if (c.idTable == "Table 6") {
-        addElem('totalTVA6', TVA + " €");
-        addElem('totalHTVA6', (total - TVA) + " €");
-        addElem('total6', total);
-    }else if (c.idTable == "Table 7") {
-        addElem('totalTVA7', TVA + " €");
-        addElem('totalHTVA7', (total - TVA) + " €");
-        addElem('total7', total);
-    }else if (c.idTable == "Table 8") {
-        addElem('totalTVA8', TVA + " €");
-        addElem('totalHTVA8', (total - TVA) + " €");
-        addElem('total8', total);
-    }else{}
+        addElem('totalTVA'+c.idTable.substring(6), TVA + " €");
+        addElem('totalHTVA'+c.idTable.substring(6), (total - TVA) + " €");
+        addElem('total'+c.idTable.substring(6), total);
+
 }
 
 function ajoutePaiement(){
