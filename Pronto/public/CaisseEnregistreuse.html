@@ -50,19 +50,21 @@
                     <div class="paiement">
                         <p>
                             <label for="recu1">Argent reçu : </label>
-                            <input id="recu1" name="recu1" placeholder='Entrez une valeur'/>
+                            <input class="recu" id="recu1" name="recu1" placeholder='Entrez une valeur'/>
                         </p>
                         <p><label>Total TVA(6%) : <span id="totalTVA1">0</span> €</label></p>
                         <p><label>Total HTVA : <span id="totalHTVA1">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total1">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes1">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu1"></span></label></p>
-                        <p><label name="btnSuspendu1">Payer un plat suspendu :</label>
-                        <select id="typeSuspendu1">
-                            <option>Soupe</option>
-                            <option>Café</option>
-                        </select>
-                        <button class="btnPayer" name="btnSuspendu1" id="btnSuspendu1" onclick="suspendu(1)">Ajouter</button></p>
-
+                        <p>
+                            <label name="btnSuspendu1">Payer un plat suspendu :</label>
+                            <select id="typeSuspendu1">
+                                <option>Soupe</option>
+                                <option>Café</option>
+                            </select>
+                            <button class="btnPayer" name="btnSuspendu1" id="btnSuspendu1" onclick="suspendu(1)">Ajouter</button>
+                        </p>
                         <button class="btnTicket" id="btnTicket1" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer1" onclick="payer(1)">Payer</button>
                         <select id="typePaiement1">
@@ -98,11 +100,12 @@
                 <div class="paiement">
                     <p>
                         <label for="recu2">Argent reçu : </label>
-                        <input id="recu2" name="recu2" placeholder='Entrez une valeur'/>
+                        <input class="recu" id="recu2" name="recu2" placeholder='Entrez une valeur'/>
                     </p>
                     <p><label>Total TVA(6%) : <span id="totalTVA2">0</span> €</label></p>
                     <p><label>Total HTVA : <span id="totalHTVA2">0</span> €</label></p>
                     <p><label class="total">Total : <span id="total2">0</span> €</label></p>
+                    <p><label class="totalRestant">Total restant à payer : <span id="totalRes2">0</span> €</label></p>
                     <p><label>A rendre : <span id="rendu2"></span></label></p>
                     <button class="btnTicket" id="btnTicket2" onclick="ticket();">Ticket</button>
                     <button class="btnPayer" id="btnPayer2" onclick="payer(2)">Payer</button>
@@ -137,11 +140,12 @@
                     <div class="paiement">
                         <p>
                             <label>Argent reçu : </label>
-                            <input id="recu3" name="recu3" placeholder='Entrez une valeur'/>
+                            <input class="recu" id="recu3" name="recu3" placeholder='Entrez une valeur'/>
                         </p>
                         <p><label>Total TVA(6%) : <span id="totalTVA3">0</span> €</label></p>
                         <p><label>Total HTVA : <span id="totalHTVA3">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total3">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes3">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu3"></span></label></p>
                         <button class="btnTicket" id="btnTicket3" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer3" onclick="payer(3)">Payer</button>
@@ -177,11 +181,12 @@
                     <div class="paiement">
                         <p>
                             <label for="recu4">Argent reçu : </label>
-                            <input id="recu4" name="recu1" placeholder='Entrez une valeur'/>
+                            <input class="recu" id="recu4" name="recu1" placeholder='Entrez une valeur'/>
                         </p>
                         <p><label>Total TVA(6%) : <span id="totalTVA4">0</span> €</label></p>
                         <p><label>Total HTVA : <span id="totalHTVA4">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total4">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes4">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu4"></span></label></p>
                         <button class="btnTicket" id="btnTicket4" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer4" onclick="payer(4)">Payer</button>
@@ -217,11 +222,12 @@
                     <div class="paiement">
                         <p>
                             <label for="recu5">Argent reçu : </label>
-                            <input id="recu5" name="recu1" placeholder='Entrez une valeur'/>
+                            <input class="recu" id="recu5" name="recu1" placeholder='Entrez une valeur'/>
                         </p>
                         <p><label>Total TVA(6%) : <span id="totalTVA5">0</span> €</label></p>
                         <p><label>Total HTVA : <span id="totalHTVA5">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total5">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes5">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu5"></span></label></p>
                         <button class="btnTicket" id="btnTicket5" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer5" onclick="payer(5)">Payer</button>
@@ -257,11 +263,12 @@
                     <div class="paiement">
                         <p>
                             <label for="recu6">Argent reçu : </label>
-                            <input id="recu6" name="recu1" placeholder='Entrez une valeur'/>
+                            <input class="recu" id="recu6" name="recu1" placeholder='Entrez une valeur'/>
                         </p>
                         <p><label>Total TVA(6%) : <span id="totalTVA6">0</span> €</label></p>
                         <p><label>Total HTVA : <span id="totalHTVA6">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total6">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes6">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu6"></span></label></p>
                         <button class="btnTicket" id="btnTicket6" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer6" onclick="payer(6)">Payer</button>
@@ -297,19 +304,19 @@
                     <div class="paiement">
                         <p>
                             <label for="recu7">Argent reçu : </label>
-                            <input id="recu7" name="recu1" placeholder='Entrez une valeur'/>
+                            <input class="recu" id="recu7" name="recu1" placeholder='Entrez une valeur'/>
                         </p>
                         <p><label>Total TVA(6%) : <span id="totalTVA7">0</span> €</label></p>
                         <p><label>Total HTVA : <span id="totalHTVA7">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total7">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes7">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu7"></span></label></p>
                         <button class="btnTicket" id="btnTicket7" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer7" onclick="payer(7)">Payer</button>
                         <select id="typePaiement7">
-                            <option>Liquide</option>
+                            <option>Liquide/Espèces</option>
                             <option>Bancontact</option>
                             <option>Visa(carte de crédit)</option>
-                            <option>Chèque cadeau</option>
                             <option>Ticket restaurant</option>
                         </select>
                     </div>
@@ -337,11 +344,12 @@
                     <div class="paiement">
                         <p>
                             <label for="recu8">Argent reçu : </label>
-                            <input id="recu8" name="recu1" placeholder='Entrez une valeur'/>
+                            <input class="recu" id="recu8" name="recu1" placeholder='Entrez une valeur'/>
                         </p>
                         <p><label>Total TVA(6%) : <span id="totalTVA8">0</span> €</label></p>
                         <p><label>Total HTVA : <span id="totalHTVA8">0</span> €</label></p>
                         <p><label class="total">Total : <span id="total8">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes8">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu8"></span></label></p>
                         <button class="btnTicket" id="btnTicket8" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer8" onclick="payer(8)">Payer</button>
@@ -359,6 +367,7 @@
     </div>
     <div class="col-md-4" id="paiementSepare">
         <table class="table table-striped" id="tableSepare">
+            <caption>Paiement séparé</caption>
             <thead>
             <tr>
                 <th>Quantité :</th>
@@ -367,11 +376,16 @@
                 <th>&nbsp;</th>
             </tr>
             </thead>
-            <tbody id="tabPaiementSepare"></tbody>
+            <tbody id="tabPaiementSep"></tbody>
         </table>
         <div class="paiement">
-            <button onclick="payerSep()">Payer</button>
-            <p><label class="total">Total : <span id="totalPaiementSepare"></span> €</label></p>
+            <p>
+                <label for="recu1">Argent reçu : </label>
+                <input id="recuPaiementSep" class="recu" name="recu1" placeholder='Entrez une valeur'/>
+            </p>
+            <p><label class="total">Total : <span id="totalPaiementSep"></span> €</label></p>
+            <p><label>A rendre : <span id="renduPaiementSep"></span></label></p>
+            <button class="btnPayer" onclick="payerSep()">Payer</button>
         </div>
     </div>
 </div>
