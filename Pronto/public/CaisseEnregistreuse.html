@@ -18,7 +18,7 @@
     <script>
         var socket = io('/CaisseEnregistreuse');
         socket.on('CaisseEnregistreuse',function(data){
-            ajouteCommande(data);
+            passData(data);
         });
     </script>
 
@@ -45,17 +45,18 @@
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody id="tableau1"></tbody>
+                        <tbody id="Table 1"></tbody>
                     </table>
                     <div class="paiement">
                         <p>
                             <label for="recu1">Argent reçu : </label>
                             <input id="recu1" name="recu1" placeholder='Entrez une valeur'/>
                         </p>
-                        <p><label>Total TVA(6%) : <span id="totalTVA1"></span></label></p>
-                        <p><label>Total HTVA : <span id="totalHTVA1"></span></label></p>
-                        <p><label class="total">Total : <span id="total1"></span> €</label></p>
+                        <p><label>Total TVA(6%) : <span id="totalTVA1">0</span> €</label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA1">0</span> €</label></p>
+                        <p><label class="total">Total : <span id="total1">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu1"></span></label></p>
+                        <button class="btnTicket" id="btnTicket1" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer1" onclick="payer(1)">Payer</button>
                         <select id="typePaiement1">
                             <option>Liquide</option>
@@ -84,7 +85,7 @@
                             <th>Prix :</th>
                         </tr>
                         </thead>
-                        <tbody id="tableau2"></tbody>
+                        <tbody id="Table 2"></tbody>
                     </table>
                 </div>
                 <div class="paiement">
@@ -96,6 +97,7 @@
                     <p><label>Total HTVA : <span id="totalHTVA2"></span></label></p>
                     <p><label class="total">Total : <span id="total2"></span> €</label></p>
                     <p><label>A rendre : <span id="rendu2"></span></label></p>
+                    <button class="btnTicket" id="btnTicket2" onclick="ticket();">Ticket</button>
                     <button class="btnPayer" id="btnPayer2" onclick="payer(2)">Payer</button>
                     <select id="typePaiement2">
                         <option>Liquide</option>
@@ -123,7 +125,7 @@
                             <th>Prix :</th>
                         </tr>
                         </thead>
-                        <tbody id="tableau3"></tbody>
+                        <tbody id="Table 3"></tbody>
                     </table>
                     <div class="paiement">
                         <p>
@@ -134,6 +136,7 @@
                         <p><label>Total HTVA : <span id="totalHTVA3"></span></label></p>
                         <p><label class="total">Total : <span id="total3"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu3"></span></label></p>
+                        <button class="btnTicket" id="btnTicket3" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer3" onclick="payer(3)">Payer</button>
                         <select id="typePaiement3">
                             <option>Liquide</option>
@@ -162,7 +165,7 @@
                             <th>Prix :</th>
                         </tr>
                         </thead>
-                        <tbody id="tableau4"></tbody>
+                        <tbody id="Table 4"></tbody>
                     </table>
                     <div class="paiement">
                         <p>
@@ -173,6 +176,7 @@
                         <p><label>Total HTVA : <span id="totalHTVA4"></span></label></p>
                         <p><label class="total">Total : <span id="total4"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu4"></span></label></p>
+                        <button class="btnTicket" id="btnTicket4" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer4" onclick="payer(4)">Payer</button>
                         <select id="typePaiement4">
                             <option>Liquide</option>
@@ -201,7 +205,7 @@
                             <th>Prix :</th>
                         </tr>
                         </thead>
-                        <tbody id="tableau5"></tbody>
+                        <tbody id="Table 5"></tbody>
                     </table>
                     <div class="paiement">
                         <p>
@@ -212,6 +216,7 @@
                         <p><label>Total HTVA : <span id="totalHTVA5"></span></label></p>
                         <p><label class="total">Total : <span id="total5"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu5"></span></label></p>
+                        <button class="btnTicket" id="btnTicket5" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer5" onclick="payer(5)">Payer</button>
                         <select id="typePaiement5">
                             <option>Liquide</option>
@@ -240,7 +245,7 @@
                             <th>Prix :</th>
                         </tr>
                         </thead>
-                        <tbody id="tableau6"></tbody>
+                        <tbody id="Table 6"></tbody>
                     </table>
                     <div class="paiement">
                         <p>
@@ -251,6 +256,7 @@
                         <p><label>Total HTVA : <span id="totalHTVA6"></span></label></p>
                         <p><label class="total">Total : <span id="total6"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu6"></span></label></p>
+                        <button class="btnTicket" id="btnTicket6" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer6" onclick="payer(6)">Payer</button>
                         <select id="typePaiement6">
                             <option>Liquide</option>
@@ -271,7 +277,7 @@
             </div>
             <div id="collapseSeven" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <table class="table table-striped" id="tabl7">
+                    <table class="table table-striped" id="table7">
                         <thead>
                         <tr>
                             <th>Quantité :</th>
@@ -279,7 +285,7 @@
                             <th>Prix :</th>
                         </tr>
                         </thead>
-                        <tbody id="tableau7"></tbody>
+                        <tbody id="Table 7"></tbody>
                     </table>
                     <div class="paiement">
                         <p>
@@ -290,6 +296,7 @@
                         <p><label>Total HTVA : <span id="totalHTVA7"></span></label></p>
                         <p><label class="total">Total : <span id="total7"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu7"></span></label></p>
+                        <button class="btnTicket" id="btnTicket7" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer7" onclick="payer(7)">Payer</button>
                         <select id="typePaiement7">
                             <option>Liquide</option>
@@ -318,7 +325,7 @@
                             <th>Prix :</th>
                         </tr>
                         </thead>
-                        <tbody id="tableau8"></tbody>
+                        <tbody id="Table 8"></tbody>
                     </table>
                     <div class="paiement">
                         <p>
@@ -329,6 +336,7 @@
                         <p><label>Total HTVA : <span id="totalHTVA8"></span></label></p>
                         <p><label class="total">Total : <span id="total8"></span> €</label></p>
                         <p><label>A rendre : <span id="rendu8"></span></label></p>
+                        <button class="btnTicket" id="btnTicket8" onclick="ticket();">Ticket</button>
                         <button class="btnPayer" id="btnPayer8" onclick="payer(8)">Payer</button>
                         <select id="typePaiement8">
                             <option>Liquide</option>
@@ -349,11 +357,13 @@
                 <th>Quantité :</th>
                 <th>Nom du produit :</th>
                 <th>Prix :</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody id="tabPaiementSepare"></tbody>
         </table>
         <div class="paiement">
+            <button onclick="payerSep()">Payer</button>
             <p><label class="total">Total : <span id="totalPaiementSepare"></span> €</label></p>
         </div>
     </div>
