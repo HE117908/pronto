@@ -25,7 +25,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <![endif]-->
-        <script src="javascripts/object.js"></script>
         <script src="javascripts/login.js"></script>
   
 
@@ -45,12 +44,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand" onclick="showBox('home')">Home</a>
+                <a href="#" class="navbar-brand" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" onclick="showBox('home')">Home</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <% for(var i=0; i<Menu.length; i++) {%>
                     <li><a href="#" onclick="showBox('<%=Menu[i]%>')"><%=Menu[i]%></a></li>
                     <% } %>
@@ -111,6 +110,155 @@
             <br>
         </div>
 
+        <!--suggestions-->
+
+            <div class="panel-group" id="accordion0" >
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion0" href="#collapse999">
+                    <h4 class="panel-title">
+                        <a>
+                            </span>Plat du jour</a>
+                    </h4>
+                </div>
+                <div id="collapse999" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="thumbnail" id="Plat du jour">
+                            <div class="caption-full">
+                                <h4 class="pull-right" id="Plats999Prix">13€</h4>
+                                <h4><a href="#" class="link_ingredient" id="Plats999Nom">Plat du jour</a></h4>
+                                <h4>
+                                    <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-number" disabled="disabled" data-type="minus" data-field="quant[999]">
+                                    <span class="">-</span>
+                                </button>
+                            </span>
+                                        <input type="text" name="quant[999]" id="Plats999Input" class="form-control input-number" value="1" min="1" max="100">
+                                        <span class="input-group-btn">
+                                <button type="button" class="btn btn-number" data-type="plus" data-field="quant[999]">
+                                    <span class="">+</span>
+                                </button>
+                            </span>
+                                    </div>
+                                </h4>
+                                <div class="col-md-3 form-group">
+                                    <select class="form-control" id="Plats999Acc">
+                                        <option><a href="#" >Accompagnements</a></option>
+
+                                        <option><a href="#">Pâtes</a></option>
+
+                                        <option><a href="#">Frites</a></option>
+
+                                        <option><a href="#">Sauce ketchup</a></option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <select class="form-control" id="Plats999Supp">
+                                        <option><a href="#" >Suppléments</a></option>
+
+                                        <option><a href="#">Pâtes</a></option>
+
+                                        <option><a href="#">Frites</a></option>
+
+                                        <option><a href="#">Sauce ketchup</a></option>
+
+                                    </select>
+                                </div>
+                                <h4 class="pull-right">
+                                    <button class="btn btn-default" onclick="getItem('Plats999')">Ajouter</button>
+                                </h4>
+                                <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
+                                <textarea class="form-control" rows="2" id="Plats999Comment" placeholder="Commentaires: "></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion0" href="#collapse998">
+                    <h4 class="panel-title" >
+                        <a>
+                            </span>Soft drink
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse998" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="thumbnail" id="Soft drink">
+                            <div class="caption-full">
+                                <h4 class="pull-right" id="Softs998Prix">4.5€</h4>
+                                <h4><a href="#" class="link_ingredient" id="Softs998Nom">Soft drink</a></h4>
+                                <h4>
+                                    <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-number" disabled="disabled" data-type="minus" data-field="quant[998]">
+                                    <span class="">-</span>
+                                </button>
+                            </span>
+                                        <input type="text" name="quant[998]" id="Softs998Input" class="form-control input-number" value="1" min="1" max="100">
+                                        <span class="input-group-btn">
+                                <button type="button" class="btn btn-number" data-type="plus" data-field="quant[998]">
+                                    <span class="">+</span>
+                                </button>
+                            </span>
+                                    </div>
+                                </h4>
+                                <h4 class="pull-right">
+                                    <button class="btn btn-default" onclick="getItem('Softs998')">Ajouter</button>
+                                </h4>
+                                <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
+                                <textarea class="form-control" rows="2" id="Softs998Comment" placeholder="Commentaires: "></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion0" href="#collapse9997">
+                        <h4 class="panel-title" >
+                            <a>
+                                </span>Café
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse997" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="thumbnail" id="Café">
+                                <div class="caption-full">
+                                    <h4 class="pull-right" id="Softs997Prix">1.5€</h4>
+                                    <h4><a href="#" class="link_ingredient" id="Softs997Nom">Café</a></h4>
+                                    <h4>
+                                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-number" disabled="disabled" data-type="minus" data-field="quant[997]">
+                                    <span class="">-</span>
+                                </button>
+                            </span>
+                                            <input type="text" name="quant[997]" id="Softs997Input" class="form-control input-number" value="1" min="1" max="100">
+                                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-number" data-type="plus" data-field="quant[997]">
+                                    <span class="">+</span>
+                                </button>
+                            </span>
+                                        </div>
+                                    </h4>
+                                    <h4 class="pull-right">
+                                        <button class="btn btn-default" onclick="getItem('Softs997')">Ajouter</button>
+                                    </h4>
+                                    <!-- <p id="entree1Desc">jumbo lump crab, avocado, herb oil.</p>-->
+                                    <textarea class="form-control" rows="2" id="Softs997Comment" placeholder="Commentaires: "></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
     </div>
 
 
@@ -124,9 +272,9 @@
         <div class="panel-group" id="accordion">
         <% for(i in Entrees) {%>
             <div class="panel panel-primary">
-                <div class="panel-heading">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
+                        <a>
                             </span><%= Entrees[i][0] %></a>
                     </h4>
                 </div>
@@ -177,9 +325,9 @@
         <div class="panel-group" id="accordion1">
         <% for(i in Plats) {%>
             <div class="panel panel-primary">
-                <div class="panel-heading">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion1" href="#collapse<%= i %>">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion1" href="#collapse<%= i %>">
+                        <a>
                             </span><%= Plats[i][0] %></a>
                     </h4>
                 </div>
@@ -250,9 +398,9 @@
         <div class="panel-group" id="accordion2">
         <% for(i in Desserts) {%>
             <div class="panel panel-primary">
-                <div class="panel-heading">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= i %>">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= i %>">
+                        <a>
                             </span><%= Desserts[i][0] %></a>
                     </h4>
                 </div>
@@ -302,13 +450,14 @@
 
         <!--<h3 id="theEtCafe">Thés et cafés</h3>-->
 
-        <div class="panel-group" id="accordion3">
+        <div class="panel-group" id="accordion3" >
         <% for(i in Boissons) {%>
             <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion3" href="#collapse<%= 100 + i %>">
-                            </span><%= Boissons[i][0] %></a>
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion3" href="#collapse<%= 100 + i %>">
+                    <h4 class="panel-title" >
+                        <a>
+                            </span><%= Boissons[i][0] %>
+                        </a>
                     </h4>
                 </div>
                 <div id="collapse<%= 100 + i %>" class="panel-collapse collapse">
