@@ -32,7 +32,7 @@ function passData(data){
 function payer(x){
     setElem(("Table "+x), "");
     var recu = document.getElementById("recu"+x).value;
-    var total = document.getElementById("total"+x).innerHTML;
+    var total = document.getElementById("totalRes"+x).innerHTML;
     var res = (recu - total);
     setElem("rendu"+x, "");
     addElem("rendu"+x, res.toFixed(2) + " €");
@@ -154,24 +154,7 @@ function payerSep() {
     addElem("renduPaiementSep", resSep.toFixed(2) + " €");
     var resteAPayer = total - totalSep;
     var selection = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[0];
-    //setElem("totalRes1", resteAPayer);
-    /*if(getElem() == "Table 1"){
-        setElem("totalRes1", resteAPayer);
-    }else if(getElem() == "Table 2"){
-        setElem("totalRes2", resteAPayer);
-    }else if(getElem() == "Table 3"){
-        setElem("totalRes3", resteAPayer);
-    }else if(getElem() == "Table 4"){
-        setElem("totalRes4", resteAPayer);
-    }else if(getElem() == "Table 5"){
-        setElem("totalRes5", resteAPayer);
-    }else if(getElem() == "Table 6"){
-        setElem("totalRes6", resteAPayer);
-    }else if(getElem() == "Table 7"){
-        setElem("totalRes7", resteAPayer);
-    }else if(getElem() == "Table 8"){
-        setElem("totalRes8", resteAPayer);
-    }*/
+    setElem('totalRes'+c.idTable.substring(6), resteAPayer);
     setElem("tabPaiementSep", "");
     setElem("totalPaiementSep", 0);
     document.getElementById("recuPaiementSep").value = '';
