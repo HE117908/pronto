@@ -161,9 +161,9 @@ function payerSep() {
 
 }
 
-function ticket(){
-    var ticket = document.getElementById("Table 1").textContent;
-    alert(ticket);
+function ticket(x){
+    $("#t1").show();
+    window.print();
 }
 
 function suspendu(n) {

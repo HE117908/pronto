@@ -12,7 +12,8 @@
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="stylesheets/CaisseEnregistreuse.css" rel="stylesheet">
+    <link href="stylesheets/CaisseEnregistreuse.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/ticket.css" media="print">
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -28,7 +29,7 @@
 
 <div class="col-md-3" id="menu">
     <div class="panel-group" id="accordion">
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t1">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Table 1</p>
@@ -65,7 +66,7 @@
                             </select>
                             <button class="btnPayer" name="btnSuspendu1" id="btnSuspendu1" onclick="suspendu(1)">Ajouter</button>
                         </p>
-                        <button class="btnTicket" id="btnTicket1" onclick="ticket();">Ticket</button>
+                        <button class="btnTicket" id="btnTicket1" onclick="ticket(1);">Ticket</button>
                         <button class="btnPayer" id="btnPayer1" onclick="payer(1)">Payer</button>
                         <select id="typePaiement1">
                             <option>Liquide</option>
@@ -78,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t2">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Table 2</p>
@@ -107,7 +108,7 @@
                     <p><label class="total">Total : <span id="total2">0</span> €</label></p>
                     <p><label class="totalRestant">Total restant à payer : <span id="totalRes2">0</span> €</label></p>
                     <p><label>A rendre : <span id="rendu2"></span></label></p>
-                    <button class="btnTicket" id="btnTicket2" onclick="ticket();">Ticket</button>
+                    <button class="btnTicket" id="btnTicket2" onclick="ticket(2);">Ticket</button>
                     <button class="btnPayer" id="btnPayer2" onclick="payer(2)">Payer</button>
                     <select id="typePaiement2">
                         <option>Liquide</option>
@@ -119,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t3">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Table 3</p>
@@ -147,7 +148,7 @@
                         <p><label class="total">Total : <span id="total3">0</span> €</label></p>
                         <p><label class="totalRestant">Total restant à payer : <span id="totalRes3">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu3"></span></label></p>
-                        <button class="btnTicket" id="btnTicket3" onclick="ticket();">Ticket</button>
+                        <button class="btnTicket" id="btnTicket3" onclick="ticket(3);">Ticket</button>
                         <button class="btnPayer" id="btnPayer3" onclick="payer(3)">Payer</button>
                         <select id="typePaiement3">
                             <option>Liquide</option>
@@ -160,7 +161,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t4">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Table 4</p>
@@ -188,7 +189,7 @@
                         <p><label class="total">Total : <span id="total4">0</span> €</label></p>
                         <p><label class="totalRestant">Total restant à payer : <span id="totalRes4">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu4"></span></label></p>
-                        <button class="btnTicket" id="btnTicket4" onclick="ticket();">Ticket</button>
+                        <button class="btnTicket" id="btnTicket4" onclick="ticket(4);">Ticket</button>
                         <button class="btnPayer" id="btnPayer4" onclick="payer(4)">Payer</button>
                         <select id="typePaiement4">
                             <option>Liquide</option>
@@ -201,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t5">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Table 5</p>
@@ -229,7 +230,7 @@
                         <p><label class="total">Total : <span id="total5">0</span> €</label></p>
                         <p><label class="totalRestant">Total restant à payer : <span id="totalRes5">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu5"></span></label></p>
-                        <button class="btnTicket" id="btnTicket5" onclick="ticket();">Ticket</button>
+                        <button class="btnTicket" id="btnTicket5" onclick="ticket(5);">Ticket</button>
                         <button class="btnPayer" id="btnPayer5" onclick="payer(5)">Payer</button>
                         <select id="typePaiement5">
                             <option>Liquide</option>
@@ -242,7 +243,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t6">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Table 6</p>
@@ -270,7 +271,7 @@
                         <p><label class="total">Total : <span id="total6">0</span> €</label></p>
                         <p><label class="totalRestant">Total restant à payer : <span id="totalRes6">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu6"></span></label></p>
-                        <button class="btnTicket" id="btnTicket6" onclick="ticket();">Ticket</button>
+                        <button class="btnTicket" id="btnTicket6" onclick="ticket(6);">Ticket</button>
                         <button class="btnPayer" id="btnPayer6" onclick="payer(6)">Payer</button>
                         <select id="typePaiement6">
                             <option>Liquide</option>
@@ -283,7 +284,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t7">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Table 7</p>
@@ -311,7 +312,7 @@
                         <p><label class="total">Total : <span id="total7">0</span> €</label></p>
                         <p><label class="totalRestant">Total restant à payer : <span id="totalRes7">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu7"></span></label></p>
-                        <button class="btnTicket" id="btnTicket7" onclick="ticket();">Ticket</button>
+                        <button class="btnTicket" id="btnTicket7" onclick="ticket(7);">Ticket</button>
                         <button class="btnPayer" id="btnPayer7" onclick="payer(7)">Payer</button>
                         <select id="typePaiement7">
                             <option>Liquide/Espèces</option>
@@ -323,7 +324,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="t8">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <p data-toggle="collapse" data-parent="#accordion" href="#collapseHeight">Table 8</p>
@@ -351,7 +352,7 @@
                         <p><label class="total">Total : <span id="total8">0</span> €</label></p>
                         <p><label class="totalRestant">Total restant à payer : <span id="totalRes8">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu8"></span></label></p>
-                        <button class="btnTicket" id="btnTicket8" onclick="ticket();">Ticket</button>
+                        <button class="btnTicket" id="btnTicket8" onclick="ticket(8);">Ticket</button>
                         <button class="btnPayer" id="btnPayer8" onclick="payer(8)">Payer</button>
                         <select id="typePaiement8">
                             <option>Liquide</option>
