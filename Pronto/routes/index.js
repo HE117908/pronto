@@ -24,10 +24,17 @@ var supplementsResult = new Object();
 
 var queryServeur = 'SELECT IdServeur FROM serveurs ORDER BY IdServeur ASC';
 var queryTable = 'SELECT IdTable FROM tables ORDER BY IdTable ASC';
+
 var queryEntrees = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "entrees" ORDER BY catplats.NomCatPlat ASC';
 var queryPlats = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "plats" ORDER BY catplats.NomCatPlat ASC';
 var queryDesserts = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "desserts" ORDER BY catplats.NomCatPlat ASC';
 var queryBoissons = 'SELECT boissons.IdBoisson, boissons.NomBoisson, boissons.Prix, NomCatBoisson FROM boissons INNER JOIN catboissons ON boissons.IdCatBoisson = catboissons.IdCatBoisson ORDER BY catboissons.IdCatBoisson ASC, boissons.IdBoisson ASC';
+/*
+var queryEntrees = "SELECT right(concat('00', IdPlat), 3), NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = 'entrees' ORDER BY catplats.NomCatPlat ASC";
+var queryPlats = "SELECT right(concat('00', IdPlat), 3), NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = 'plats' ORDER BY catplats.NomCatPlat ASC";
+var queryDesserts = "SELECT right(concat('00', IdPlat), 3), NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = 'desserts' ORDER BY catplats.NomCatPlat ASC";
+var queryBoissons = "SELECT right(concat('00', boissons.IdBoisson), 3), boissons.NomBoisson, boissons.Prix, NomCatBoisson FROM boissons INNER JOIN catboissons ON boissons.IdCatBoisson = catboissons.IdCatBoisson ORDER BY catboissons.IdCatBoisson ASC, boissons.IdBoisson ASC";
+*/
 var queryAccompagnements = 'SELECT * FROM accompagnements ORDER BY IdAcc ASC';
 var querySupplements = 'SELECT * FROM supplements ORDER BY IdSupp ASC';
 

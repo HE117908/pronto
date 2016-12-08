@@ -278,6 +278,7 @@ function raz(){
     date = new Date().getTime();
     idCom = 'commande'+ date;
     element = 0;
+    getElem("dropdownMenuTable").value = "---";
     showBox('home');
 }
 
