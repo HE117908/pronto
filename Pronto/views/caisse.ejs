@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -32,6 +32,7 @@
 <div class="col-md-3" id="menu">
     <div class="panel-group" id="accordion">
 
+      <div id="entete"><%=RestaurantName%></div>
         <% for(var i=0; i<Table.length; i++) {%>
         <div class="panel panel-primary" id="t<%=Table[i]%>">
             <div class="panel-heading">
@@ -71,8 +72,8 @@
                             </select>
                             <button class="btnPayer" name="btnSuspendu<%=Table[i]%>" id="btnSuspendu<%=Table[i]%>" onclick="suspendu(<%=Table[i]%>)">Ajouter</button>
                         </p>
-                        <button class="btnTicket" id="btnTicket<%=Table[i]%>" onclick="ticket(1);">Ticket</button>
-                        <button class="btnPayer" id="btnPayer<%=Table[i]%>" onclick="payer(1)">Payer</button>
+                        <button class="btnTicket" id="btnTicket<%=Table[i]%>" onclick="ticket(<%=Table[i]%>);">Ticket</button>
+                        <button class="btnPayer" id="btnPayer<%=Table[i]%>" onclick="payer(<%=Table[i]%>)">Payer</button>
                         <select id="typePaiement<%=Table[i]%>">
                             <option>Liquide</option>
                             <option>Bancontact</option>
@@ -83,6 +84,7 @@
                     </div>
                 </div>
             </div>
+          <div id="pied"></div>
         </div>
         <% } %>
 

@@ -161,9 +161,17 @@ function payerSep() {
 
 }
 
+function piedTicket() {
+    $("#pied").html("<p>"+c.idCommande+"</p><p>Servi par :"+c.idGarcon+"</p><p>N°TVA: 1234567</p><p>"+date+"</p>");
+
+}
+
 function ticket(x){
-    $("#t1").show();
+    piedTicket();
+    $(".panel-primary").removeClass("print");
+    $("#t"+x).addClass("print");
     window.print();
+    $("#pied").hide();
 }
 
 function suspendu(n) {

@@ -2,6 +2,6 @@ div{
     display: none;
 }
 
-#menu, #accordion, #t1, #table, .paiement, .in, .panel-heading, .panel-body{
+#menu, #accordion, .print, #table, .paiement, .in, .panel-heading, .panel-body, #entete, #pied{
     display: block;
 }
