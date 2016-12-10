@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Caisse Enregistreuse</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="stylesheets/CaisseEnregistreuse.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/ticket.css" media="print">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('/CaisseEnregistreuse');
+        socket.on('CaisseEnregistreuse',function(data){
+            passData(data);
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+<div class="col-md-3" id="menu">
+    <div class="panel-group" id="accordion">
+
+        <% for(var i=0; i<Table.length; i++) {%>
+        <div class="panel panel-primary" id="t<%=Table[i]%>">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i%>">Table <%=Table[i]%></p>
+                </h4>
+            </div>
+            <div id="collapse<%= i%>" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-striped" id="tableT<%=Table[i]%>">
+                        <thead>
+                        <tr>
+                            <th>Quantité :</th>
+                            <th>Nom du produit :</th>
+                            <th>Prix :</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="Table <%=Table[i]%>"></tbody>
+                    </table>
+                    <div class="paiement">
+                        <p>
+                            <label for="recu<%= i%>">Argent reçu : </label>
+                            <input class="recu" id="recu<%= i%>" name="recu<%= i%>" placeholder='Entrez une valeur'/>
+                        </p>
+                        <p><label>Total TVA(6%) : <span id="totalTVA<%= i%>">0</span> €</label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA<%= i%>">0</span> €</label></p>
+                        <p><label class="total">Total : <span id="total<%= i%>">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes<%= i%>">0</span> €</label></p>
+                        <p><label>A rendre : <span id="rendu1"></span></label></p>
+                        <p>
+                            <label name="btnSuspendu<%= i%>">Payer un plat suspendu :</label>
+                            <select id="typeSuspendu<%= i%>">
+                                <option>Soupe</option>
+                                <option>Café</option>
+                            </select>
+                            <button class="btnPayer" name="btnSuspendu<%= i%>" id="btnSuspendu<%= i%>" onclick="suspendu(<%= i%>)">Ajouter</button>
+                        </p>
+                        <button class="btnTicket" id="btnTicket<%= i%>" onclick="ticket(1);">Ticket</button>
+                        <button class="btnPayer" id="btnPayer<%= i%>" onclick="payer(1)">Payer</button>
+                        <select id="typePaiement<%= i%>">
+                            <option>Liquide</option>
+                            <option>Bancontact</option>
+                            <option>Visa(carte de crédit)</option>
+                            <option>Chèque cadeau</option>
+                            <option>Ticket restaurant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+    <div class="col-md-4" id="paiementSepare">
+        <table class="table table-striped" id="tableSepare">
+            <caption>Paiement séparé</caption>
+            <thead>
+            <tr>
+                <th>Quantité :</th>
+                <th>Nom du produit :</th>
+                <th>Prix :</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody id="tabPaiementSep"></tbody>
+        </table>
+        <div class="paiement">
+            <p>
+                <label for="recu1">Argent reçu : </label>
+                <input id="recuPaiementSep" class="recu" name="recu1" placeholder='Entrez une valeur'/>
+            </p>
+            <p><label class="total">Total : <span id="totalPaiementSep"></span> €</label></p>
+            <p><label>A rendre : <span id="renduPaiementSep"></span></label></p>
+            <button class="btnPayer" onclick="payerSep()">Payer</button>
+        </div>
+    </div>
+</div>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<![endif]-->
+
+<!-- jQuery -->
+<script src="javascripts/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="javascripts/bootstrap.min.js"></script>
+
+<script src="javascripts/utils.js"></script>
+<script src="javascripts/CaisseEnregistreuse.js"></script>
+
+
+
+
+</body>
+
+</html>
+
+
+
