@@ -34,23 +34,24 @@ function hide(id) {
 
 
 //fonction pour récupérer les données d'un "item" (entrée, plat...)
-function getItem(a) {
-    var nom = document.getElementById(a + 'Nom').textContent;
-    var comment = document.getElementById(a + 'Comment').value;
-    var prix = document.getElementById(a + 'Prix').textContent;
-    if((getElem(a + 'Acc'))!=null){
-        var ac = document.getElementById(a + 'Acc').value;
+function getItem(id) {
+    var nom = document.getElementById(id + 'Nom').textContent;
+    var comment = document.getElementById(id + 'Comment').value;
+    var prix = document.getElementById(id + 'Prix').textContent;
+    var ac, sup;
+    if((getElem(id + 'Acc'))!=null){
+        ac = document.getElementById(id + 'Acc').value;
     }else{
-        var ac = 'Accompagnements';
+        ac = 'Accompagnements';
     }
-    if((getElem(a + 'Acc'))!=null){
-        var sup = document.getElementById(a + 'Supp').value;
+    if((getElem(id + 'Acc'))!=null){
+        sup = document.getElementById(id + 'Supp').value;
     }else{
-        var sup = 'Suppléments';
+        sup = 'Suppléments';
     }
-    addTmp(a, nom, comment, ac, sup, prix);
+    addTmp(id, nom, comment, ac, sup, prix);
     drawCommand();
-    razQtt(a);
+    razQtt(id);
 }
 
 //fonction qui affiche le résumé de la commande
@@ -145,9 +146,10 @@ function setTable(nom){
 }
 
 //fonction pour créer dans un objet tmp
-function addTmp(typeTemp, nom, det, ac, sup, pr){
-    var type = typeTemp.substring(0,typeTemp.length-1);
-    var input = typeTemp + "Input";
+function addTmp(id, nom, det, ac, sup, pr){
+    var type = returnType(id);
+    console.log('type: '+type);
+    var input = id + "Input";
     var qtt = getElem(input).value;
     var accomp = [];
     var suppl = [];
@@ -184,6 +186,18 @@ function addToTab(tab,ajout){
     var elem = "elem" + element;
     tab[elem] = ajout;
     tmp = {};
+}
+
+//fonction pour retourner le type d'élément (retire les chiffres à la fin de l'id)
+function returnType(id){
+    var type = id;
+    do{
+        type = type.substring(0,type.length-1);
+        var lastCaract = type.substr(-1);
+        console.log('lastCaract: '+lastCaract);
+    }
+    while (lastCaract == 0 || lastCaract == 1 || lastCaract == 9);
+    return type;
 }
 
 /*
