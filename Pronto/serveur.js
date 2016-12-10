@@ -33,12 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var index = require('./routes/index');
 var bar = require('./routes/bar');
 var cuisine = require('./routes/cuisine');
-var CaisseEnregistreuse = require('./routes/CaisseEnregistreuse');
+var caisse = require('./routes/caisse');
 
 app.use('/', index);
 app.use('/bar', bar);
 app.use('/cuisine', cuisine);
-app.use('/CaisseEnregistreuse', CaisseEnregistreuse);
+app.use('/CaisseEnregistreuse', caisse);
 
 var nspCuisine = io.of('/cuisine');
 nspCuisine.on('connection', function(socket){
@@ -108,7 +108,7 @@ var deleteDocument = function(db, callback) {
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
     user     : "root",
-    password : "mpolkiuj",
+    password : "alex",
     database : "pronto"
 });
 
@@ -129,14 +129,6 @@ function DBQueryLogin(query,receive,key,value){
         });
 }
 
-var platResult = new Object();
-var boissonResult = new Object();
-var queryPlat = 'select Plats.NomPlat, Plats.IdPlat from Plats';
-var queryBoisson = 'SELECT Boissons.NomBoisson, Boissons.IdBoisson FROM Boissons';
-
-DBQueryLogin(queryPlat,platResult,'IdPlat','NomPlat');
-DBQueryLogin(queryBoisson,boissonResult,'IdBoisson','NomBoisson');
-
 app.post('/process_post', function (req, res) {
     var commande = req.body;
     if(commande != ""){
@@ -148,8 +140,7 @@ app.post('/process_post', function (req, res) {
 });
 
 app.post('/login_post', function (req, res) {
-    console.log(platResult);
-    console.log(boissonResult);
+    console.log(loginResult);
     var user_name=req.body.user;
     var password=req.body.password;
     console.log("User name = "+user_name+", password is "+password);
@@ -216,7 +207,7 @@ function sendCaisseEnregistreuse(data){
 
 function reception(commande) {
     console.log(JSON.stringify(commande));
-    recordDB(commande);
+    //recordDB(commande);
     //viewDB();
     sendBar(commande);
     sendCuisine(commande);
@@ -277,6 +268,7 @@ function makeServeur () {
 
     })
 }
+
 
 
 

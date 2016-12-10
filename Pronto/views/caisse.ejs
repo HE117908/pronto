@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
+
 <head>
 
     <meta charset="utf-8">
@@ -35,10 +36,10 @@
         <div class="panel panel-primary" id="t<%=Table[i]%>">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <p data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i%>">Table <%=Table[i]%></p>
+                    <p data-toggle="collapse" data-parent="#accordion" href="#collapse<%=Table[i]%>">Table <%=Table[i]%></p>
                 </h4>
             </div>
-            <div id="collapse<%= i%>" class="panel-collapse collapse">
+            <div id="collapse<%=Table[i]%>" class="panel-collapse collapse">
                 <div class="panel-body">
                     <table class="table table-striped" id="tableT<%=Table[i]%>">
                         <thead>
@@ -53,25 +54,26 @@
                     </table>
                     <div class="paiement">
                         <p>
-                            <label for="recu<%= i%>">Argent reçu : </label>
-                            <input class="recu" id="recu<%= i%>" name="recu<%= i%>" placeholder='Entrez une valeur'/>
+                            <label for="recu<%=Table[i]%>">Argent reçu : </label>
+                            <input class="recu" id="recu<%=Table[i]%>" name="recu<%=Table[i]%>" placeholder='Entrez une valeur'/>
                         </p>
-                        <p><label>Total TVA(6%) : <span id="totalTVA<%= i%>">0</span> €</label></p>
-                        <p><label>Total HTVA : <span id="totalHTVA<%= i%>">0</span> €</label></p>
-                        <p><label class="total">Total : <span id="total<%= i%>">0</span> €</label></p>
-                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes<%= i%>">0</span> €</label></p>
+                        <p><label>Total TVA(<%= Tva[0]*100 %>/<%= Tva[1]*100 %>%) : <span id="totalTVA<%=Table[i]%>">0</span> €</label></p>
+                        <p><label>Total HTVA : <span id="totalHTVA<%=Table[i]%>">0</span> €</label></p>
+                        <p><label class="total">Total : <span id="total<%=Table[i]%>">0</span> €</label></p>
+                        <p><label class="totalRestant">Total restant à payer : <span id="totalRes<%=Table[i]%>">0</span> €</label></p>
                         <p><label>A rendre : <span id="rendu1"></span></label></p>
                         <p>
-                            <label name="btnSuspendu<%= i%>">Payer un plat suspendu :</label>
-                            <select id="typeSuspendu<%= i%>">
-                                <option>Soupe</option>
-                                <option>Café</option>
+                            <label name="btnSuspendu<%=Table[i]%>">Payer un plat suspendu :</label>
+                            <select id="typeSuspendu<%=Table[i]%>">
+                                <% for(var j=0; j<PlatsSuspendus.length; j++) {%>
+                                    <option><%= PlatsSuspendus[j][0] %></option>
+                                <% } %>
                             </select>
-                            <button class="btnPayer" name="btnSuspendu<%= i%>" id="btnSuspendu<%= i%>" onclick="suspendu(<%= i%>)">Ajouter</button>
+                            <button class="btnPayer" name="btnSuspendu<%=Table[i]%>" id="btnSuspendu<%=Table[i]%>" onclick="suspendu(<%=Table[i]%>)">Ajouter</button>
                         </p>
-                        <button class="btnTicket" id="btnTicket<%= i%>" onclick="ticket(1);">Ticket</button>
-                        <button class="btnPayer" id="btnPayer<%= i%>" onclick="payer(1)">Payer</button>
-                        <select id="typePaiement<%= i%>">
+                        <button class="btnTicket" id="btnTicket<%=Table[i]%>" onclick="ticket(1);">Ticket</button>
+                        <button class="btnPayer" id="btnPayer<%=Table[i]%>" onclick="payer(1)">Payer</button>
+                        <select id="typePaiement<%=Table[i]%>">
                             <option>Liquide</option>
                             <option>Bancontact</option>
                             <option>Visa(carte de crédit)</option>
@@ -85,6 +87,7 @@
         <% } %>
 
     </div>
+
     <div class="col-md-4" id="paiementSepare">
         <table class="table table-striped" id="tableSepare">
             <caption>Paiement séparé</caption>
