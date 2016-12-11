@@ -26,6 +26,7 @@ function passData(data){
     c = data;
     //drawTable();
     ajouteCommande();
+    ajouteTicket()
     payerSep();
 }
 
@@ -77,11 +78,11 @@ function ajouteCommande(){
         ligne = '<tr id="' + c.idTable + '">';
         ligne += '<td>' + c.commande.plats[i].Quantite + '</td>';
         ligne += '<td>' + c.commande.plats[i].Nom + '</td>';
-        ligne += '<td class="prix" id="prix'
-        ligne += i
-        ligne += '"'
-        ligne += '" value='
-        ligne += prixp
+        ligne += '<td class="prix" id="prix';
+        ligne += i;
+        ligne += '"';
+        ligne += '" value=';
+        ligne += prixp;
         ligne += '>' + prixp + " €" + '</td>';
         ligne += '<td>' + '<button class="add" onclick="ajoutePaiement(this.parentNode.parentNode)"> + </button>' + '</td>';
         ligne += '</tr>';
@@ -96,10 +97,10 @@ function ajouteCommande(){
         ligne = '<tr id="' + c.idTable + '">';
         ligne += '<td>' + c.commande.boissons[j].Quantite + '</td>';
         ligne += '<td>' + c.commande.boissons[j].Nom + '</td>';
-        ligne += '<td class="prix" id="prix'
-        ligne += j
-        ligne += '" value='
-        ligne += prixb
+        ligne += '<td class="prix" id="prix';
+        ligne += j;
+        ligne += '" value=';
+        ligne += prixb;
         ligne += '>' + prixb + " €" + '</td>';
         ligne += '<td>' + '<button class="add" onclick="ajoutePaiement(this.parentNode.parentNode)"> + </button>' + '</td>';
         ligne += '</tr>';
@@ -122,6 +123,57 @@ function ajouteCommande(){
     setElem('totalTVA'+c.idTable.substring(6), tttva);
     setElem('totalHTVA'+c.idTable.substring(6), tthtva);
     setElem('total'+c.idTable.substring(6), tt);
+}
+
+function ajouteTicket(){
+    var ligne;
+    var elem = Object.keys(c.commande.plats);
+    var eleme = Object.keys(c.commande.boissons);
+    var totalP = 0;
+    var totalB = 0;
+    for (var i in elem) {
+        i = elem[i];
+        var prixp = c.commande.plats[i].Prix;
+        var qtep = c.commande.plats[i].Quantite;
+        ligne = '<tr id="' + c.idTable + '">';
+        ligne += '<td>' + c.commande.plats[i].Quantite + '</td>';
+        ligne += '<td>' + c.commande.plats[i].Nom + '</td>';
+        ligne += '<td>' + prixp + " €" + '</td>';
+        ligne += '</tr>';
+        numTab = c.idTable.substring(6);
+        addElem("tableTicket"+numTab, ligne);
+        var prixligneP = (qtep*prixp);//prix plats selon quantité
+        totalP= totalP + prixligneP;
+    }
+    for (var j in eleme) {
+        j = eleme[j];
+        var prixb = (c.commande.boissons[j].Prix);
+        var qteb =(c.commande.boissons[j].Quantite);
+        ligne = '<tr id="' + c.idTable + '">';
+        ligne += '<td>' + c.commande.boissons[j].Quantite + '</td>';
+        ligne += '<td>' + c.commande.boissons[j].Nom + '</td>';
+        ligne += '<td>' + prixb + " €" + '</td>';
+        ligne += '</tr>';
+        numTab = c.idTable.substring(6);
+        addElem("tableTicket"+numTab, ligne);
+        var prixligneB = (qteb*prixb); //prix boissons selon quantité
+        totalB= totalB + prixligneB;
+    }
+    //permet de commander boisson sans plats et inversement
+    if (isNaN(totalB)){
+        totalB = 0;
+    }
+    if (isNaN(totalP)){
+        totalP = 0;
+    }
+    total = (totalB+totalP);
+    var oldtt = parseFloat(getElem('totalTicket'+c.idTable.substring(6)).textContent);
+    var tt = total+oldtt;
+    var tttva = (tt*6)/100;
+    var tthtva = (tt - tttva);
+    setElem('totalTVATicket'+c.idTable.substring(6), tttva);
+    setElem('totalHTVATicket'+c.idTable.substring(6), tthtva);
+    setElem('totalTicket'+c.idTable.substring(6), tt);
 }
 
 function ajoutePaiement(tr){
@@ -161,17 +213,27 @@ function payerSep() {
 
 }
 
-function piedTicket() {
-    $("#pied").html("<p>"+c.idCommande+"</p><p>Servi par :"+c.idGarcon+"</p><p>N°TVA: 1234567</p><p>"+date+"</p>");
-
-}
-
 function ticket(x){
-    piedTicket();
+    $("#tickethead"+x).html("<p>"+c.idCommande+"</p><p>Servi par :"+c.idGarcon+"</p><p>N°TVA: 1234567</p><p>"+getDate()+"</p>");
     $(".panel-primary").removeClass("print");
     $("#t"+x).addClass("print");
+    $("#ticket"+x).addClass("print");
+    $("#tickethead"+x).addClass("print");
+    $("#tableTicketT"+x).addClass("print");
     window.print();
-    $("#pied").hide();
+}
+
+function getDate() {
+    var d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth()+1;
+    var year = d.getFullYear();
+    var hour = d.getHours();
+    var minute = d.getMinutes();
+    var second = d.getSeconds();
+
+    var jour = day+"/"+month+"/"+year+" - "+hour+":"+minute+":"+second;
+    return jour;
 }
 
 function suspendu(n) {

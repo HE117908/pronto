@@ -64,7 +64,6 @@ body {
     text-align: right;
     font-size: 1.2em;
 }
-
-#entete,#pied{
+.ticket{
     display: none;
 }

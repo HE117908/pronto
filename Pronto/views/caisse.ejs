@@ -31,8 +31,6 @@
 
 <div class="col-md-3" id="menu">
     <div class="panel-group" id="accordion">
-
-      <div id="entete"><%=RestaurantName%></div>
         <% for(var i=0; i<Table.length; i++) {%>
         <div class="panel panel-primary" id="t<%=Table[i]%>">
             <div class="panel-heading">
@@ -84,7 +82,24 @@
                     </div>
                 </div>
             </div>
-          <div id="pied"></div>
+            <div id="ticket<%=Table[i]%>" class="ticket">
+                <h1>Ticket  de  caisse  TVA :</h1>
+                <p><%=RestaurantName%></p>
+                <div id="tickethead<%=Table[i]%>"></div>
+                <table class="table table-striped" id="tableTicketT<%=Table[i]%>">
+                    <thead>
+                    <tr>
+                        <th>Quantité :</th>
+                        <th>Nom du produit :</th>
+                        <th>Prix :</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableTicket<%=Table[i]%>"></tbody>
+                </table>
+                <p><label>Total TVA(<%= Tva[0]*100 %>/<%= Tva[1]*100 %>%) : <span id="totalTVATicket<%=Table[i]%>">0</span> €</label></p>
+                <p><label>Total HTVA : <span id="totalHTVATicket<%=Table[i]%>">0</span> €</label></p>
+                <p><label class="total">Total : <span id="totalTicket<%=Table[i]%>">0</span> €</label></p>
+            </div>
         </div>
         <% } %>
 
