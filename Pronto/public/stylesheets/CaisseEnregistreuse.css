@@ -23,6 +23,22 @@ body {
     float: right;
 }
 
+caption {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    background-color: #337ab7;
+    text-align: center;
+}
+
+#paiementSepare {
+    background-color: white;
+    border: 1px solid #337ab7;
+    border-radius: 10px;
+    width: 45%;
+    float: right;
+}
+
 .add {
     background-color: #337ab7;
     color: white;
@@ -64,6 +80,7 @@ body {
     text-align: right;
     font-size: 1.2em;
 }
+
 .ticket{
     display: none;
 }

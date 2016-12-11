@@ -25,21 +25,22 @@ function addCart(val){
 function passData(data){
     c = data;
     //drawTable();
-    ajouteCommande();
     ajouteTicket()
+    ajouteCommande();
     payerSep();
 }
 
 function payer(x){
     setElem(("Table "+x), "");
     var recu = document.getElementById("recu"+x).value;
-    var total = document.getElementById("totalRes"+x).innerHTML;
+    var total = document.getElementById("total"+x).innerHTML;
     var res = (recu - total);
     setElem("rendu"+x, "");
     addElem("rendu"+x, res.toFixed(2) + " €");
     cart['idCommande'] = idCom;
     cart['PrixTotal'] = document.getElementById("total"+x).innerHTML;
     cart['typePaiement'] = document.getElementById("typePaiement"+x).value;
+    cart['typePaiementSep'] = document.getElementById("typePaiementSep").value;
     cart['platsSuspendu'] = document.getElementById("typeSuspendu"+x).value;
     cart['idTable'] = c['idTable'];
     addCart();
@@ -120,8 +121,8 @@ function ajouteCommande(){
     var tt = total+oldtt;
     var tttva = (tt*6)/100;
     var tthtva = (tt - tttva);
-    setElem('totalTVA'+c.idTable.substring(6), tttva);
-    setElem('totalHTVA'+c.idTable.substring(6), tthtva);
+    setElem('totalTVA'+c.idTable.substring(6), tttva.toFixed(2));
+    setElem('totalHTVA'+c.idTable.substring(6), tthtva.toFixed(2));
     setElem('total'+c.idTable.substring(6), tt);
 }
 
@@ -141,9 +142,9 @@ function ajouteTicket(){
         ligne += '<td>' + prixp + " €" + '</td>';
         ligne += '</tr>';
         numTab = c.idTable.substring(6);
-        addElem("tableTicket"+numTab, ligne);
-        var prixligneP = (qtep*prixp);//prix plats selon quantité
-        totalP= totalP + prixligneP;
+        addElem("tableTicket" + numTab, ligne);
+        var prixligneP = (qtep * prixp);//prix plats selon quantité
+        totalP = totalP + prixligneP;
     }
     for (var j in eleme) {
         j = eleme[j];
@@ -205,12 +206,11 @@ function payerSep() {
     var resSep = (recuSep - totalSep);
     addElem("renduPaiementSep", resSep.toFixed(2) + " €");
     var resteAPayer = total - totalSep;
-    var selection = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[0];
     setElem('totalRes'+c.idTable.substring(6), resteAPayer);
     setElem("tabPaiementSep", "");
     setElem("totalPaiementSep", 0);
     document.getElementById("recuPaiementSep").value = '';
-
+    long = 0;
 }
 
 function ticket(x){
