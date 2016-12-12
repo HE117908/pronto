@@ -108,7 +108,7 @@ var deleteDocument = function(db, callback) {
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
     user     : "root",
-    password : "alex",
+    password : "mpolkiuj",
     database : "pronto"
 });
 
@@ -188,8 +188,7 @@ app.post('/caisse_post', function (req, res) {
 
 function recordVente(commande) {
     console.log(commande);
-    //var tab = Object.keys(commande[])
-    //forEach(elem in )
+
 
 }
 
