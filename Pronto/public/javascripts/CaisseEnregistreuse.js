@@ -7,6 +7,7 @@ var idCom = 'commande'+ date; // id de la commande = commande + date en millisec
 var c = {}; //objet pour mise en forme
 var long = 0; //permet de récupérer le nbr d'éléments pour les paiements séparés
 var total; //total d'une commande
+var totRestant;
 
 //fonction pour créer la commande avant l'envoye sans id, table, etc (objets boissons + plats)
 function addCom(){
@@ -191,13 +192,11 @@ function ajoutePaiement(tr){
     for(var i = 0; i < long; i++){
         var pri = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[i].getElementsByTagName("td")[2].innerHTML;
         var qte = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[i].getElementsByTagName("td")[0].innerHTML;
-        if(pri.length == 2){
-            pri = pri.substring(0,pri.length-1);
-        }else if(pri.length == 3){
+        if(pri.length == 3){
             pri = pri.substring(0,pri.length-1);
         }else if(pri.length == 4){
             pri = pri.substring(0,pri.length-1);
-        }else if(pri.length == 4){
+        }else if(pri.length == 5){
             pri = pri.substring(0,pri.length-1);
         }
         var res = pri*qte;
@@ -207,7 +206,6 @@ function ajoutePaiement(tr){
     setElem("renduPaiementSep", "");
 }
 
-var tt;
 
 //Fonction qui effectue tous les calculs concernant les paiements séparés
 function payerSep() {
@@ -215,10 +213,9 @@ function payerSep() {
     var totalSep = getElem("totalPaiementSep").innerHTML;
     var resSep = (recuSep - totalSep);
     setElem("renduPaiementSep", resSep.toFixed(2) + " €");
-    //var resteAPayer = total - totalSep;
     var totalSep2 = getElem("totalRes"+c.idTable.substring(6)).innerHTML;
-    tt = totalSep2 -totalSep;
-    setElem('totalRes'+c.idTable.substring(6), tt);
+    totRestant = totalSep2 -totalSep;
+    setElem('totalRes'+c.idTable.substring(6), totRestant);
     setElem("tabPaiementSep", "");
     setElem("totalPaiementSep", 0);
     document.getElementById("recuPaiementSep").value = '';
