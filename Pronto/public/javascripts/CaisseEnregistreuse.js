@@ -4,10 +4,9 @@ var com = {}; //objet commande avec plats et boissons (sans ids table et garçon
 var cart = {}; //objet avec ids garçon, table ... et tableau de commande
 var date = new Date().getTime();
 var idCom = 'commande'+ date; // id de la commande = commande + date en millisecondes
-var c = {};
-var long = 0;
-var tableTemp;
-var total;
+var c = {}; //objet pour mise en forme
+var long = 0; //permet de récupérer le nbr d'éléments pour les paiements séparés
+var total; //total d'une commande
 
 //fonction pour créer la commande avant l'envoye sans id, table, etc (objets boissons + plats)
 function addCom(){
@@ -22,6 +21,7 @@ function addCart(val){
     console.log(cart);
 }
 
+//fonction qui permet de récupérer les données via les sockets
 function passData(data){
     c = data;
     //drawTable();
@@ -30,6 +30,7 @@ function passData(data){
     payerSep();
 }
 
+//function qui effectue les différents calcul de l'interface de caisse(boutton payer principale)
 function payer(x){
     setElem(("Table "+x), "");
     var recu = document.getElementById("recu"+x).value;
@@ -58,14 +59,16 @@ function payer(x){
     });
 }
 
+//fonction de remise à zéro des champs
 function raz(x){
     setElem("totalTVA"+x, 0);
     setElem("totalHTVA"+x, 0);
     setElem("total"+x, 0);
+    setElem("totalRes"+x, 0);
     document.getElementById("recu"+x).value = '';
 }
 
-
+//fonction qui effectue la mise en forme des données de la caisse
 function ajouteCommande(){
     var ligne;
     var elem = Object.keys(c.commande.plats);
@@ -124,6 +127,7 @@ function ajouteCommande(){
     setElem('totalTVA'+c.idTable.substring(6), tttva.toFixed(2));
     setElem('totalHTVA'+c.idTable.substring(6), tthtva.toFixed(2));
     setElem('total'+c.idTable.substring(6), tt);
+    setElem('totalRes'+c.idTable.substring(6), tt);
 }
 
 function ajouteTicket(){
@@ -177,6 +181,7 @@ function ajouteTicket(){
     setElem('totalTicket'+c.idTable.substring(6), tt);
 }
 
+//Fonction qui permet d'ajouter les plats ou boissons a payer séparement
 function ajoutePaiement(tr){
     long++;
     tr.cells[3].innerHTML="&nbsp;"
@@ -186,11 +191,13 @@ function ajoutePaiement(tr){
     for(var i = 0; i < long; i++){
         var pri = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[i].getElementsByTagName("td")[2].innerHTML;
         var qte = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[i].getElementsByTagName("td")[0].innerHTML;
-        if(pri.length == 3){
+        if(pri.length == 2){
+            pri = pri.substring(0,pri.length-1);
+        }else if(pri.length == 3){
             pri = pri.substring(0,pri.length-1);
         }else if(pri.length == 4){
             pri = pri.substring(0,pri.length-1);
-        }else if(pri.length == 5){
+        }else if(pri.length == 4){
             pri = pri.substring(0,pri.length-1);
         }
         var res = pri*qte;
@@ -200,13 +207,18 @@ function ajoutePaiement(tr){
     setElem("renduPaiementSep", "");
 }
 
+//Fonction qui effectue tous les calculs concernant les paiements séparés
 function payerSep() {
-    var recuSep = document.getElementById("recuPaiementSep").value;
-    var totalSep = document.getElementById("totalPaiementSep").innerHTML;
+    var recuSep = getElem("recuPaiementSep").value;
+    var totalSep = getElem("totalPaiementSep").innerHTML;
     var resSep = (recuSep - totalSep);
-    addElem("renduPaiementSep", resSep.toFixed(2) + " €");
+    setElem("renduPaiementSep", resSep.toFixed(2) + " €");
     var resteAPayer = total - totalSep;
-    setElem('totalRes'+c.idTable.substring(6), resteAPayer);
+    console.log(resteAPayer);
+    var totalSep2 = getElem("totalRes"+c.idTable.substring(6)).innerHTML;
+    console.log(totalSep2);
+    var tt = totalSep2 -totalSep;
+    setElem('totalRes'+c.idTable.substring(6), tt);
     setElem("tabPaiementSep", "");
     setElem("totalPaiementSep", 0);
     document.getElementById("recuPaiementSep").value = '';
@@ -244,7 +256,6 @@ function suspendu(n) {
     }else{
         prix = 2;
     }
-    console.log(type);
     var ligne = '<tr id="Table ' + n + '">';
     ligne += '<td>1</td>';
     ligne += '<td>' + type + '</td>';
@@ -252,10 +263,13 @@ function suspendu(n) {
     ligne += n
     ligne += '" value='
     ligne += prix
-    ligne += '>' + prix + '€ </td>';
+    ligne += '>' + prix + ' €</td>';
     ligne += '<td>' + '<button class="add" onclick="ajoutePaiement(this.parentNode.parentNode)"> + </button></td>';
     ligne += '</tr>';
-
+    var prixTot = parseFloat(getElem('total'+c.idTable.substring(6)).textContent);
+    var prixSuspendu = prixTot + prix;
+    setElem('total'+c.idTable.substring(6), prixSuspendu);
+    setElem('totalRes'+c.idTable.substring(6), prixSuspendu);
     addElem("Table "+n, ligne);
 }
 
