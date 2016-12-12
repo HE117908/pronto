@@ -34,7 +34,7 @@ function passData(data){
 function payer(x){
     setElem(("Table "+x), "");
     var recu = document.getElementById("recu"+x).value;
-    var total = document.getElementById("total"+x).innerHTML;
+    var total = document.getElementById("totalRes"+x).innerHTML;
     var res = (recu - total);
     setElem("rendu"+x, "");
     addElem("rendu"+x, res.toFixed(2) + " €");
@@ -191,13 +191,11 @@ function ajoutePaiement(tr){
     for(var i = 0; i < long; i++){
         var pri = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[i].getElementsByTagName("td")[2].innerHTML;
         var qte = document.getElementById("tabPaiementSep").getElementsByTagName("tr")[i].getElementsByTagName("td")[0].innerHTML;
-        if(pri.length == 2){
-            pri = pri.substring(0,pri.length-1);
-        }else if(pri.length == 3){
+        if(pri.length == 3){
             pri = pri.substring(0,pri.length-1);
         }else if(pri.length == 4){
             pri = pri.substring(0,pri.length-1);
-        }else if(pri.length == 4){
+        }else if(pri.length == 5){
             pri = pri.substring(0,pri.length-1);
         }
         var res = pri*qte;
@@ -214,9 +212,7 @@ function payerSep() {
     var resSep = (recuSep - totalSep);
     setElem("renduPaiementSep", resSep.toFixed(2) + " €");
     var resteAPayer = total - totalSep;
-    console.log(resteAPayer);
     var totalSep2 = getElem("totalRes"+c.idTable.substring(6)).innerHTML;
-    console.log(totalSep2);
     var tt = totalSep2 -totalSep;
     setElem('totalRes'+c.idTable.substring(6), tt);
     setElem("tabPaiementSep", "");
