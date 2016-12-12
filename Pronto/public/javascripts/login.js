@@ -2,11 +2,14 @@
  * Created by francois on 06/11/2016.
  */
 
+
+/*
+* Fonction d'envoi du login/pwd au serveur (AJAX)
+*/
 function submitLog() {
     var tabData = {};
     tabData.user = document.getElementById("inputLogin").value;
     tabData.password = document.getElementById("inputPassword").value;
-    //alert(JSON.stringify(tabData));
     $.ajax({
         type: 'POST',
         data: JSON.stringify(tabData),
@@ -25,6 +28,10 @@ function submitLog() {
 
 }
 
+
+/*
+ * Fonction de modification CSS (Login)
+ */
 function show() {
 
     showBox("home");

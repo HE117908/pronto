@@ -5,7 +5,9 @@
 var express = require('express');
 var router = express.Router();
 
-
+/*
+ * Spécification de la ressource à retourner
+ */
 router.get('/bar', function (req, res,next) {
     res.sendFile( __dirname + "/" + "bar.html" );
 })

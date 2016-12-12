@@ -6,13 +6,18 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
+/*
+ * Etablissement de la connexion à la DB SQL
+ */
 var mySqlClient = mysql.createConnection({
     host     : "localhost",
     user     : "root",
     password : "mpolkiuj",
     database : "pronto"
 });
-
+/*
+ * Tableau servant à stocker les données venant de la DB SQL
+ */
 var serveurResult = [];
 var tableResult = [];
 var entreesResult = new Object();
@@ -22,6 +27,9 @@ var boissonsResult = new Object();
 var accompagnementsResult = new Object();
 var supplementsResult = new Object();
 
+/*
+ * queries select
+ */
 var queryServeur = 'SELECT IdServeur FROM serveurs ORDER BY IdServeur ASC';
 var queryTable = 'SELECT IdTable FROM tables ORDER BY IdTable ASC';
 
@@ -29,12 +37,7 @@ var queryEntrees = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats
 var queryPlats = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "plats" ORDER BY catplats.NomCatPlat ASC';
 var queryDesserts = 'SELECT IdPlat, NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = "desserts" ORDER BY catplats.NomCatPlat ASC';
 var queryBoissons = 'SELECT boissons.IdBoisson, boissons.NomBoisson, boissons.Prix, NomCatBoisson FROM boissons INNER JOIN catboissons ON boissons.IdCatBoisson = catboissons.IdCatBoisson ORDER BY catboissons.IdCatBoisson ASC, boissons.IdBoisson ASC';
-/*
-var queryEntrees = "SELECT right(concat('00', IdPlat), 3), NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = 'entrees' ORDER BY catplats.NomCatPlat ASC";
-var queryPlats = "SELECT right(concat('00', IdPlat), 3), NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = 'plats' ORDER BY catplats.NomCatPlat ASC";
-var queryDesserts = "SELECT right(concat('00', IdPlat), 3), NomPlat, Prix, catplats.NomCatPlat FROM plats INNER JOIN catplats ON plats.IdCatPlat = catplats.IdCatPlat WHERE catplats.NomCatPlat = 'desserts' ORDER BY catplats.NomCatPlat ASC";
-var queryBoissons = "SELECT right(concat('00', boissons.IdBoisson), 3), boissons.NomBoisson, boissons.Prix, NomCatBoisson FROM boissons INNER JOIN catboissons ON boissons.IdCatBoisson = catboissons.IdCatBoisson ORDER BY catboissons.IdCatBoisson ASC, boissons.IdBoisson ASC";
-*/
+
 var queryAccompagnements = 'SELECT * FROM accompagnements ORDER BY IdAcc ASC';
 var querySupplements = 'SELECT * FROM supplements ORDER BY IdSupp ASC';
 
@@ -48,7 +51,9 @@ DBQueryDeuxVar(queryAccompagnements,accompagnementsResult,'IdAcc','NomAcc');
 DBQueryTroisVar(querySupplements,supplementsResult,'IdSupp','NomSupp','Prix');
 
 
-
+/*
+ * Fonctions de query select pour récupérer les données depuis la DB SQL
+ */
 function DBQuery(query,receive,column){
     mySqlClient.query(query,
         function select(error, results, fields) {
@@ -98,7 +103,10 @@ function DBQueryQuatreVar(query,receive,id,nom,prix,cat){
 }
 
 
-
+/*
+ * Spécification de la ressource à retourner par le serveur
+ * Génération dynamique de la page (template EJS)
+ */
 /* GET home page. */
 router.get('/', function(req, res,next) {
     console.log(serveurResult);
