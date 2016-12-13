@@ -99,12 +99,6 @@ function drawCommand(){
             +'</b></h4></div></div>';
         addElem('tempCom',st);
     }
-	//fonction de tri
-    /*for (elem in plats){
-        if(plats[elem].Nom = nom){
-            plats[elem].Quantite++;
-        }
-    }*/
 }
 
 //fonction pour supprimer un élément dans la commande
@@ -129,6 +123,31 @@ function suppItem(item){
 function razQtt(el){
     var qtt = el + 'Input';
     getElem(qtt).value = 1;
+    var com = el + 'Comment';
+    getElem(qtt).value = 1;
+}
+
+
+//crée le select des serveurs
+function drawServeur(){
+    setElem('dropdownMenuServeur', '');
+    for (var serv in données.serveurs) {
+        st = '<option><a href=\"#\" >'
+            + serv
+            + '</a></option>';
+        addElem('dropdownMenuServeur',st);
+    }
+}
+
+//crée le select des tables
+function drawTable(){
+    setElem('dropdownMenuTable', '');
+    for (var tab in données.tables) {
+        st = '<option><a href=\"#\" >'
+            + tab
+            + '</a></option>';
+        addElem('dropdownMenuTable',st);
+    }
 }
 
 //fonction pour changer le garçon de salle
@@ -148,7 +167,17 @@ function setTable(nom){
 //fonction pour créer dans un objet tmp
 function addTmp(id, nom, det, ac, sup, pr){
     var type = returnType(id);
-    console.log('type: '+type);
+    var idElem = id.substring(type.length);
+    var idBdd;
+    if(idElem==999){
+        idBdd = 6;
+    }else if(idElem==998){
+        idBdd = 3;
+    }else if(idElem==997){
+        idBdd = 1;
+    }else{
+        idBdd = idElem;
+    }
     var input = id + "Input";
     var qtt = getElem(input).value;
     var accomp = [];
@@ -167,6 +196,7 @@ function addTmp(id, nom, det, ac, sup, pr){
     tmp['Detail'] = det;
     tmp['Prix'] = prix;
     tmp['Quantite'] = qtt;
+    tmp['Id'] = idBdd;
     if (type != 'boisson' && type != 'Softs' && type != 'Alcools' && type != 'Bières') {
         tmp['Accompagnements'] = accomp;
         tmp['Supplements'] = suppl;
@@ -194,18 +224,10 @@ function returnType(id){
     do{
         type = type.substring(0,type.length-1);
         var lastCaract = type.substr(-1);
-        console.log('lastCaract: '+lastCaract);
     }
-    while (lastCaract == 0 || lastCaract == 1 || lastCaract == 9);
+    while (!isNaN(lastCaract));
     return type;
 }
-
-/*
-function addQuant(val1,val2){
-    tmp.push(val1);
-    addCart(val2)
-}
-*/
 
 //fonction pour créer la commande avant l'envoye sans id, table, etc (objets boissons + plats)
 function addCom(){
@@ -223,6 +245,8 @@ function addCart(val){
     console.log(cart);
 }
 
+
+//fonction qui envoye la commande au serveur
 function onSubmit() {
     if(isEmpty(plats) && isEmpty(boissons)){
         setElem("comError","Veuillez remplir la commande!");
@@ -248,35 +272,22 @@ function onSubmit() {
     }
 }
 
-// Speed up calls to hasOwnProperty
+
+// fonction pour vérifier si un object est vide
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function isEmpty(obj) {
-
-    // null and undefined are "empty"
     if (obj == null) return true;
-
-    // Assume if it has a length property with a non-zero value
-    // that that property is correct.
     if (obj.length > 0)    return false;
     if (obj.length === 0)  return true;
-
-    // If it isn't an object at this point
-    // it is empty, but it can't be anything *but* empty
-    // Is it empty?  Depends on your application.
     if (typeof obj !== "object") return true;
-
-    // Otherwise, does it have any properties of its own?
-    // Note that this doesn't handle
-    // toString and valueOf enumeration bugs in IE < 9
     for (var key in obj) {
         if (hasOwnProperty.call(obj, key)) return false;
     }
-
     return true;
 }
 
-
+//fonction qui remet tout les champ à zéro
 function raz(){
     setElem('tempCom', '');
     //setElem('garconCom', '');
@@ -296,8 +307,7 @@ function raz(){
     showBox('home');
 }
 
-//fonctions pour les + et -
-
+//fonctions pour les boutons + et -
 $('.btn-number').click(function(e){
     e.preventDefault();
 
@@ -351,8 +361,6 @@ $('.input-number').change(function() {
         alert('Désolé, la valeur maximale est atteinte');
         $(this).val($(this).data('oldValue'));
     }
-
-
 });
 $(".input-number").keydown(function (e) {
     // Allow: backspace, delete, tab, escape, enter and .
@@ -370,61 +378,7 @@ $(".input-number").keydown(function (e) {
     }
 });
 
-//fonctions pour créer la page onload
-function drawAll(param){
-    menu = param;
-    //console.log(param);
-    //drawServeur();
-    //drawTable();
-    //drawAccoreon();
-}
-
-//crée le select des serveurs
-function drawServeur(){
-    setElem('dropdownMenuServeur', '');
-    for (var serv in données.serveurs) {
-        st = '<option><a href=\"#\" >'
-        + serv
-        + '</a></option>';
-        addElem('dropdownMenuServeur',st);
-    }
-}
-
-//crée le select des tables
-function drawTable(){
-    setElem('dropdownMenuTable', '');
-    for (var tab in données.tables) {
-        st = '<option><a href=\"#\" >'
-            + tab
-            + '</a></option>';
-        addElem('dropdownMenuTable',st);
-    }
-}
-
-//crée le menu de raccourcis en accordéon
-function drawAccoreon(){
-    setElem('menuAccordion', '');
-    for (var cat in données.categories) {
-        var sc = '<table class="table">'
-        for (var sousCat in données.categories[cat]){
-            sc += '<tr><td><a href="#'
-            + données.categories[cat][sousCat]
-            + '" onclick="showBox('
-            + données.categories[cat]
-            + ')">'
-            + données.categories[cat][sousCat]
-            + '</a></td></tr>'
-        }
-        sc += '</table>';
-        st = '<div class="panel panel-default"><div class="panel-heading"><br class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">'
-            + cat
-            + '</a></h4></div><div id="" class="panel-collapse collapse in"><div class="panel-body">'
-            + sc
-            + '</div></div></div>';
-        addElem('menuAccordion',st);
-    }
-}
-
+//fonctions pour les pop-ups
 $('.link_ingredient').tooltip({placement: "auto top", toggle: "tooltip", title: "<h4>Ingrédients:</h4> jumbo lump crab, avocado, herb oil.", animation:"true", html: "true"});
 $('.btn-default').tooltip({placement: "auto right", trigger: "onClick" , toggle: "tooltip", title: "<h4>Produits ajoutés</h4>", animation:"true", html: "true"});
 
