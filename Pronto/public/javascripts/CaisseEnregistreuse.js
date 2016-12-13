@@ -25,7 +25,6 @@ function addCart(val){
 //fonction qui permet de récupérer les données via les sockets
 function passData(data){
     c = data;
-    //drawTable();
     ajouteTicket()
     ajouteCommande();
     payerSep();
@@ -37,8 +36,7 @@ function payer(x){
     var recu = document.getElementById("recu"+x).value;
     var total = document.getElementById("totalRes"+x).innerHTML;
     var res = (recu - total);
-    setElem("rendu"+x, "");
-    addElem("rendu"+x, res.toFixed(2) + " €");
+    setElem(("rendu"+x), res.toFixed(2) + " €");
     cart['idCommande'] = idCom;
     cart['PrixTotal'] = document.getElementById("total"+x).innerHTML;
     cart['typePaiement'] = document.getElementById("typePaiement"+x).value;
@@ -272,43 +270,6 @@ function suspendu(n) {
     addElem("Table "+n, ligne);
 }
 
-function drawTable(){
-    /*
-<div id="collapseSix" class="panel-collapse collapse">
-        <div class="panel-body">
-        <table class="table table-striped" id="table6">
-        <thead>
-        <tr>
-        <th>Quantité :</th>
-    <th>Nom du produit :</th>
-    <th>Prix :</th>
-    </tr>
-    </thead>
-    <tbody id="Table 6"></tbody>
-        </table>
-        <div class="paiement">
-        <p>
-        <label for="recu6">Argent reçu : </label>
-    <input id="recu6" name="recu1" placeholder='Entrez une valeur'/>
-        </p>
-        <p><label>Total TVA(6%) : <span id="totalTVA6"></span></label></p>
-        <p><label>Total HTVA : <span id="totalHTVA6"></span></label></p>
-        <p><label class="total">Total : <span id="total6"></span> €</label></p>
-        <p><label>A rendre : <span id="rendu6"></span></label></p>
-        <button class="btnTicket" id="btnTicket6" onclick="ticket();">Ticket</button>
-        <button class="btnPayer" id="btnPayer6" onclick="payer(6)">Payer</button>
-        <select id="typePaiement6">
-        <option>Liquide</option>
-        <option>Bancontact</option>
-        <option>Visa(carte de crédit)</option>
-    <option>Chèque cadeau</option>
-    <option>Ticket restaurant</option>
-    </select>
-    </div>
-    </div>
-    </div>
-    </div>*/
-}
 
 
 
