@@ -81,3 +81,9 @@ body{margin-top:50px;}
 .navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover{
     color: #7dcbed;
 }
+
+/*css erreur au submit*/
+.erreur {
+    color: #D8000C;
+    font-size: 1.5em;
+}
