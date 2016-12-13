@@ -27,7 +27,10 @@ function addCart(val){
 //fonction qui permet de récupérer les données via les sockets
 function passData(data){
     c = data;
-    ajouteTicket()
+    var x = c.idTable.substring(6);
+    var tot = parseFloat(getElem("total"+x).innerHTML);
+    if(tot==0){setElem("tableTicket"+x, '')};
+    ajouteTicket();
     ajouteCommande();
     payerSep();
 }
