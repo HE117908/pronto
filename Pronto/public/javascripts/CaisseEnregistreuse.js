@@ -11,6 +11,8 @@ var totRestant;
 
 //fonction pour créer la commande avant l'envoye sans id, table, etc (objets boissons + plats)
 function addCom(){
+    boissons = c.commande.boissons;
+    plats = c.commande.boissons;
     com['boissons'] = boissons;
     com['plats'] = plats;
 }
@@ -56,6 +58,8 @@ function payer(x){
             raz(x);
         }
     });
+    boissons = {};
+    plats = {};
 }
 
 //fonction de remise à zéro des champs

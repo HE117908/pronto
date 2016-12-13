@@ -224,12 +224,11 @@ function ckL(usr,pwd){
  */
 app.post('/caisse_post', function (req, res) {
     var commande = req.body;
-    commande = com;
+    //commande = com;
     if(commande != "") {
         res.sendStatus(200);
-        //commande = JSON.stringify(commande);
-        //console.log(commande);
-        recordVente(JSON.stringify(commande));
+        commande = JSON.stringify(commande);
+        recordVente(commande);
     } else res.sendStatus(500);
 
 
