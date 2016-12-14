@@ -26,21 +26,21 @@ Pour accéder à l'interface d'administration, on utilise encore une fois l'adre
 
 #####ORGANIGRAME DES INTERFACES#####
 
-Accès à l'interface de:<br />
+Accès à l'interface de:
 
-prise de commande: 192.168.XXX.XXX:3000<br />
-cuisine: 192.168.XXX.XXX:3000/cuisine.html<br />
-bar: 192.168.XXX.XXX:3000/bar.html<br />
-caisse: 192.168.XXX.XXX:3000/caisse<br />
+prise de commande: 192.168.XXX.XXX:3000
+cuisine: 192.168.XXX.XXX:3000/cuisine.html
+bar: 192.168.XXX.XXX:3000/bar.html
+caisse: 192.168.XXX.XXX:3000/caisse
 administration: 192.168.XXX.XXX:3100
 
 #####[TL;DR]#####
-Install NodeJS <br />
-Start DB<br />
-"cd /path/to/app/folder"<br />
-"npm install"<br />
-"npm install ./ProntoAdmin"<br />
-"node serveur.js"<br />
-"cd ./ProntoAdmin"<br />
-"node main.js"<br />
-navigate with web browser to computer ip adress on port 3000 or 3100.<br />
+Install NodeJS
+Start DB
+"cd /path/to/app/folder"
+"npm install"
+"npm install ./ProntoAdmin"
+"node serveur.js"
+"cd ./ProntoAdmin"
+"node main.js"
+navigate with web browser to computer ip adress on port 3000 or 3100.
