@@ -48,6 +48,8 @@ function payer(x){
     cart['typePaiementSep'] = document.getElementById("typePaiementSep").value;
     cart['platsSuspendu'] = document.getElementById("typeSuspendu"+x).value;
     cart['idTable'] = c['idTable'];
+    cart['idServeur'] = c['idGarcon'];
+
     addCart();
     $.ajax({
         type: 'POST',
