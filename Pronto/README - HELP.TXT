@@ -34,7 +34,7 @@ bar: 192.168.XXX.XXX:3000/bar.html
 caisse: 192.168.XXX.XXX:3000/caisse
 administration: 192.168.XXX.XXX:3100
 
-[TL;DR]
+#####[TL;DR]#####
 Install NodeJS
 Start DB
 "cd /path/to/app/folder"
@@ -43,3 +43,4 @@ Start DB
 "node serveur.js"
 "cd ./ProntoAdmin"
 "node main.js"
+navigate with web browser to computer ip adress on port 3000 or 3100.
