@@ -84,6 +84,14 @@ nspCaisseEnregistreuse.on('connection', function(socket){
 });
 
 
+
+var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
+
+// Connection URL
+var url = 'mongodb://localhost:27017/db';
+
+
 /*
  * Fonction d'insertion MongoDB
  */
@@ -116,14 +124,14 @@ var findDocuments = function(db, callback) {
 /*
  * Fonction de suppression MongoDB
  */
-var deleteDocument = function(db, callback) {
+var deleteDocument = function(db, callback,data) {
     // Get the documents collection
     var collection = db.collection('documents');
     // Insert some documents
-    collection.deleteOne({ a : 3 }, function(err, result) {
+    collection.deleteOne({ idCommande : data }, function(err, result) {
         assert.equal(err, null);
         assert.equal(1, result.result.n);
-        console.log("Removed the document with the field a equal to 3");
+        console.log("Removed the document with the field a equal to idcom");
         callback(result);
     });
 };
@@ -257,15 +265,18 @@ function getTime() {
     return jour;
 }
 
-
+/*
+ * Fonction d'enregistrement des plats et boissons
+ */
 function enregistreElemCom(x, commande) {
     console.log(commande);
     var boissons=commande.commande.boissons;
     var plats =commande.commande.plats;
+    console.log(boissons);
+    console.log(plats);
+
     for(var i in boissons)
     {
-
-        console.log(boissons[i])
         var recordBoissons = {IdBoisson: boissons[i]["Id"]+'',IdVente: x , Quantite: boissons[i]["Quantite"]};
         mySqlClient.query('INSERT INTO pronto.boissons_ventes SET ?', recordBoissons, function (err, res) {
             if (err) throw err;
@@ -274,7 +285,8 @@ function enregistreElemCom(x, commande) {
         });
     }
 
-    for(var j in plats) {
+    for(var j in plats)
+    {
         var recordPlats = {IdVente: x, IdPlat: plats[j]["Id"], Quantite: plats[j]["Quantite"]};
         mySqlClient.query('INSERT INTO pronto.plats_ventes SET ?', recordPlats, function (err, res) {
             if (err) throw err;
@@ -283,13 +295,16 @@ function enregistreElemCom(x, commande) {
         });
 
     }
+
+
+    //deleteRecord(commande.idCommande);
 }
 
 /*
- * Fonction d'enregistrement des commandes payées dans la DB SQL (amélioration future)
+ * Fonction d'enregistrement des commandes payées dans la DB SQL
  */
 function enregistrementVente(commande,enregistreElemCom) {
-
+    console.log(commande);
     var recordVente = { Timestamp: getTime(), IdTable: commande["idTable"].substring(6), IdServeur: commande["idServeur"], Prix: commande["PrixTotal"]};
     mySqlClient.query('INSERT INTO pronto.ventes SET ?', recordVente, function(err,res){
         if(err) throw err;
@@ -327,8 +342,8 @@ function sendCaisseEnregistreuse(data){
  */
 function reception(commande) {
     console.log(JSON.stringify(commande));
-    //recordDB(commande);
-    //viewDB();
+    recordDB(commande);
+    viewDB();
     sendBar(commande);
     sendCuisine(commande);
     sendCaisseEnregistreuse(commande);
@@ -362,6 +377,24 @@ function viewDB(){
         findDocuments(db, function () {
             db.close();
         });
+    });
+
+}
+
+
+/*
+ * Fonction de suppression de contenu de la DB MongoDB (amélioration future)
+ */
+function deleteRecord (idCom) {
+    console.log(idCom);
+    MongoClient.connect(url, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server database");
+
+        deleteDocument(db, function () {
+            db.close();
+        }, idCom);
+
     });
 
 }
