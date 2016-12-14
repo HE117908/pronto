@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Administration - Pronto</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        <link href="css/custom-css.css" rel="stylesheet">
+        <script src="js/bootstrap.js"></script>
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body onload="hide();">
+        <div class="container">
+            <div class="col-lg-12">
+                <ul class="nav nav-pills" style="background-color:black">
+                    <li role="presentation" onclick="hide('Users');getUsers();"><a href="index.html#Users">Utilisateurs</a></li>
+                    <li role="presentation" onclick="hide('Carte');"><a href="index.html#Carte">Carte</a></li>
+                    <li role="presentation" onclick="hide('Restaurant');"><a href="index.html#Restaurant">Restaurant</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12 hiding" id="Users">
+                <h1>Utilisateurs</h1>
+                    <form class="form-inline">
+                        <div class="form-group">
+                          <label for="username">Nom d'utilisateur</label>
+                          <input type="text" class="form-control" id="username">
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Mot de Passe</label>
+                          <input type="password" class="form-control" id="pwd">
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="addUser();">Enregistrer</button><br><br>
+                        <div class="form-group">
+                          <label for="userRemove">Nom de l'utilisateur à supprimer</label>
+                          <input type="text" class="form-control" id="userRemove">
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="remUser();">Valider</button>
+                    </form>
+                <br>
+                <div>
+                    <h4>Liste des utilisateurs actuels:</h4>
+                    <span id="userList"></span>
+                </div>
+            </div>
+            <div class="col-lg-12 hiding" id="Carte">
+                <h1>Carte</h1>
+                <form class="form-inline">
+                    <fieldset class="form-group">
+                        <legend class="custom">Plats</legend>
+                        <div class="form-group">
+                          <label for="plate">Nom du plat</label>
+                          <input type="text" class="form-control" id="plate">
+                        </div>
+                        <div class="form-group">
+                          <label for="price">Prix</label>
+                          <input type="number" class="form-control" id="price" step='0.01' min='0'>
+                        </div>
+                        <div class="form-group">
+                            <label for="catPlat">Catégorie</label>
+                            <select name="catPlat" id="catPlat">
+                                <option value="1">Entrées</option>
+                                <option value="2">Plats</option>
+                                <option value="3">Desserts</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="addPlat();">Enregistrer</button>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="custom">Accompagnements</legend>
+                          <div class="form-group">
+                          <label for="accomp">Accompagnement</label>
+                          <input type="text" class="form-control" id="accomp">
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="addAccomp();">Enregistrer</button>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Suppléments</legend>
+                          <div class="form-group">
+                          <label for="supp">Suppléments</label>
+                          <input type="text" class="form-control" id="supp">
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="addSupp();">Enregistrer</button>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Boissons</legend>
+                          <div class="form-group">
+                          <label for="boisson">Boissons</label>
+                          <input type="text" class="form-control" id="boisson">
+                        </div>
+                        <div class="form-group">
+                          <label for="priceBoisson">Prix</label>
+                          <input type="number" class="form-control" id="priceBoisson" step='0.01' min='0'>
+                        </div>                        
+                            <label for="catBoisson">Catégorie</label>
+                            <select name="catBoisson" id="catBoisson">
+                                <option value="1">Softs</option>
+                                <option value="2">Alcools</option>
+                                <option value="3">Bières</option>
+                            </select>
+                        <button type="button" class="btn btn-default" onclick="addBoisson();">Enregistrer</button>
+                    </fieldset>
+                    <div>
+                        <span id="result"></span>
+                    </div>
+              </form>
+            </div>
+            <div class="col-lg-12 hiding" id="Restaurant">
+                <h1>Restaurant</h1>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="tableNbr">Nombre de tables</label>
+                        <input type="number" class="form-control" id="tableNbr" step='1' min='0'>
+                    </div>
+                    <button type="button" class="btn btn-default" onclick="">Enregistrer</button>
+                    <br>
+                    <div class="form-group">
+                        <label for="tvaNbr">N° de TVA</label>
+                        <input type="number" class="form-control" id="tvaNbr" step='1' min='0'>
+                    </div>
+                    <button type="button" class="btn btn-default" onclick="">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
