@@ -10,8 +10,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 
-var com = {"idCommande":"commande1481120647839","PrixTotal":"9.50","idTable":"Table 1","typePaiement":"Liquide","commande":{"boissons":{"elem2":{"Nom":"Café","Categorie":"Softs","Detail":"","Prix":"1.5","Quantite":"1"}},"plats":{"elem1":{"Nom":"Gaspacho","Categorie":"Entrées","Detail":"","Prix":"5","Quantite":"1","Accompagnements":[],"Supplements":[]}}}};
-
+var idVente ="";
 /*
 * Creation du serveur Web écoutant sur le port 3000
 */
@@ -165,7 +164,11 @@ function DBQueryLogin(query,receive,key,value){
 
             } else console.log("Pas de données");
         });
+
+
 }
+
+
 
 /*
  * Reception des données venant de l'interface du garçon de salle
@@ -225,21 +228,78 @@ function ckL(usr,pwd){
 app.post('/caisse_post', function (req, res) {
     var commande = req.body;
     //commande = com;
-    if(commande != "") {
+    if(commande.length != 0) {
         res.sendStatus(200);
-        commande = JSON.stringify(commande);
-        recordVente(commande);
+        enregistrementVente(commande,enregistreElemCom);
     } else res.sendStatus(500);
 
 
 });
 
 /*
+ * Fonction Time
+ */
+function getTime() {
+    var d = new Date();
+    var day = d.getDate()+"";
+    if(day.length<2) day = "0"+day;
+    var month = d.getMonth()+1+"";
+    if(month.length<2) month = "0"+month;
+    var year = d.getFullYear();
+    var hour = d.getHours()+"";
+    if(hour.length<2) hour = "0"+hour;
+    var minute = d.getMinutes()+"";
+    if(minute.length<2) minute = "0"+minute;
+    var second = d.getSeconds()+"";
+    if(second.length<2) second = "0"+second;
+
+    var jour = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+    return jour;
+}
+
+
+function enregistreElemCom(x, commande) {
+    console.log(commande);
+    var boissons=commande.commande.boissons;
+    var plats =commande.commande.plats;
+    for(var i in boissons)
+    {
+
+        console.log(boissons[i])
+        var recordBoissons = {IdBoisson: boissons[i]["Id"]+'',IdVente: x , Quantite: boissons[i]["Quantite"]};
+        mySqlClient.query('INSERT INTO pronto.boissons_ventes SET ?', recordBoissons, function (err, res) {
+            if (err) throw err;
+
+            console.log('enregistrement boisson OK');
+        });
+    }
+
+    for(var j in plats) {
+        var recordPlats = {IdVente: x, IdPlat: plats[j]["Id"], Quantite: plats[j]["Quantite"]};
+        mySqlClient.query('INSERT INTO pronto.plats_ventes SET ?', recordPlats, function (err, res) {
+            if (err) throw err;
+
+            console.log('enregistrement plat OK');
+        });
+
+    }
+}
+
+/*
  * Fonction d'enregistrement des commandes payées dans la DB SQL (amélioration future)
  */
-function recordVente(commande) {
-    console.log(commande);
+function enregistrementVente(commande,enregistreElemCom) {
+
+    var recordVente = { Timestamp: getTime(), IdTable: commande["idTable"].substring(6), IdServeur: commande["idServeur"], Prix: commande["PrixTotal"]};
+    mySqlClient.query('INSERT INTO pronto.ventes SET ?', recordVente, function(err,res){
+        if(err) throw err;
+
+        idVente = res.insertId;
+        enregistreElemCom(idVente,commande);
+
+    });
 }
+
 
 /*
  * Fonction d'envoi de contenu vers l'interface Bar
