@@ -1,0 +1,89 @@
+INSERT INTO `pronto`.`catplats` (`IdCatPlat`, `NomCatPlat`) VALUES ('001', 'Entrées');
+INSERT INTO `pronto`.`catplats` (`IdCatPlat`, `NomCatPlat`) VALUES ('002', 'Plats');
+INSERT INTO `pronto`.`catplats` (`IdCatPlat`, `NomCatPlat`) VALUES ('003', 'Desserts');
+
+INSERT INTO `pronto`.`tva` (`TypeTVA`, `TauxTVA`) VALUES ('boissons', '0.21');
+INSERT INTO `pronto`.`tva` (`TypeTVA`, `TauxTVA`) VALUES ('plats', '0.12');
+
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('001', 'Poivrons marinés et mozzarela', '8', '001');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('002', 'Nems de fromage sur salade verte', '7', '001');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('003', 'Terrine de poisson', '6', '001');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('004', 'Terrine de foie de volaille', '6', '001');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('005', 'Gaspacho', '5', '001');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('006', 'Plat du jour', '13', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('007', 'Pavé de cabillaud et légumes du jour', '18', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('008', 'Gambas grillés et riz au lait de coco', '18', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('009', 'Salade italienne', '16', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('010', 'Salade césar', '16', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('011', 'Tartare de boeuf et frites maison', '15', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('012', 'Entrecôte et frites maison', '17', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('013', 'Quiche du jour et salade', '11', '002');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('014', 'Soupe de fraises à la menthe', '5', '003');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('015', 'Glace maison', '5', '003');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('016', 'Panna cotta et son coulis', '6', '003');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('017', 'Crème brulée', '7', '003');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('018', 'Tarte poire et chocolat', '6', '003');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('019', 'Fondant au chocolat et glace vanille', '8', '003');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('020', 'Café gourmand', '6', '003');
+INSERT INTO `pronto`.`plats` (`IdPlat`, `NomPlat`, `Prix`, `IdCatPlat`) VALUES ('021', 'Plateau de fromages', '6', '003');
+
+INSERT INTO `pronto`.`catboissons` (`IdCatBoisson`, `NomCatBoisson`) VALUES ('001', 'Softs');
+INSERT INTO `pronto`.`catboissons` (`IdCatBoisson`, `NomCatBoisson`) VALUES ('002', 'Alcools');
+INSERT INTO `pronto`.`catboissons` (`IdCatBoisson`, `NomCatBoisson`) VALUES ('003', 'Bières');
+
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('001', 'Café', '1.5', '001');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('002', 'Boissons chaudes', '4', '001');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('003', 'Soft drink', '4.5', '001');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('004', 'Apéritifs', '4', '002');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('005', 'Digestifs', '8', '002');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('006', 'Cocktails', '9', '002');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('007', 'Champagnes', '10', '002');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('008', 'Vins', '6', '002');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('009', 'Bière 25cl', '3', '003');
+INSERT INTO `pronto`.`boissons` (`IdBoisson`, `NomBoisson`, `Prix`, `IdCatBoisson`) VALUES ('010', 'Bière 50cl', '5.5', '003');
+
+INSERT INTO `pronto`.`formules` (`IdFormule`, `NomFormule`, `Prix`) VALUES ('001', 'Formule Rapide Midi', '18');
+INSERT INTO `pronto`.`formules` (`IdFormule`, `NomFormule`, `Prix`) VALUES ('002', 'Formule Salade', '20');
+
+INSERT INTO `pronto`.`plats_formules` (`IdPlat`, `IdFormule`) VALUES ('006', '001');
+INSERT INTO `pronto`.`plats_formules` (`IdPlat`, `IdFormule`) VALUES ('009', '002');
+INSERT INTO `pronto`.`plats_formules` (`IdPlat`, `IdFormule`) VALUES ('010', '002');
+
+INSERT INTO `pronto`.`boissons_formules` (`IdBoisson`, `IdFormule`) VALUES ('001', '001');
+INSERT INTO `pronto`.`boissons_formules` (`IdBoisson`, `IdFormule`) VALUES ('008', '001');
+INSERT INTO `pronto`.`boissons_formules` (`IdBoisson`, `IdFormule`) VALUES ('009', '001');
+INSERT INTO `pronto`.`boissons_formules` (`IdBoisson`, `IdFormule`) VALUES ('001', '002');
+INSERT INTO `pronto`.`boissons_formules` (`IdBoisson`, `IdFormule`) VALUES ('003', '002');
+
+INSERT INTO `pronto`.`accompagnements` (`IdAcc`, `NomAcc`) VALUES ('001', 'Pâtes');
+INSERT INTO `pronto`.`accompagnements` (`IdAcc`, `NomAcc`) VALUES ('002', 'Frites');
+INSERT INTO `pronto`.`accompagnements` (`IdAcc`, `NomAcc`) VALUES ('003', 'Sauce ketchup');
+
+INSERT INTO `pronto`.`supplements` (`IdSupp`, `NomSupp`, `Prix`) VALUES ('001', 'Pâtes', '2');
+INSERT INTO `pronto`.`supplements` (`IdSupp`, `NomSupp`, `Prix`) VALUES ('002', 'Frites', '3');
+INSERT INTO `pronto`.`supplements` (`IdSupp`, `NomSupp`, `Prix`) VALUES ('003', 'Sauce ketchup', '1');
+
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('1');
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('2');
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('3');
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('4');
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('5');
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('6');
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('7');
+INSERT INTO `pronto`.`tables` (`IdTable`) VALUES ('8');
+
+INSERT INTO `pronto`.`serveurs` (`IdServeur`, `NomServeur`, `Pass`) VALUES ('Albert', 'Alerbet A.', 'pass1');
+INSERT INTO `pronto`.`serveurs` (`IdServeur`, `NomServeur`, `Pass`) VALUES ('Bernard', 'Bernard B.', 'pass2');
+INSERT INTO `pronto`.`serveurs` (`IdServeur`, `NomServeur`, `Pass`) VALUES ('Charlie', 'Charlie C.', 'pass3');
+
+INSERT INTO `pronto`.`ventes` (`Timestamp`, `IdTable`, `IdServeur`, `Prix`) VALUES ('2016-12-05 15:00:00', '5', 'Albert', '40');
+
+INSERT INTO `pronto`.`plats_ventes` (`IdPlat`, `IdVente`,  `Quantite`) VALUES ('3', '1', '2');
+INSERT INTO `pronto`.`plats_ventes` (`IdPlat`, `IdVente`,  `Quantite`) VALUES ('20', '1', '1');
+
+INSERT INTO `pronto`.`boissons_ventes` (`IdBoisson`, `IdVente`,  `Quantite`) VALUES ('2', '1', '1');
+
+INSERT INTO `pronto`.`formules_ventes` (`IdFormule`, `IdVente`,  `Quantite`) VALUES ('1', '1', '1');
+
+INSERT INTO `pronto`.`ensuspens` (`Label`, `Quantite`, `Prix`) VALUES ('Cafe', '0', '2');
+INSERT INTO `pronto`.`ensuspens` (`Label`, `Quantite`, `Prix`) VALUES ('Soupe', '0', '5');
